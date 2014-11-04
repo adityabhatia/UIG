@@ -1,0 +1,68 @@
+#body {
+font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+
+#tabular, table{
+font-size:120%;
+}
+
+.navbar, .panel .panel-heading{
+background-color:#373737;
+}
+
+.navbar-default .navbar-brand, .panel .panel-heading{
+color:#F2F2F2;
+}
+
+.list-group > a.active, .pagination>.active>a{
+color:#F2F2F2;
+background: #373737;
+border-color: #F2F2F2;
+}
+
+#nav > .active > a{
+color:#F2F2F2;
+background: #6E6E6E;
+border-color: #F2F2F2;
+}
+
+.list-group > a.deactive:hover, #add:hover, .pagination>.active>a:hover, .pagination>li>a:hover  {
+color:#F2F2F2;
+background-color: #6E6E6E;
+border-color: #F2F2F2;
+}
+
+#add{
+color:#F2F2F2;
+}
+
+
+.navbar-default .navbar-brand:hover{
+color:#BDBDBD;
+background-color:#373737;
+}
+
+.btn{
+color:#F2F2F2;
+background-color:#373737;
+}
+
+.btn:hover{
+background:#BDBDBD;
+}
+.nopadding {
+padding: 0;
+ }
+   
+ .dropdown-toggle, .pagination>li>a{
+background:#BDBDBD;
+color:#373737;
+} 
+
+ a{
+ color:#373737;
+ }
+
+
+
+
