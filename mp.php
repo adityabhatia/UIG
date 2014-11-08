@@ -4,7 +4,8 @@ require('connect.php');
 if($_SESSION['username']==""){
 ?>
 <script>window.location.replace("login.php");</script>
-<?php }  $msg="";
+<?php }  
+$msg="";
 if (isset($_GET["cname"])){
 			$result = 0;
 			$name = $_GET["cname"];
@@ -21,7 +22,7 @@ if (isset($_GET["cname"])){
 					$msg = "Updated!";
 					echo($msg);
 					}		
-						}	
+}	
 if (isset($_GET["dname"])){
 			$result = 0;
 			$name = $_GET["dname"];
@@ -36,7 +37,9 @@ if (isset($_GET["dname"])){
 					$msg = "Deleted!";
 					echo($msg);
 					}		
-						}	
+}
+
+
  ?>
 
 
@@ -54,11 +57,41 @@ if (isset($_GET["dname"])){
 	<link rel="stylesheet" type="text/css" href="css/demo.css">
 	<link type="text/css" rel="stylesheet" href="css/main.css">
 	
-	<style type="text/css" class="init">
-
-	</style>
+	<style type="text/css" class="init"></style>
 	
+	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" language="javascript" src="js/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="js/demo.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#example').dataTable();
+			var className, substr;
+			$('.glyphicon').click(function(){
+				className = $(this).attr('class');
+				substr = className.split('__');
+			});
+			$('#removal').click(function(){
+				var $url= "mp.php?dname="+substr[1]+"&dver="+substr[2];
+					//$('.form-horizontal').attr('action', $url);
+					window.location.replace($url);
+			});
+			$('#edit').click(function(){
+				var newname = $("#inputName").val();
+				var newver = $("#version").val();
+				var $url= "mp.php?cname="+substr[1]+"&cver="+substr[2]+"&nn="+newname+"&nv="+newver;
+					window.location.replace($url);
+			});
+			
+			$("#glyph_detail").click(function(){
+				var $url= "product_detail.php?sname="+substr[1];
+					window.location.replace($url);
+			});
 
+			} );
+	</script>	
 </head>
 
 <body id="tabular" >
@@ -89,17 +122,21 @@ if (isset($_GET["dname"])){
 
 				<tbody>
 					<?php 
-														$user=$_SESSION['username'];
-														$query = "SELECT * FROM products WHERE username='$user' ";
-														$result = mysql_query($query) or die(mysql_error()); 
-														$count = mysql_num_rows($result);
-														while($row = mysql_fetch_array($result)){
-															echo ('<tr><td>' . $row['p_name'] . '</td>');
-															echo ('<td>' . $row['p_class'] . '</td>');
-															echo ('<td><a data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
-															<a data-toggle="modal" data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td></tr>');
-															} 
-														if($count==0){echo ('<tr><td>-Empty-</td><td>-Empty-</td><td>-Empty-</td></tr>');}?>
+						$user=$_SESSION['username'];
+						$query = "SELECT * FROM products WHERE username='$user' ";
+						$result = mysql_query($query) or die(mysql_error()); 
+						$count = mysql_num_rows($result);
+						
+						while($row = mysql_fetch_array($result)){
+							$name = $row['p_name'];
+							echo ('<tr><td>' . $row['p_name'] . '</td>');
+							echo ('<td>' . $row['p_class'] . '</td>');
+							echo ('<td><a data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
+							<a data-toggle="modal" data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>
+							<a class="glyphicon glyphicon-stats __' .$row['p_name'].'" id="glyph_detail" ">
+							</td></tr>');
+							} 
+						if($count==0){echo ('<tr><td>-Empty-</td><td>-Empty-</td><td>-Empty-</td></tr>');}?>
 				</tbody>
 			</table>			
 		</section>
@@ -114,7 +151,7 @@ if (isset($_GET["dname"])){
       
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" name="delete" id=removal>Delete Permanently</button>
+        <button type="button" class="btn btn-primary" name="delete" id="removal">Delete Permanently</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -149,34 +186,6 @@ if (isset($_GET["dname"])){
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 	</div>
-	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.js"></script>
-	<script type="text/javascript" language="javascript" src="js/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="js/demo.js"></script>
-	<script>
-$(document).ready(function() {
-	$('#example').dataTable();
-	var className, substr;
-	$('.glyphicon').click(function(){
-		className = $(this).attr('class');
-		substr = className.split('__');
-	});
-	$('#removal').click(function(){
-		var $url= "mp.php?dname="+substr[1]+"&dver="+substr[2];
-			//$('.form-horizontal').attr('action', $url);
-			window.location.replace($url);
-	});
-	$('#edit').click(function(){
-		var newname = $("#inputName").val();
-		var newver = $("#version").val();
-		var $url= "mp.php?cname="+substr[1]+"&cver="+substr[2]+"&nn="+newname+"&nv="+newver;
-			window.location.replace($url);
-	});
-} );
-
-	</script>
 </body>
 </html>
 
