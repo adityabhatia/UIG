@@ -46,6 +46,7 @@ if($result){
 
 	</head>
 	<body>
+	<div class="col-xs-12 col-sm-12"
 		<div class="container" width=200px>
 			<div class="panel panel-default" style="margin:0 auto;width:50%">
 							<div class="panel-heading">
@@ -54,14 +55,14 @@ if($result){
 							<div class="panel-body">
 							<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 									<div class="form-group">
-										<label for="inputName" class="col-sm-3 control-label nopadding">Subject</label>
-										<div class="col-sm-9">
+										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding">Subject</label>
+										<div class="col-sm-9 col-xs-9">
 											<input type="text" class="form-control" id="reason" name="reason" placeholder="Subject" value="" required />
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="username" class="col-sm-3 control-label nopadding">Message</label>
-										<div class="col-sm-9">
+										<label for="username" class="col-sm-3 col-xs-3 control-label nopadding">Message</label>
+										<div class="col-sm-9 col-xs-9">
 											<textarea type="text" class="form-control" id="message" name="message" placeholder="Message" value="" style="resize:none;"required /></textarea>
 										</div>
 									</div>

@@ -14,7 +14,7 @@ background-color:#373737;
 color:#F2F2F2;
 }
 
-.list-group > a.active, .pagination>.active>a{
+.list-group > a.active, .pagination>.active>a, .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
 color:#F2F2F2;
 background: #373737;
 border-color: #F2F2F2;
