@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php 
 session_start();
 require('connect.php');
@@ -16,8 +17,6 @@ $count = mysql_num_rows($result);
 if ($count == 1){
 while($row = mysql_fetch_array($result)){
 ?>
-
-<!DOCTYPE html>
 
 <html lang="en">
 	<head>
@@ -71,53 +70,96 @@ while($row = mysql_fetch_array($result)){
 			</script>
 	</head>
 	<body>
-	<div class="jumbotron" style="padding:5px;">
-		<div class="container">
-		<span class="sel1">
-			<h2 class="panel-title" align=center><b>Overview</b></h2><br />
-			<div class="col-xs-6 col-sm-6" style="text-align:right;" >
-					Product Name:<br />
-					Version:<br />
-					Budget (in thousand € /year):<br />
-					Start of product design and development:<br />
-					End of product design and development:<br />
-					<br />Group size of the design and development team:<br/>
-					Number of team members located at each site:<br/>
-				
-			</div>
-			<div class="col-xs-6 col-sm-6" >
-			<?php echo($row['p_name']);?><br />
-			<?php echo($row['p_class']);?><br />
-			<?php echo($row['budget']);?><br />
-			<?php echo($row['sdate']);?><br />
-			<?php echo($row['edate']);?><br /><br />
-			<?php echo($row['gsize']);?><br />
-			<?php echo($row['teamno']);?>
-			</div>
-		</span>
-		<span class="sel2">	
-			<h2 class="panel-title" align=center><b>Software Team</b></h2><br />
-			<div class="col-xs-6 col-sm-6" style="text-align:right;" >
-			</div>
-			<div class="col-xs-6 col-sm-6" >
-			</div>
-		</span>
-		<span class="sel3">	
-			<h2 class="panel-title" align=center><b>Users</b></h2><br />
-			<div class="col-xs-6 col-sm-6" style="text-align:right;" >
-			</div>
-			<div class="col-xs-6 col-sm-6" >
-			</div>
-		</span>
-		<span class="sel4">	
-			<h2 class="panel-title" align=center><b>Review</b></h2><br />
-			<div class="col-xs-6 col-sm-6" style="text-align:right;" >
-			</div>
-			<div class="col-xs-6 col-sm-6" >
-			</div>
-		</span>
+	<div class="container">
+			<span class="sel1">
+				<h2 class="panel-title" align=center><b>Overview</b></h2><br />
+				<!--<div class="col-xs-6 col-sm-6" style="text-align:right;" >
+						Product Name:<br />
+						Version:<br />
+						Budget (in thousand € /year):<br />
+						Start of product design and development:<br />
+						End of product design and development:<br />
+						<br />Group size of the design and development team:<br/>
+						Number of team members located at each site:<br/>
+				</div>
+				<div class="col-xs-6 col-sm-6" >
+					<?php echo($row['p_name']);?><br />
+					<?php echo($row['p_class']);?><br />
+					<?php echo($row['budget']);?><br />
+					<?php echo($row['sdate']);?><br />
+					<?php echo($row['edate']);?><br /><br />
+					<?php echo($row['gsize']);?><br />
+					<?php echo($row['teamno']);?>
+				</div>-->
+		<div id="table-responsive">
+            <table class="col-md-12 table-bordered table-striped table-condensed">
+        		<thead>
+        			<tr>
+        				<th>Attribute</th>
+        				<th>Value</th>
+        			</tr>
+        		</thead>
+				<tbody>
+        			<tr>
+						<td data-title="Attribute">Product Name</td>
+        				<td data-title="Attribute"><?php echo($row['p_name']);?></td>
+        			</tr>
+					<tr>
+						<td data-title="Attribute">Version</td>
+        				<td data-title="Attribute"><?php echo($row['p_class']);?></td>
+        			</tr>
+					<tr>
+						<td data-title="Attribute">Budget (in thousand € /year)</td>
+        				<td data-title="Attribute"><?php echo($row['budget']);?></td>
+        			</tr>
+					<tr>
+						<td data-title="Attribute">Start of product design and development</td>
+        				<td data-title="Attribute"><?php $sdate=date('d/m/Y', strtotime($row['sdate']));
+						echo($sdate);?></td>
+        			</tr>
+					<tr>
+						<td data-title="Attribute">End of product design and development</td>
+        				<td data-title="Attribute"><?php $edate=date('d/m/Y', strtotime($row['edate']));
+						echo($edate);?></td>
+        			</tr>
+					<tr>
+						<td data-title="Attribute">Group size of the design and development team</td>
+        				<td data-title="Attribute"><?php echo($row['gsize']);?></td>
+        			</tr>
+					<tr>
+						<td data-title="Attribute">Number of team members located at each site</td>
+        				<td data-title="Attribute"><?php echo($row['teamno']);?></td>
+        			</tr>
+				</tbody>
+			</table>
 		</div>
+			</span>
+			<span class="sel2">	
+				<h2 class="panel-title" align=center><b>Software Team</b></h2><br />
+				<div class="col-xs-6 col-sm-6" style="text-align:right;" >
+				</div>
+				<div class="col-xs-6 col-sm-6" >
+				</div>
+				<?php $arrival=date('Y-m-d', strtotime("25.12.2014"));
+				echo ($arrival);?>
+			</span>
+			<span class="sel3">	
+				<h2 class="panel-title" align=center><b>Users</b></h2><br />
+				<div class="col-xs-6 col-sm-6" style="text-align:right;" >
+				</div>
+				<div class="col-xs-6 col-sm-6" >
+				</div>
+			</span>
+			<span class="sel4">	
+				<h2 class="panel-title" align=center><b>Review</b></h2><br />
+				<div class="col-xs-6 col-sm-6" style="text-align:right;" >
+				</div>
+				<div class="col-xs-6 col-sm-6" >
+				</div>
+			</span>
 	</div>
+	
+	
 	</body>
 </html>
 

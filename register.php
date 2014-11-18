@@ -13,7 +13,7 @@
         $password = $_POST['password'];
  
         $query = "INSERT INTO `user`(`name`, `company`, `desig`, `experience`, `username`, `email`, `password`) 
-		VALUES ('','','','0.0','$username','$email','$password')";
+		VALUES ('','','','0.0','$username','$email',MD5('$password'))";
         $result = mysql_query($query) or die(mysql_error());
 		$msg = $result;
 		}

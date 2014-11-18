@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php 
 session_start();
 require('connect.php');
@@ -5,8 +6,9 @@ if($_SESSION['username']==""){
 ?>
 <script>window.location.replace("login.php");</script>
 <?php }  else 
-{	$msg="";
+{	$msg ="";
 	$uname = $_SESSION['username'];
+	
 if (isset($_GET["cname"])){
 			$result = 0;
 			$cname = $_GET["cname"];
@@ -41,8 +43,6 @@ if (isset($_GET["dname"])){
 						}	
  ?>
 
-
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -78,31 +78,31 @@ if (isset($_GET["dname"])){
 					</tr>
 				</thead>
 
-				<tfoot>
+				<!--<tfoot>
 					<tr>
 						<th>Name</th>
 						<th>Version</th>
-						<!--<th>Entry Date</th>
+						<th>Entry Date</th>
 						<th>Type&nbsp&nbsp </th>
-						<th>Questionnaire&nbsp&nbsp  </th>-->
+						<th>Questionnaire&nbsp&nbsp  </th>
 						<th>Actions</th>
 					</tr>
-				</tfoot>
+				</tfoot>-->
 
 				<tbody>
 					<?php 
-														$user=$_SESSION['username'];
-														$query = "SELECT * FROM products WHERE username='$user' ";
-														$result = mysql_query($query) or die(mysql_error()); 
-														$count = mysql_num_rows($result);
-														while($row = mysql_fetch_array($result)){
-															echo ('<tr><td class=selec_name>' . $row['p_name'] . '</td>');
-															echo ('<td class=selec_version>' . $row['p_class'] . '</td>');
-															echo ('<td><a data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
-															<a data-toggle="modal" data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td></tr>');
-															} 
-														if($count==0){echo ('<tr><td>-Empty-</td><td>-Empty-</td><td>-Empty-</td></tr>');}
-														}?>
+						$user=$_SESSION['username'];
+						$query = "SELECT * FROM products WHERE username='$user' ";
+						$result = mysql_query($query) or die(mysql_error()); 
+						$count = mysql_num_rows($result);
+						while($row = mysql_fetch_array($result)){
+							echo ('<tr><td><a class=selec_name>' . $row['p_name'] . '</a></td>');
+							echo ('<td class=selec_version>' . $row['p_class'] . '</td>');
+							echo ('<td><a data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
+							<a data-toggle="modal" data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td></tr>');
+							} 
+						if($count==0){echo ('<tr><td>-Empty-</td><td>-Empty-</td><td>-Empty-</td></tr>');}
+						}?>
 				</tbody>
 			</table>			
 		</section>
@@ -163,8 +163,12 @@ $(document).ready(function() {
 	$('#example').dataTable();
 	var className, substr;
 	$('.glyphicon').click(function(){
+		$("#inputName").val("");
+		$("#version").val("");
 		className = $(this).attr('class');
 		substr = className.split('__');
+			$("#inputName").attr("placeholder", substr[1]);
+			$("#version").attr("placeholder", substr[2]);
 	});
 	$('#removal').click(function(){
 		var $url= "mp.php?dname="+substr[1]+"&dver="+substr[2];
@@ -184,7 +188,6 @@ $(document).ready(function() {
 	window.location.replace($url);
 	});
 });
-
 	</script>
 </body>
 </html>

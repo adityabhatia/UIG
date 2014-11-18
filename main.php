@@ -1,11 +1,10 @@
+<!DOCTYPE html>
 <?php 
 session_start();
 if($_SESSION['username']==""){
 ?>
 <script>window.location.replace("login.php");</script>
 <?php } else{ ?>
-
-<!DOCTYPE html>
 
 <html lang="en">
 	<head>

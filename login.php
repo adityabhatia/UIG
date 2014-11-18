@@ -15,7 +15,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 //Checking the values are existing in the database or not
-$query = "SELECT * FROM `user` WHERE username='$username' and password='$password'";
+$query = "SELECT * FROM `user` WHERE username='$username' and password=MD5('$password')";
 $result = mysql_query($query) or die(mysql_error());
 $count = mysql_num_rows($result);
 

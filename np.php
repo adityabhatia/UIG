@@ -1,3 +1,5 @@
+
+<!DOCTYPE html>
 <?php 
 session_start();
 require('connect.php');
@@ -16,7 +18,8 @@ $sdate = $_POST['sdate'];
 $edate = $_POST['edate'];
 $groupsize = $_POST['groupsize'];
 $teamno = $_POST['teamno'];
-
+$edate=date('Y-m-d', strtotime($edate));
+$sdate=date('Y-m-d', strtotime($sdate));
 $query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno')";
 $result = mysql_query($query) or die(mysql_error());
 if($result){
@@ -27,7 +30,6 @@ if($result){
 
 ?>
 
-<!DOCTYPE html>
 
 <html lang="en">
 	<head>
@@ -42,7 +44,8 @@ if($result){
 			
 			<link type="text/css" rel="stylesheet" href="css/main.css">
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
-			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+			
+			<link rel="stylesheet" href="css/datepicker.css" type="text/css" />
 			 <!--[if lt IE 9]>
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->
@@ -81,13 +84,13 @@ if($result){
 										<div class="form-group nopadding">
 											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Start Date <br />(yyyy-mm-dd)</label>
 											<div class="col-sm-9 col-xs-8">
-												<input type="text" class="form-control" id="sdate" name="sdate" placeholder="Start Date" required />
+												<input type="text" class="form-control" value="" data-date-format="dd.mm.yyyy" id="dp1" name="sdate" placeholder="Start Date" required />
 											</div>
 										</div>
 										<div class="form-group nopadding">
 											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">End Date <br />(yyyy-mm-dd)</label>
 											<div class="col-sm-9 col-xs-8">
-												<input type="text" class="form-control" id="edate" name="edate" placeholder="End Date" required />
+												<input type="text" class="form-control" value="" data-date-format="dd.mm.yyyy" id="dp2" name="edate" placeholder="End Date" required />
 											</div>
 										</div>
 									</div>
@@ -122,8 +125,22 @@ if($result){
 			<!--Inclusions-->
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-		
-		
-		
+		<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+		<script>
+		$(document).ready(function(){
+			$('#dp2').datepicker();
+			$('#dp2').attr('value', "01.01.2014");
+		$('#dp2').datepicker()
+				.on('changeDate', function(ev){
+		$('#dp2').datepicker('hide');
+		});
+		$('#dp1').datepicker();
+		$('#dp1').attr('value', "01.01.2014");
+		$('#dp1').datepicker()
+				.on('changeDate', function(ev){
+		$('#dp1').datepicker('hide');
+		});
+			});
+		</script>
 		</body>
 </html>
