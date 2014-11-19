@@ -72,7 +72,7 @@ while($row = mysql_fetch_array($result)){
 	<body>
 	<div class="container">
 			<span class="sel1">
-				<h2 class="panel-title" align=center><b>Overview</b></h2><br />
+				<h2 class="panel-title" align=center><b>Overview <?php echo($row['p_name']);?></b></h2><br />
 				<!--<div class="col-xs-6 col-sm-6" style="text-align:right;" >
 						Product Name:<br />
 						Version:<br />
@@ -135,13 +135,19 @@ while($row = mysql_fetch_array($result)){
 		</div>
 			</span>
 			<span class="sel2">	
-				<h2 class="panel-title" align=center><b>Software Team</b></h2><br />
-				<div class="col-xs-6 col-sm-6" style="text-align:right;" >
+				<h2 class="panel-title" align=center><b> Team Survey Product <?php echo($row['p_name']);?> </b></h2><br/>
+				<div class="col-xs-6 col-sm-6" style="text-align:left;" >
+					<p>The team survey will contain questions about the develop and designing process of the product.</p>
+					<p>In order to create a new team survey follow the link below.</p>
+					<a href="http://www.unipark.de/uc/agileSDT/" target="_blank" style="font-size:20px;"> Start Team Survey </a>
+					<p></p>
+					<p>An overview of the results of all product related surveys will be shown in the review section.</p>
 				</div>
 				<div class="col-xs-6 col-sm-6" >
+
 				</div>
-				<?php $arrival=date('Y-m-d', strtotime("25.12.2014"));
-				echo ($arrival);?>
+				<!--<?php $arrival=date('Y-m-d', strtotime("25.12.2014"));
+				echo ($arrival);?>-->
 			</span>
 			<span class="sel3">	
 				<h2 class="panel-title" align=center><b>Users</b></h2><br />

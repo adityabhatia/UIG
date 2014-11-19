@@ -50,7 +50,10 @@ background:#BDBDBD;
 .nopadding {
 padding: 0;
  }
-   
+ 
+ .panel-title{
+ 	font-size: 24px;
+ }
  .dropdown-toggle, .pagination>li>a{
 background:#BDBDBD;
 color:#373737;
@@ -58,6 +61,14 @@ color:#373737;
 
  a{
  color:#373737;
+ }
+
+ h1{
+ 	font-size: 24px;
+ }
+
+ h2{
+ 	font-size: 20px;
  }
 
 
