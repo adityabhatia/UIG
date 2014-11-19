@@ -142,7 +142,7 @@ if($_SESSION['username']==""){
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-10  nopadding" style="margin-left:14px; min-width:350px;" >
-				<div class="embe"><iframe src="home.php" name="myiframe" width=100% height=590px
+				<div class="embe"><iframe src="home.php" name="myiframe" width=100% height=790px
 					frameborder="0" scrolling=no style="position:absolute;" class="iframe" id="iframe"></iframe></div>
 				</div>
 			</div>

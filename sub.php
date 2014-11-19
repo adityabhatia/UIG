@@ -134,14 +134,14 @@ while($row = mysql_fetch_array($result)){
 			</table>
 		</div>
 			</span>
-			<span class="sel2">	
+			<span class="sel2">
 				<h2 class="panel-title" align=center><b> Team Survey Product <?php echo($row['p_name']);?> </b></h2><br/>
 				<div class="col-xs-6 col-sm-6" style="text-align:left;" >
-					<p>The team survey will contain questions about the develop and designing process of the product.</p>
+					<p>The team survey contains questions about the develop and designing process of the product.</p>
 					<p>In order to create a new team survey follow the link below.</p>
 					<a href="http://www.unipark.de/uc/agileSDT/" target="_blank" style="font-size:20px;"> Start Team Survey </a>
 					<p></p>
-					<p>An overview of the results of all product related surveys will be shown in the review section.</p>
+					<p>An overview of the results of all product related surveys is shown in the review section.</p>
 				</div>
 				<div class="col-xs-6 col-sm-6" >
 
