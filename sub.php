@@ -11,7 +11,7 @@ if (isset($_GET["sname"])){
 			$result = 0;
 			$sname = $_GET["sname"];
 			$sversion = $_GET["sver"];
-$query = "SELECT `username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno` FROM `products` WHERE username = '$user' and  p_name = '$sname' and p_class = '$sversion'";
+$query = "SELECT `product_id`, `username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno` FROM `products` WHERE username = '$user' and  p_name = '$sname' and p_class = '$sversion'";
 $result = mysql_query($query) or die(mysql_error());
 $count = mysql_num_rows($result);
 if ($count == 1){
@@ -136,31 +136,93 @@ while($row = mysql_fetch_array($result)){
 			</span>
 			<span class="sel2">
 				<h2 class="panel-title" align=center><b> Team Survey Product <?php echo($row['p_name']);?> </b></h2><br/>
-				<div class="col-xs-6 col-sm-6" style="text-align:left;" >
+				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
 					<p>The team survey contains questions about the develop and designing process of the product.</p>
 					<p>In order to create a new team survey follow the link below.</p>
-					<a href="http://www.unipark.de/uc/agileSDT/" target="_blank" style="font-size:20px;"> Start Team Survey </a>
+					<a href="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" target="_blank" style="font-size:20px;"> Start Team Survey </a>
 					<p></p>
-					<p>An overview of the results of all product related surveys is shown in the review section.</p>
+					
+					<p>To send the survey invitation to specific team members fill out the following form and click "Send invitation"!</p>
+					
+					<!-- TODO: Form/Submit functionality-->
+					<form id="user-survey-form">	
+						<table class="col-md-12 table-bordered table-striped table-condensed" style="border-spacing: 5px;">
+						  <tr>
+						  	<th>Nr.</th>
+						    <th>Name</th>
+						    <th>Email</th>		
+						    <th>Position in team</th>
+						  </tr>
+						  <tr>
+						  	<td>1</td>
+						    <td><input type="text" name="name" form="user-survey-form" value="Name"></td>
+						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
+						    <td><input type="text" name="position" form="user-survey-form" value="Position"></td>
+						  </tr>
+						  <tr>
+						  	<td>2</td>
+							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
+						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
+						    <td><input type="text" name="position" form="user-survey-form" value="Position"></td>
+						  </tr>
+						  <tr>
+						  	<td>3</td>
+							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
+						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
+						    <td><input type="text" name="position" form="user-survey-form" value="Position"></td>
+						  </tr>
+						</table>
+						</br>
+						<input type="submit" value="Send invitation">
+					</form>
+					</br>
+					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
 				</div>
-				<div class="col-xs-6 col-sm-6" >
 
-				</div>
-				<!--<?php $arrival=date('Y-m-d', strtotime("25.12.2014"));
-				echo ($arrival);?>-->
 			</span>
 			<span class="sel3">	
-				<h2 class="panel-title" align=center><b>Users</b></h2><br />
-				<div class="col-xs-6 col-sm-6" style="text-align:right;" >
+				<h2 class="panel-title" align=center><b>User Survey Product <?php echo($row['p_name']);?></b></h2><br />
+				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
+					
+					<p>The user survey contains questions about the usability of the product.</p>
+					<p>In order to create a new user survey follow the link below.</p>
+					<a href="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" target="_blank" style="font-size:20px;"> Start User Survey </a>
+					<p>To send the survey invitation to specific users, fill out the following form and click "Send invitation"!</p>
+					<!-- TODO: Form/Submit functionality-->
+					<form id="user-survey-form">	
+						<table class="col-md-12 table-bordered table-striped table-condensed" style="border-spacing: 5px;">
+						  <tr>
+						  	<th>Nr.</th>
+						    <th>Name</th>
+						    <th>Email</th>
+						  </tr>
+						  <tr>
+						  	<td>1</td>
+						    <td><input type="text" name="name" form="user-survey-form" value="Name"></td>
+						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
+						  </tr>
+						  <tr>
+						  	<td>2</td>
+							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
+						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
+						  </tr>
+						  <tr>
+						  	<td>3</td>
+							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
+						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
+						  </tr>
+						</table>
+						</br>
+						<input type="submit" value="Send invitation">
+					</form>
+					</br>
+					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
 				</div>
-				<div class="col-xs-6 col-sm-6" >
-				</div>
+
 			</span>
 			<span class="sel4">	
 				<h2 class="panel-title" align=center><b>Review</b></h2><br />
-				<div class="col-xs-6 col-sm-6" style="text-align:right;" >
-				</div>
-				<div class="col-xs-6 col-sm-6" >
+				<div class="col-xs-12 col-sm-12" style="text-align:right;" >
 				</div>
 			</span>
 	</div>
