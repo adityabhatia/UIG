@@ -72,6 +72,34 @@ color:#373737;
  	margin:20px 0 20px 0;
  }
 
+ .iframe{
+ 	max-width: 1200px;
+ 	height: 1200px;
+
+ }
+ .navbar{
+ 	min-height: 60px;
+ }
+
+ .navbar-brand{
+ 	padding:0 15px 0 0;
+ }
+
+ .navbar-nav>li>a{
+ 	padding:20px;
+ }
+
+.navbar-right{
+ 	padding: 15px 20px 0 0;
+ }
+
+
+ .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse{
+ 	max-height: 370px;
+ }
+
+
+
 
 
 
