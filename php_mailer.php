@@ -21,7 +21,9 @@ if (isset($_POST['username'])){
         $randomString .= $characters[rand(0, strlen($characters) - 1)];
 		$query1 = "INSERT INTO `password`(`random`, `token`, `username`) VALUES ('$randomString','1', '$username')";
 		$result1 = mysql_query($query1) or die("error: " . mysql_error()) ;
-		$pass = "http://localhost/Task2/karl/php_mailer.php?chk=" . $randomString;
+		
+		//LINK TO SEND IN E-MAIL
+		$pass = "http://eris-vm08.uni-mannheim.de/php_mailer.php?chk=" . $randomString;
 	
 	
 require_once('Mailer/class.phpmailer.php');
