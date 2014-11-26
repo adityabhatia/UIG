@@ -11,11 +11,18 @@ if (isset($_POST['username'])){
     if($count==1)
     {
         $rows=mysql_fetch_array($result);
-        $pass  =  $rows['password'];//FETCHING PASS
+        //$pass  =  $rows['password'];//FETCHING PASS
         //echo "your pass is ::".($pass)."";
         $recep = $rows['email'];
         //echo "your email is ::".$email;
-	}
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$randomString = '';
+		for ($i = 0; $i < 10; $i++) 
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+		$query1 = "INSERT INTO `password`(`random`, `token`, `username`) VALUES ('$randomString','1', '$username')";
+		$result1 = mysql_query($query1) or die("error: " . mysql_error()) ;
+		$pass = "http://localhost/Task2/karl/php_mailer.php?chk=" . $randomString;
+	
 	
 require_once('Mailer/class.phpmailer.php');
 //include("class.smtp.php"); // optional, gets called from within class.phpmailer.php if not already loaded
@@ -31,15 +38,15 @@ $mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
                                            // 1 = errors and messages
                                            // 2 = messages only
 $mail->SMTPAuth   = true;                  // enable SMTP authentication
-$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-$mail->Port       = 465;                   // set the SMTP port for the GMAIL server
-$mail->Username   = "bhatia.aditya1@gmail.com";  // GMAIL username
-$mail->Password   = "n123456789-*/";            // GMAIL password
+$mail->SMTPSecure = "tls";                 // sets the prefix to the servier
+$mail->Host       = "smtp.office365.com";      // sets GMAIL as the SMTP server
+$mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+$mail->Username   = "UIG@es.uni-mannheim.de";  // GMAIL username
+$mail->Password   = "n123456789/*-";            // GMAIL password
 
-$mail->SetFrom('bhatia.aditya1@gmail.com', 'Aditya Bhatia');
+$mail->SetFrom('UIG@es.uni-mannheim.de', 'Usability in Germany');
 
-$mail->AddReplyTo("bhatia.aditya1@gmail.com","Aditya Bhatia");
+$mail->AddReplyTo("UIG@es.uni-mannheim.de","Usability in Germany");
 
 $mail->Subject    = "Password Lost!";
 
@@ -90,7 +97,10 @@ if(!$mail->Send()) {
    }*/
 ?>
 
- <?php } ?>
+ <?php }
+ else $msg = "Invalid User!";
+ }
+ ?>
 
 <!DOCTYPE html>
 <html>
@@ -102,7 +112,6 @@ if(!$mail->Send()) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta name="description" content="INES Questionnaire">
 			<meta name="author" content="adityabhatia">
-			
 			
 			<link href="css/bootstrap.min.css" rel="stylesheet">
 			
@@ -119,6 +128,7 @@ if(!$mail->Send()) {
 	<body style="background-color:#2E2E2E">
 		<!-- Form for logging in the users -->
 		<div class="wrapper">
+			<?php if (isset($_GET["chk"]) == null){ ?>
 			<form class=form-signin action="" method="POST">      
 				  <h2 class="form-signin-heading" align=center>FORGOT PASSWORD</h2>
 				  <div align=center><?php echo($msg);?></div>
@@ -141,6 +151,58 @@ if(!$mail->Send()) {
 				<a class="btn btn-default" type="submit" style="display: block; width: 100%;" href="login.php">Login</a>
 				</div>-->
 			</form>		
+			<?php } 
+			else if (isset($_GET["chk"])){
+				$random = $_GET["chk"];
+				$query2 = "select * from password where random='$random' and token = '1'";
+				$result2 = mysql_query($query2) or die("error: " . mysql_error()) ;
+				$count=mysql_num_rows($result2);
+				if($count==1){
+					echo("okay");
+						if (isset($_POST['newpass'])){
+							$rows1=mysql_fetch_array($result2);
+							$user  =  $rows1['username'];
+							$newpass = $_POST['newpass'];
+							$query3 = "UPDATE `user` SET password = MD5('$newpass') where username = '$user'";
+							$result3 = mysql_query($query3) or die("error: " . mysql_error()) ;
+							$query4 = "DELETE FROM `password` WHERE `username` = '$user'";
+							$result4 = mysql_query($query4) or die("error: " . mysql_error()) ;
+							$msg = "Password changed successfully." ;
+						
+			?>
+			<form class=form-signin action="" method="POST">      
+				  <h2 class="form-signin-heading" align=center>CHANGE PASSWORD</h2>
+				  <div align=center><?php echo($msg);?></div>      
+				  <div class="col-sm-12 nopadding">
+					<a class="btn btn-default" type="submit" style="display: block; width: 100%;" href="login.php">Login</a>
+				</div>
+			</form>
+			<?php } 
+			else if (isset($_POST['newpass'])==null) {
+			?>
+			<form class=form-signin action="" method="POST">      
+				  <h2 class="form-signin-heading" align=center>CHANGE PASSWORD</h2>
+				  <div align=center><?php echo($msg);?></div>
+				  <input type="password" class="form-control" name="newpass" placeholder="Enter New Password" required="" autofocus="" />      
+				  <div class="col-sm-6 nopadding">
+					<button class="btn btn-default" type="submit" style="display: block; width: 100%;">Change</button>
+				</div>
+				<div class="col-sm-6 nopadding">
+					<button class="btn btn-default" type="reset" style="display: block; width: 100%;">Reset</button>
+				</div>
+			</form>
+			<?php 
+			}
+			}
+				else{
+					$msg = "The link has expired." ;
+			?>
+					<form class=form-signin action="" method="POST">
+						<h2 class="form-signin-heading" align=center>SORRY</h2>
+						<div align=center><?php echo($msg);?></div>
+					</form>
+			<?php
+			}}?>
 		</div>
 
 		<!--Inclusions-->

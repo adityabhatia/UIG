@@ -22,8 +22,9 @@ $edate=date('Y-m-d', strtotime($edate));
 $sdate=date('Y-m-d', strtotime($sdate));
 $query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno')";
 $result = mysql_query($query) or die(mysql_error());
-if($result){
-            $msg = ": Success!";
+if($result){ ?>
+<script>window.location.replace("mp.php");</script>
+<?php
         }
 }
 }
@@ -56,7 +57,7 @@ if($result){
 		<div class = "col-sm-12 col-xs-12" style="">
 						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">
 							<div class="panel-heading">
-								<h2 class="panel-title">Add new Product <?php echo($msg);?></h2>
+								<h2 class="panel-title">Add new Product</h2>
 							</div>
 							<div class="panel-body">
 								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
@@ -82,33 +83,50 @@ if($result){
 											</div>
 										</div>
 										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Start Date <br />(yyyy-mm-dd)</label>
+											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Start Date <br />(dd/mm/yyyy)</label>
 											<div class="col-sm-9 col-xs-8">
-												<input type="text" class="form-control" value="" data-date-format="dd.mm.yyyy" id="dp1" name="sdate" placeholder="Start Date" required />
+												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="dp1" name="sdate" placeholder="Start Date" required />
 											</div>
 										</div>
 										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">End Date <br />(yyyy-mm-dd)</label>
+											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">End Date <br />(dd/mm/yyyy)</label>
 											<div class="col-sm-9 col-xs-8">
-												<input type="text" class="form-control" value="" data-date-format="dd.mm.yyyy" id="dp2" name="edate" placeholder="End Date" required />
+												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="dp2" name="edate" placeholder="End Date" required />
 											</div>
 										</div>
 									</div>
 									<div class="col-sm-6 col-xs-6">
 										<h2 class="panel-title" align=center><b>Group</b></h2><br />
 										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Group size of the design and development team</label>
+											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Total size of the team</label>
 											<div class="col-sm-9 col-xs-8">
-												<input type="text" class="form-control" id="groupsize" name="groupsize" placeholder="Group Size" required />
+												<input type="number" class="form-control" id="groupsize" name="groupsize" placeholder="Group Size" required />
 											</div>
 										</div>
 										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Number of team members located at each site</label>
+										<label class="col-sm-3 col-xs-4 control-label nopadding">Developers</label>
+												<div class="col-sm-9 col-xs-8">
+													<input type="number" class="form-control" min="0" id="developers" name="developers" placeholder="No. of Developers" required />
+												</div>
+										</div>
+										<div class="form-group nopadding">
+										<label class="col-sm-3 col-xs-4 control-label nopadding">Designers</label>
+												<div class="col-sm-9 col-xs-8">
+													<input type="number" class="form-control" min="0" id="designers" name="designers" placeholder="No. of Developers" required />
+												</div>
+										</div>
+										<div class="form-group nopadding">
+											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" >No. of sites</label>
 											<div class="col-sm-9 col-xs-8">
-												<input type="text" class="form-control" id="teamno" name="teamno" placeholder="Number of Team Members" required />
+												<input type="number" min="0" class=form-control id="teamno" name="teamno" placeholder="Number of Team Members" required />
 											</div>
 										</div>
-									
+										<div class="table-responsive">
+											<table class="table" id="teamallocation" align=center>
+											</table>
+										</div>
+									</div>
+									<div class="col-sm-12 col-xs-12">
 										<div class="form-group" align=center>
 												<button type="submit" class="btn btn-default" name=submit style="margin-bottom:-10px;">
 													Add Product
@@ -129,16 +147,27 @@ if($result){
 		<script>
 		$(document).ready(function(){
 			$('#dp2').datepicker();
-			$('#dp2').attr('value', "01.01.2014");
+			$('#dp2').attr('value', "01/01/2014");
 		$('#dp2').datepicker()
 				.on('changeDate', function(ev){
 		$('#dp2').datepicker('hide');
 		});
 		$('#dp1').datepicker();
-		$('#dp1').attr('value', "01.01.2014");
+		$('#dp1').attr('value', "01/01/2014");
 		$('#dp1').datepicker()
 				.on('changeDate', function(ev){
 		$('#dp1').datepicker('hide');
+		});
+		
+		$('#teamno').change(function(){
+			$('#teamallocation').html("");
+			var count = $('#teamno').val();
+			if(count>0)
+				$('#teamallocation').append("<tr><th>Location</th><th>No.</th></tr>");
+			while(count>0){
+			$('#teamallocation').append("<tr><td><input type=text class=form-control /></td><td><input type=text class=form-control /></td></tr>");
+			count-=1;
+			}
 		});
 			});
 		</script>
