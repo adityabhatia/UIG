@@ -123,6 +123,15 @@ color:#373737;
 	width:auto;
 }
 
+.jumbotron{
+	padding-top: 10px;
+	padding-bottom: 20px;
+
+}
+
+.pagination{
+	float:right;
+}
 
 
 

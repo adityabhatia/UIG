@@ -137,9 +137,9 @@ while($row = mysql_fetch_array($result)){
 			<span class="sel2">
 				<h2 class="page-header" ><b> Product Development Survey: <?php echo($row['p_name']);?> </b></h2><br/>
 				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
-					<p>The team survey contains questions about the develop and designing process of the product.</p>
-					<p>The survey can be accessed by the link below.</p>
-					<p>To invite members of the development team you can provide them the access link, or fillout the form below and click "Send invitation".</p>
+					<p>The team survey contains questions about the develop and designing process of the product.<br>
+					The survey can be accessed by the link below.<br>
+					To invite members of the development team you can provide them the access link, or fillout the form below and click "Send invitation".</p>
 					<div class="jumbotron">
 					<p>Link:</p>
 					<form id="team-survey-form">
@@ -159,21 +159,21 @@ while($row = mysql_fetch_array($result)){
 						  </tr>
 						  <tr>
 						  	<td>1</td>
-						    <td><input class="table-form" type="text" name="name" form="team-survey-form" value="Name"></td>
-						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" value="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" value="Position"></td>
+						    <td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Position"></td>
 						  </tr>
 						  <tr>
 						  	<td>2</td>
-							<td><input class="table-form" type="text" name="name" form="team-survey-form" value="Name"></td>
-						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" value="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" value="Position"></td>
+							<td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Position"></td>
 						  </tr>
 						  <tr>
 						  	<td>3</td>
-							<td><input class="table-form" type="text" name="name" form="team-survey-form" value="Name"></td>
-						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" value="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" value="Position"></td>
+							<td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Position"></td>
 						  </tr>
 						</table>
 						</br>
@@ -188,16 +188,15 @@ while($row = mysql_fetch_array($result)){
 				<h2 class="page-header" ><b>Product User Survey: <?php echo($row['p_name']);?></b></h2><br />
 				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
 					
-						<p>The user survey contains questions about the usability of the product.</p>
-						<p>The survey can be accessed by the link below.</p>
-						<p>To invite your product's users and customers you can provide them the access link.</p>
+						<p>	The user survey contains questions about the usability of the product.<br>
+							The survey can be accessed by the link below.<br>
+							To invite your product's users and customers you can provide them the access link.</p>
 					
 					<div class="jumbotron">
 						<p>Link:</p>
 					<form id="user-survey-form">	
 						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" class="field left" readonly>
 					</form>
-					</br>
 					</div>
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
 
