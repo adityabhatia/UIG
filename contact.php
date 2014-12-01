@@ -49,7 +49,7 @@ if($result){
 	<body>
 	<div class="col-xs-12 col-sm-12"
 		<div class="container" width=200px>
-			<div class="panel panel-default" style="margin:0 auto;width:50%">
+			<div class="panel panel-default" style="margin:0 auto; max-width:500px;">
 							<div class="panel-heading">
 								<h2 class="panel-title">Contact Form<?php echo($msg);?></h2>
 							</div>
