@@ -155,25 +155,25 @@ while($row = mysql_fetch_array($result)){
 						  	<th>Nr.</th>
 						    <th>Name</th>
 						    <th>Email</th>		
-						    <th>Position in team</th>
+						    <th>Team Role</th>
 						  </tr>
 						  <tr>
 						  	<td>1</td>
 						    <td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
 						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Position"></td>
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Team Role"></td>
 						  </tr>
 						  <tr>
 						  	<td>2</td>
 							<td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
 						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Position"></td>
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Team Role"></td>
 						  </tr>
 						  <tr>
 						  	<td>3</td>
 							<td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
 						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Position"></td>
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Team Role"></td>
 						  </tr>
 						</table>
 						</br>
