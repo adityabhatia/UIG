@@ -16,6 +16,47 @@ $result = mysql_query($query) or die(mysql_error());
 $count = mysql_num_rows($result);
 if ($count == 1){
 while($row = mysql_fetch_array($result)){
+					if (isset($_POST['submit'])){
+							$name = $_POST['name1'];
+							$mail = $_POST['mail1'];
+							//$mail = trim($mail);
+							if (is_string($mail)) {
+								$nmail = trim($mail);
+							}
+							$role = $_POST['role1'];														
+								//LINK TO SEND IN E-MAIL
+								$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey: http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class'] . "<br />" . "Your team role: " .  $role;					
+						require_once('Mailer/class.phpmailer.php');
+						$mail             = new PHPMailer();
+						$mail->IsSMTP(); // telling the class to use SMTP
+						//$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
+						//$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+																   // 1 = errors and messages
+																   // 2 = messages only
+						$mail->SMTPAuth   = true;                  // enable SMTP authentication
+						$mail->SMTPSecure = "tls";                 // sets the prefix to the servier
+						$mail->Host       = "smtp.office365.com";      // sets GMAIL as the SMTP server
+						$mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+						$mail->Username   = "UIG@es.uni-mannheim.de";  // GMAIL username
+						$mail->Password   = "n123456789/*-";            // GMAIL password
+
+						$mail->SetFrom('UIG@es.uni-mannheim.de', 'Usability in Germany');
+
+						$mail->AddReplyTo("UIG@es.uni-mannheim.de","Usability in Germany");
+
+						$mail->Subject    = "Survey Invitation: UIG!";
+
+						//$mail->AltBody    = "Password: " . $pass; // optional, comment out and test
+
+						$mail->MsgHTML($pass);
+
+						$mail->AddAddress($nmail, $name);
+						if(!$mail->Send()) {
+						  $msg = "Mailer Error: " . $mail->ErrorInfo;
+						} else {
+						  $msg = "Message sent!";
+						}
+					}
 ?>
 
 <html lang="en">
@@ -149,7 +190,7 @@ while($row = mysql_fetch_array($result)){
 					<p></p>
 					
 					<!-- TODO: Form/Submit functionality-->
-					<form id="team-survey-form">	
+					<form id="team-survey-form" method="post" action="" class="form-horizontal">	
 						<table class="col-md-12 table-bordered table-striped table-condensed" style="border-spacing: 5px;">
 						  <tr>
 						  	<th>Nr.</th>
@@ -159,30 +200,31 @@ while($row = mysql_fetch_array($result)){
 						  </tr>
 						  <tr>
 						  	<td>1</td>
-						    <td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Team Role"></td>
+						    <td><input class="table-form" type="text" name="name1" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail1" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="role1" placeholder="Team Role"></td>
 						  </tr>
 						  <tr>
 						  	<td>2</td>
-							<td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Team Role"></td>
+							<td><input class="table-form" type="text" name="name2" form="team-survey-form" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail2" form="team-survey-form" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="position2" form="team-survey-form" placeholder="Team Role"></td>
 						  </tr>
 						  <tr>
 						  	<td>3</td>
-							<td><input class="table-form" type="text" name="name" form="team-survey-form" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position" form="team-survey-form" placeholder="Team Role"></td>
+							<td><input class="table-form" type="text" name="name3" form="team-survey-form" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail3" form="team-survey-form" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="position3" form="team-survey-form" placeholder="Team Role"></td>
 						  </tr>
+						<tr class = "nopadding">
+						<td  colspan="4" align=center><button class="btn btn-default" type="submit" name="submit" value="Send invitation" >Send invitation</button></td>
+						</tr>
 						</table>
-						</br>
-						<input type="submit" value="Send invitation">
-					</form>
-					</br>
+					</form>					
+				</div>
+				<div class="col-xs-12 col-sm-12" style="text-align:left;" ><br />
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
 				</div>
-
 			</span>
 			<span class="sel3">	
 				<h2 class="page-header" ><b>Product User Survey: <?php echo($row['p_name']);?></b></h2><br />
