@@ -82,7 +82,8 @@ color:#373737;
  }
 
  .navbar-brand{
- 	padding:0 15px 0 0;
+ 	height: 60px;
+ 	padding: 10px 15px;
  }
 
  .navbar-nav>li>a{
@@ -133,6 +134,29 @@ color:#373737;
 	float:right;
 }
 
+.sidebar{
+	padding:50px 20px 50px 20px;
+}
 
+/* Large desktop */
+@media (min-width: 1200px) { ... }
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { ... }
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { ... }
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+	#uig-logo{
+		width:220px;
+	}
+
+	.container{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+ }
 
 

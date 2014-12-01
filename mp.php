@@ -72,7 +72,7 @@ if (isset($_GET["dname"])){
 	<div class="container">
 		<h2 class="page-header"><b> Manage Products </b></h2><br />
 		<section>
-			<table id="example" class="table table-striped table-bordered">
+			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Product</th>

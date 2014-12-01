@@ -97,7 +97,9 @@ if($_SESSION['username']==""){
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 		         	</button>
-					<div class="navbar-brand" style="padding: 8px 8px 8px 8px;"><img src="img/uig-logo.png"></img></div>
+					<div class="navbar-brand">
+						<img id="uig-logo" src="img/uig-logo.png"></img>
+					</div>
 				</div>
 			<!-- Collection of nav links, forms, and other content for toggling -->
 			<div id="navbar" class="navbar-collapse collapse in" aria-expanded="true">

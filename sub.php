@@ -72,7 +72,7 @@ while($row = mysql_fetch_array($result)){
 	<body>
 	<div class="container">
 			<span class="sel1">
-				<h2 class="page-header"><b>Product Overview: <?php echo($row['p_name']);?></b></h2><br />
+				<h2 class="page-header"><b>Product Overview:</b> <?php echo($row['p_name']);?></h2><br />
 				<!--<div class="col-xs-6 col-sm-6" style="text-align:right;" >
 						Product Name:<br />
 						Version:<br />
