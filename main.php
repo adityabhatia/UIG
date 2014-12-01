@@ -74,7 +74,6 @@ if($_SESSION['username']==""){
 			
 			<link href="css/bootstrap.min.css" rel="stylesheet">
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-			<link rel="stylesheet" type="text/css" href="css/offcanvas.css">
 			<link rel="stylesheet" type="text/css" href="css/dashboard.css">
 
 			<link type="text/css" rel="stylesheet" href="css/main.css">

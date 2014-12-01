@@ -52,24 +52,30 @@ if (isset($_GET["dname"])){
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/shCore.css">
-	<link rel="stylesheet" type="text/css" href="css/demo.css">
-	<link type="text/css" rel="stylesheet" href="css/main.css">
-	
-	<style type="text/css" class="init">
 
-	</style>
+	
+	<style type="text/css" class="init"></style>
+	
+	<link type="text/css" rel="stylesheet" href="css/main.css">
+
+	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" language="javascript" src="js/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="js/demo.js"></script>
 	
 
 </head>
 
 <body id="tabular" >
 	<div class="container">
+		<h2 class="page-header"><b> Manage Products </b></h2><br />
 		<section>
-			<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+			<table id="example" class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Name</th>
+						<th>Product</th>
 						<th>Version</th>
 						<!--<th>Entry Date</th>
 						<th>Type&nbsp&nbsp </th>
@@ -117,7 +123,7 @@ if (isset($_GET["dname"])){
       
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" name="delete" id=removal>Delete Permanently</button>
+        <button type="button" class="btn btn-primary" name="delete" id="removal">Delete Permanently</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -152,12 +158,7 @@ if (isset($_GET["dname"])){
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 	</div>
-	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.js"></script>
-	<script type="text/javascript" language="javascript" src="js/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="js/demo.js"></script>
+
 	<script>
 $(document).ready(function() {
 	$('#example').dataTable();

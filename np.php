@@ -42,7 +42,7 @@ if($result){ ?>
 			<meta name="author" content="adityabhatia">
 			
 			<link href="css/bootstrap.min.css" rel="stylesheet">
-			
+			<link rel="stylesheet" type="text/css" href="css/dashboard.css">
 			<link type="text/css" rel="stylesheet" href="css/main.css">
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			
@@ -57,12 +57,12 @@ if($result){ ?>
 		<div class = "col-sm-12 col-xs-12" style="">
 						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">
 							<div class="panel-heading">
-								<h2 class="panel-title">Add new Product</h2>
+								<h2 class="panel-title">Register a new product</h2>
 							</div>
 							<div class="panel-body">
 								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
-									<div class="col-sm-6 col-xs-6">
-										<h2 class="panel-title" align=center><b>Background Information</b></h2><br />
+									<div class="col-xs-12 col-sm-6 ">
+										<h2 class="panel-title" align=center><b>General Product Information</b></h2><br />
 										<div class="form-group nopadding">
 											<label for="inputName" class="col-sm-3 col-xs-4 control-label nopadding">Product Name</label>
 											<div class="col-sm-9 col-xs-8">
@@ -95,8 +95,8 @@ if($result){ ?>
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-6 col-xs-6">
-										<h2 class="panel-title" align=center><b>Group</b></h2><br />
+									<div class="col-xs-12 col-sm-6">
+										<h2 class="panel-title" align=center><b>Development Information</b></h2><br />
 										<div class="form-group nopadding">
 											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Total size of the team</label>
 											<div class="col-sm-9 col-xs-8">

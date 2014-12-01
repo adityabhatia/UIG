@@ -72,7 +72,7 @@ while($row = mysql_fetch_array($result)){
 	<body>
 	<div class="container">
 			<span class="sel1">
-				<h2 class="page-header"><b>Overview <?php echo($row['p_name']);?></b></h2><br />
+				<h2 class="page-header"><b>Product Overview: <?php echo($row['p_name']);?></b></h2><br />
 				<!--<div class="col-xs-6 col-sm-6" style="text-align:right;" >
 						Product Name:<br />
 						Version:<br />
@@ -92,7 +92,7 @@ while($row = mysql_fetch_array($result)){
 					<?php echo($row['teamno']);?>
 				</div>-->
 		<div id="table-responsive">
-            <table class="col-md-12 table-bordered table-striped table-condensed">
+            <table class="col-xs-12 table-bordered table-striped table-condensed">
         		<thead>
         			<tr>
         				<th>Attribute</th>
@@ -135,17 +135,21 @@ while($row = mysql_fetch_array($result)){
 		</div>
 			</span>
 			<span class="sel2">
-				<h2 class="page-header" ><b> Team Survey Product <?php echo($row['p_name']);?> </b></h2><br/>
+				<h2 class="page-header" ><b> Product Development Survey: <?php echo($row['p_name']);?> </b></h2><br/>
 				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
 					<p>The team survey contains questions about the develop and designing process of the product.</p>
-					<p>In order to create a new team survey follow the link below.</p>
-					<a href="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" target="_blank" style="font-size:20px;"> Start Team Survey </a>
+					<p>The survey can be accessed by the link below.</p>
+					<p>To invite members of the development team you can provide them the access link, or fillout the form below and click "Send invitation".</p>
+					<div class="jumbotron">
+					<p>Link:</p>
+					<form id="team-survey-form">
+					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" class="field left" readonly>
+					</form>
+					</div>
 					<p></p>
 					
-					<p>To send the survey invitation to specific team members fill out the following form and click "Send invitation"!</p>
-					
 					<!-- TODO: Form/Submit functionality-->
-					<form id="user-survey-form">	
+					<form id="team-survey-form">	
 						<table class="col-md-12 table-bordered table-striped table-condensed" style="border-spacing: 5px;">
 						  <tr>
 						  	<th>Nr.</th>
@@ -155,21 +159,21 @@ while($row = mysql_fetch_array($result)){
 						  </tr>
 						  <tr>
 						  	<td>1</td>
-						    <td><input type="text" name="name" form="user-survey-form" value="Name"></td>
-						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
-						    <td><input type="text" name="position" form="user-survey-form" value="Position"></td>
+						    <td><input class="table-form" type="text" name="name" form="team-survey-form" value="Name"></td>
+						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" value="Email"></td>		
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" value="Position"></td>
 						  </tr>
 						  <tr>
 						  	<td>2</td>
-							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
-						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
-						    <td><input type="text" name="position" form="user-survey-form" value="Position"></td>
+							<td><input class="table-form" type="text" name="name" form="team-survey-form" value="Name"></td>
+						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" value="Email"></td>		
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" value="Position"></td>
 						  </tr>
 						  <tr>
 						  	<td>3</td>
-							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
-						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
-						    <td><input type="text" name="position" form="user-survey-form" value="Position"></td>
+							<td><input class="table-form" type="text" name="name" form="team-survey-form" value="Name"></td>
+						    <td><input class="table-form" type="text" name="mail" form="team-survey-form" value="Email"></td>		
+						    <td><input class="table-form" type="text" name="position" form="team-survey-form" value="Position"></td>
 						  </tr>
 						</table>
 						</br>
@@ -181,42 +185,22 @@ while($row = mysql_fetch_array($result)){
 
 			</span>
 			<span class="sel3">	
-				<h2 class="page-header" ><b>User Survey Product <?php echo($row['p_name']);?></b></h2><br />
+				<h2 class="page-header" ><b>Product User Survey: <?php echo($row['p_name']);?></b></h2><br />
 				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
 					
-					<p>The user survey contains questions about the usability of the product.</p>
-					<p>In order to create a new user survey follow the link below.</p>
-					<a href="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" target="_blank" style="font-size:20px;"> Start User Survey </a>
-					<p>To send the survey invitation to specific users, fill out the following form and click "Send invitation"!</p>
-					<!-- TODO: Form/Submit functionality-->
+						<p>The user survey contains questions about the usability of the product.</p>
+						<p>The survey can be accessed by the link below.</p>
+						<p>To invite your product's users and customers you can provide them the access link.</p>
+					
+					<div class="jumbotron">
+						<p>Link:</p>
 					<form id="user-survey-form">	
-						<table class="col-md-12 table-bordered table-striped table-condensed" style="border-spacing: 5px;">
-						  <tr>
-						  	<th>Nr.</th>
-						    <th>Name</th>
-						    <th>Email</th>
-						  </tr>
-						  <tr>
-						  	<td>1</td>
-						    <td><input type="text" name="name" form="user-survey-form" value="Name"></td>
-						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
-						  </tr>
-						  <tr>
-						  	<td>2</td>
-							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
-						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
-						  </tr>
-						  <tr>
-						  	<td>3</td>
-							<td><input type="text" name="name" form="user-survey-form" value="Name"></td>
-						    <td><input type="text" name="mail" form="user-survey-form" value="Email"></td>		
-						  </tr>
-						</table>
-						</br>
-						<input type="submit" value="Send invitation">
+						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" class="field left" readonly>
 					</form>
 					</br>
+					</div>
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
+
 				</div>
 
 			</span>

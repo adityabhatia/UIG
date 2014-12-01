@@ -127,7 +127,18 @@ if(!$mail->Send()) {
 
 	</head>
 	
-	<body style="background-color:#2E2E2E">
+	<body style="background-color:#f5f5f5">
+
+		<div class="row">
+		<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<div class="navbar-brand" style="padding: 8px 8px 8px 8px;"><img src="img/uig-logo.png"></img></div>
+				</div>
+			</div>
+		</nav>
+		</div>
 		<!-- Form for logging in the users -->
 		<div class="wrapper">
 			<?php if (isset($_GET["chk"]) == null){ ?>

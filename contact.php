@@ -35,11 +35,12 @@ if($result){
 			<meta name="author" content="adityabhatia">
 			
 			<link href="css/bootstrap.min.css" rel="stylesheet">
-			<link href="css/main.css" rel="stylesheet">
-			
-			<link type="text/css" rel="stylesheet" href="css/main.css">
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+			<link rel="stylesheet" type="text/css" href="css/dashboard.css">
+			<link type="text/css" rel="stylesheet" href="css/main.css">
+			
+			
 			 <!--[if lt IE 9]>
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->
