@@ -17,13 +17,23 @@ $count = mysql_num_rows($result);
 if ($count == 1){
 while($row = mysql_fetch_array($result)){
 					if (isset($_POST['submit'])){
-							$name = $_POST['name1'];
-							$mail = $_POST['mail1'];
+
+							$counter=0;
+
+							$array_name = $_POST['name'];
+							$array_mail = $_POST['mail'];
+							$array_role = $_POST['role'];
+
+							foreach ($array_name as $value) {
+								$name=$value;
+								$mail=$array_mail[$counter];
+								$role=$array_role[$counter];
+								$counter++;
+							
 							//$mail = trim($mail);
 							if (is_string($mail)) {
 								$nmail = trim($mail);
-							}
-							$role = $_POST['role1'];														
+							}													
 								//LINK TO SEND IN E-MAIL
 								$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey: http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class'] . "<br />" . "Your team role: " .  $role;					
 						require_once('Mailer/class.phpmailer.php');
@@ -57,6 +67,7 @@ while($row = mysql_fetch_array($result)){
 						  $msg = "Message sent!";
 						}
 					}
+					}
 ?>
 
 <html lang="en">
@@ -73,19 +84,22 @@ while($row = mysql_fetch_array($result)){
 			<meta name="author" content="adityabhatia">
 	
 			<link href="css/bootstrap.min.css" rel="stylesheet">
-			<link type="text/css" rel="stylesheet" href="css/main.css">
+
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 			 <!--[if lt IE 9]>
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->
-			
-			<script>
+			<link type="text/css" rel="stylesheet" href="css/main.css">
+			<script type="text/javascript">
+
+
 			$( document ).ready(function() {
+
 				//var url = document.URL;
 				//document.write(url);
 					$("span").css("display","none");
-					var value = null;
+						var value = null;
 						var winURL = window.location.href;
 						var queryStringArray = winURL.split("?");
 						var queryStringParamArray = queryStringArray[1].split("&");
@@ -106,8 +120,32 @@ while($row = mysql_fetch_array($result)){
 					$(".sel4").css("display","block");
 				else
 					$(".sel1").css("display","block");
+
+
+				$("#participant-table").on('click','.remCF',function(){
+						$(this).parent().parent().remove();
+					});
+
+
 					
 			});
+				
+					var table_name=1;
+					var table_mail=1;
+					var table_role=1;
+
+				function addRow(){
+
+					table_name++;
+					table_mail++;
+					table_role++;
+
+					$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" placeholder="Name"></td><td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td><td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td><td><a href="javascript:void(0);" class="remCF"><i class="glyphicon glyphicon-minus"></i></a></td></tr>');
+
+				}
+
+ 					
+
 			</script>
 	</head>
 	<body>
@@ -176,70 +214,58 @@ while($row = mysql_fetch_array($result)){
 		</div>
 			</span>
 			<span class="sel2">
-				<h2 class="page-header" ><b> Product Development Survey: <?php echo($row['p_name']);?> </b></h2><br/>
+				<h2 class="page-header" ><b> Product Development Survey:</b> <?php echo($row['p_name']);?> </h2><br/>
 				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
-					<p>The team survey contains questions about the develop and designing process of the product.<br>
+					<p>The team survey contains questions about the develop and designing process of the product <?php echo($row['p_name']);?>.<br>
 					The survey can be accessed by the link below.<br>
 					To invite members of the development team you can provide them the access link, or fillout the form below and click "Send invitation".</p>
-					<div class="jumbotron">
-					<p>Link:</p>
+
+					<p>Link to product development survey:</p>
 					<form id="team-survey-form">
 					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" class="field left" readonly>
 					</form>
-					</div>
 					<p></p>
+					<h3>Survey Participants</h3>
+					<button class="btn btn-default" id="btn-addRow" type="button" name="table_row" value="Add Participant" onclick="addRow();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add participant</button>
 					
 					<!-- TODO: Form/Submit functionality-->
 					<form id="team-survey-form" method="post" action="" class="form-horizontal">	
-						<table class="col-md-12 table-bordered table-striped table-condensed" style="border-spacing: 5px;">
+						<button class="btn btn-default" id="btn-sendIn" type="submit" name="submit" value="Send invitation" ><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Send invitation</button>
+						<table class="col-md-12 table-bordered table-striped table-condensed" id="participant-table" style="border-spacing: 5px;">
 						  <tr>
-						  	<th>Nr.</th>
 						    <th>Name</th>
 						    <th>Email</th>		
 						    <th>Team Role</th>
+						    <th>Action</th>
 						  </tr>
 						  <tr>
-						  	<td>1</td>
-						    <td><input class="table-form" type="text" name="name1" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mail1" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="role1" placeholder="Team Role"></td>
+						    <td><input class="table-form" type="text" name="name[]" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td>
+						    <td></td>
 						  </tr>
-						  <tr>
-						  	<td>2</td>
-							<td><input class="table-form" type="text" name="name2" form="team-survey-form" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mail2" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position2" form="team-survey-form" placeholder="Team Role"></td>
-						  </tr>
-						  <tr>
-						  	<td>3</td>
-							<td><input class="table-form" type="text" name="name3" form="team-survey-form" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mail3" form="team-survey-form" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="position3" form="team-survey-form" placeholder="Team Role"></td>
-						  </tr>
-						<tr class = "nopadding">
-						<td  colspan="4" align=center><button class="btn btn-default" type="submit" name="submit" value="Send invitation" >Send invitation</button></td>
-						</tr>
 						</table>
+						
 					</form>					
 				</div>
-				<div class="col-xs-12 col-sm-12" style="text-align:left;" ><br />
+				<div class="col-xs-12 col-sm-12" style="text-align:left;" ><br>
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
+					
 				</div>
 			</span>
 			<span class="sel3">	
-				<h2 class="page-header" ><b>Product User Survey: <?php echo($row['p_name']);?></b></h2><br />
+				<h2 class="page-header" ><b>Product User Survey:</b> <?php echo($row['p_name']);?></h2><br />
 				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
 					
-						<p>	The user survey contains questions about the usability of the product.<br>
+						<p>	The user survey contains questions about the usability of the product <?php echo($row['p_name']);?>.<br>
 							The survey can be accessed by the link below.<br>
 							To invite your product's users and customers you can provide them the access link.</p>
 					
-					<div class="jumbotron">
 						<p>Link:</p>
 					<form id="user-survey-form">	
 						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" class="field left" readonly>
 					</form>
-					</div>
+					<br>
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
 
 				</div>

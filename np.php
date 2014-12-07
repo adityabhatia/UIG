@@ -43,18 +43,17 @@ if($result){ ?>
 			
 			<link href="css/bootstrap.min.css" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="css/dashboard.css">
-			<link type="text/css" rel="stylesheet" href="css/main.css">
+
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
-			
-			<link rel="stylesheet" href="css/datepicker.css" type="text/css" />
+			<link type="text/css" rel="stylesheet" href="css/main.css">
 			 <!--[if lt IE 9]>
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->
 
 	</head>
 	<body>
-		<div class="container-fixed" style=" margin: 0 auto;">
-		<div class = "col-sm-12 col-xs-12" style="">
+		<div class="container" style=" margin: 0 auto;">
+		<div class = "col-sm-12 col-xs-12" >
 						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">
 							<div class="panel-heading">
 								<h2 class="panel-title">Register a new product</h2>

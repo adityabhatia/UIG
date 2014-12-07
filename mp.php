@@ -123,7 +123,7 @@ if (isset($_GET["dname"])){
       
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" name="delete" id="removal">Delete Permanently</button>
+        <button type="button" class="glyphicon glyphicon-plus" name="delete" id="removal">Delete Permanently</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

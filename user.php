@@ -55,7 +55,7 @@ while($row = mysql_fetch_array($result)){
 
 	</head>
 	<body>
-		<div class="container" width=200px>
+		<div class="container">
 						<div class="panel panel-default" style="margin:0 auto;width:50%">
 							<div class="panel-heading">
 								<h2 class="panel-title">User Summary<?php echo($msg);?></h2>
