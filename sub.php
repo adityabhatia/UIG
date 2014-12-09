@@ -33,9 +33,12 @@ while($row = mysql_fetch_array($result)){
 							//$mail = trim($mail);
 							if (is_string($mail)) {
 								$nmail = trim($mail);
-							}													
+							}
+							$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class'];
+							$survey_url = str_replace(' ','%', $survey_url);
+
 								//LINK TO SEND IN E-MAIL
-								$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey: http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class'] . "<br />" . "Your team role: " .  $role;					
+								$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey:". $survey_url  . "<br />" . "Your team role: " .  $role;					
 						require_once('Mailer/class.phpmailer.php');
 						$mail             = new PHPMailer();
 						$mail->IsSMTP(); // telling the class to use SMTP
@@ -222,7 +225,7 @@ while($row = mysql_fetch_array($result)){
 
 					<p>Link to product development survey:</p>
 					<form id="team-survey-form">
-					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" class="field left" readonly>
+					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$row['product_id']."&b=".str_replace(' ','%',$row['p_name'])."&c=".str_replace(' ','%',$row['p_class']));?>" class="field left" readonly>
 					</form>
 					<p></p>
 					<h3>Survey Participants</h3>
@@ -263,7 +266,7 @@ while($row = mysql_fetch_array($result)){
 					
 						<p>Link:</p>
 					<form id="user-survey-form">	
-						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$row['product_id']."&b=".$row['p_name']."&c=".$row['p_class']);?>" class="field left" readonly>
+						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$row['product_id']."&b=".str_replace(' ','%',$row['p_name'])."&c=".str_replace(' ','%',$row['p_class']));?>" class="field left" readonly>
 					</form>
 					<br>
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
