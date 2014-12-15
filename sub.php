@@ -142,9 +142,7 @@ while($row = mysql_fetch_array($result)){
 					table_name++;
 					table_mail++;
 					table_role++;
-
 					$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" placeholder="Name"></td><td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td><td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td><td><a href="javascript:void(0);" class="remCF"><i class="glyphicon glyphicon-minus"></i></a></td></tr>');
-
 				}
 
  					

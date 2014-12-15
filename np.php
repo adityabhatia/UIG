@@ -42,7 +42,6 @@ if($result){ ?>
 			<meta name="author" content="adityabhatia">
 			
 			<link href="css/bootstrap.min.css" rel="stylesheet">
-			<link rel="stylesheet" type="text/css" href="css/dashboard.css">
 
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			<link type="text/css" rel="stylesheet" href="css/main.css">
@@ -62,66 +61,69 @@ if($result){ ?>
 								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 									<div class="col-xs-12 col-sm-6 ">
 										<h2 class="panel-title" align=center><b>General Product Information</b></h2><br />
-										<div class="form-group nopadding">
-											<label for="inputName" class="col-sm-3 col-xs-4 control-label nopadding">Product Name</label>
-											<div class="col-sm-9 col-xs-8">
+										<div class="row" style="margin-bottom:5px;">
+											<label for="inputName" class="col-sm-5 col-xs-6 control-label nopadding">Product Name</label>
+											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="inputName" name="inputName" placeholder="Name" required />
 											</div>
 										</div>
-										<div class="form-group nopadding">
-											<label for="inputEmail1" class="col-sm-3 col-xs-4 control-label nopadding">Version</label>
-											<div class="col-sm-9 col-xs-8">
+										<div class="row" style="margin-bottom:5px;">
+											<label for="inputEmail1" class="col-sm-5 col-xs-6 control-label nopadding">Version</label>
+											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="version" name="version" placeholder="Version" required />
 											</div>
 										</div>
 										
-										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Budget(in thousand € /year)</label>
-											<div class="col-sm-9 col-xs-8">
+										<div class="row" style="margin-bottom:5px;">
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Budget <span style="font-weight:normal;">(in 1000 € /year)</span></label>
+											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="budget" name="budget" placeholder="Budget" required />
 											</div>
 										</div>
-										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Start Date <br />(dd/mm/yyyy)</label>
-											<div class="col-sm-9 col-xs-8">
+										<div class="row" style="margin-bottom:5px;">
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Start Date <span style="font-weight:normal;">(dd/mm/yyyy)</span></label>
+											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="dp1" name="sdate" placeholder="Start Date" required />
 											</div>
 										</div>
-										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">End Date <br />(dd/mm/yyyy)</label>
-											<div class="col-sm-9 col-xs-8">
+										<div class="row" style="margin-bottom:5px;">
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >End Date <span style="font-weight:normal;">(dd/mm/yyyy)</span></label>
+											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="dp2" name="edate" placeholder="End Date" required />
+											</div>
+										</div>
+										<br />
+										<h2 class="panel-title" align=center><b>Development Information</b></h2><br />
+										<div class="row" style="margin-bottom:5px;">
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Total size of the team</label>
+											<div class="col-sm-7 col-xs-6">
+												<input type="number" class="form-control" id="groupsize" name="groupsize" placeholder="Group Size" required />
+											</div>
+										</div>
+										<div class="row" style="margin-bottom:5px;">
+											<label class="col-sm-5 col-xs-6 control-label nopadding">Developers</label>
+												<div class="col-sm-7 col-xs-6">
+													<input type="number" class="form-control" min="0" id="developers" name="developers" placeholder="No. of Developers" required />
+												</div>
+										</div>
+										<div class="row" style="margin-bottom:5px;">
+											<label class="col-sm-5 col-xs-6 control-label nopadding">Designers</label>
+												<div class="col-sm-7 col-xs-6">
+													<input type="number" class="form-control" min="0" id="designers" name="designers" placeholder="No. of Developers" required />
+												</div>
+										</div>
+										<div class="row" style="margin-bottom:5px;">
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >No. of sites</label>
+											<div class="col-sm-7 col-xs-6">
+												<input type="number" min="1" class=form-control id="teamno" name="teamno" placeholder="Number of Team Members" required />
 											</div>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6">
-										<h2 class="panel-title" align=center><b>Development Information</b></h2><br />
-										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" style="margin-top:-10px;">Total size of the team</label>
-											<div class="col-sm-9 col-xs-8">
-												<input type="number" class="form-control" id="groupsize" name="groupsize" placeholder="Group Size" required />
-											</div>
-										</div>
-										<div class="form-group nopadding">
-										<label class="col-sm-3 col-xs-4 control-label nopadding">Developers</label>
-												<div class="col-sm-9 col-xs-8">
-													<input type="number" class="form-control" min="0" id="developers" name="developers" placeholder="No. of Developers" required />
-												</div>
-										</div>
-										<div class="form-group nopadding">
-										<label class="col-sm-3 col-xs-4 control-label nopadding">Designers</label>
-												<div class="col-sm-9 col-xs-8">
-													<input type="number" class="form-control" min="0" id="designers" name="designers" placeholder="No. of Developers" required />
-												</div>
-										</div>
-										<div class="form-group nopadding">
-											<label for="budget" class="col-sm-3 col-xs-4 control-label nopadding" >No. of sites</label>
-											<div class="col-sm-9 col-xs-8">
-												<input type="number" min="0" class=form-control id="teamno" name="teamno" placeholder="Number of Team Members" required />
-											</div>
-										</div>
-										<div class="table-responsive">
-											<table class="table" id="teamallocation" align=center>
+										<h2 class="panel-title" align=center><b>Location Information</b></h2><br />
+										<div>
+											<table class="table-bordered table-striped table-condensed" id="teamallocation" align=center>
+												
 											</table>
 										</div>
 									</div>
@@ -158,13 +160,14 @@ if($result){ ?>
 		$('#dp1').datepicker('hide');
 		});
 		
+		$('#teamallocation').append('<tr><th>Location</th><th>No.</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" /></td><td style="padding:0;"><input type=text class="table-form nopadding" /></td></tr>');
+				
 		$('#teamno').change(function(){
 			$('#teamallocation').html("");
 			var count = $('#teamno').val();
-			if(count>0)
-				$('#teamallocation').append("<tr><th>Location</th><th>No.</th></tr>");
-			while(count>0){
-			$('#teamallocation').append("<tr><td><input type=text class=form-control /></td><td><input type=text class=form-control /></td></tr>");
+			$('#teamallocation').append('<tr><th>Location</th><th>No.</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" /></td><td style="padding:0;"><input type=text class="table-form nopadding" /></td></tr>');
+			while(count>1){
+			$('#teamallocation').append('<tr><td style="padding:0;"><input type=text class="table-form" /></td><td style="padding:0;"><input type=text class="table-form" /></td></tr>');
 			count-=1;
 			}
 		});

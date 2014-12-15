@@ -35,7 +35,7 @@ $mail             = new PHPMailer();
 //$body             = eregi_replace("[\]",'',$body);
 
 $mail->IsSMTP(); // telling the class to use SMTP
-$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
+//$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
 //$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
                                            // 1 = errors and messages
                                            // 2 = messages only
