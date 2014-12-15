@@ -11,7 +11,7 @@ background-color:#373737;
 color:#F2F2F2;
 }
 
-.list-group > a.active, .pagination>.active>a, .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+.list-group > a.active, .pagination>.active>a, .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover{
 color:#F2F2F2;
 background: #373737;
 border-color: #F2F2F2;
@@ -62,7 +62,7 @@ padding: 0;
  }
  
  .panel-title{
- 	font-size: 20px;
+ 	font-size: 18px;
  }
  .dropdown-toggle, .pagination>li>a{
 background:#BDBDBD;

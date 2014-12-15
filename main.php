@@ -27,6 +27,12 @@ if($_SESSION['username']==""){
 						$( this ).addClass( " active" );
 						$(".sublist").css("display","none");
 					});
+					$('#nav1 li').click(function() {
+						$('#nav li').removeClass();
+						$(".list-group-item").removeClass('active');
+						$( this ).addClass( " active" );
+						$(".sublist").css("display","none");
+					});
 					$(".external").click(function(){
 						$(".sublist").css("display","none");
 					});
@@ -113,7 +119,7 @@ if($_SESSION['username']==""){
 						<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" style="display:block; width:160px;">
 						<i class="glyphicon glyphicon-user"></i>   <?php echo($_SESSION['username']); ?>
 							<span class="caret"></span></a>
-						<ul class="dropdown-menu nopadding" role="menu" aria-labelledby="dropdownMenu1" style="min-width:100%;">
+						<ul class="dropdown-menu nopadding" role="menu" aria-labelledby="dropdownMenu1" style="min-width:100%;" id=nav1>
 							<li class="nopadding" role="presentation"><a class="nopadding" role="menuitem" tabindex="-1" href="user.php" target="myiframe">Profile</a></li>
 							<li class="nopadding" role="presentation"><a role="menuitem" tabindex="-1" href="user.php" target="myiframe">Change Password</a></li>
 							<li role="presentation" class="divider nopadding"></li>
