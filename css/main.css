@@ -61,6 +61,11 @@ background:#BDBDBD;
 padding: 0;
  }
  
+ #myModal{
+ outline: none;
+ top:0;
+ }
+ 
  .panel-title{
  	font-size: 18px;
  }
@@ -88,7 +93,7 @@ color:#373737;
 
  .iframe{
  	max-width: 1200px;
- 	height: 1200px;
+ 	height: 570px;
 
  }
  .navbar{

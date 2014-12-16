@@ -102,9 +102,9 @@ if (isset($_GET["dname"])){
 						$result = mysql_query($query) or die(mysql_error()); 
 						$count = mysql_num_rows($result);
 						while($row = mysql_fetch_array($result)){
-							echo ('<tr><td><a class=selec_name>' . $row['p_name'] . '</a></td>');
+							echo ('<tr><td><a href="" class=selec_name>' . $row['p_name'] . '</a></td>');
 							echo ('<td class=selec_version>' . $row['p_class'] . '</td>');
-							echo ('<td><a data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
+							echo ('<td><a href="" data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
 							<a data-toggle="modal" data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td></tr>');
 							} 
 						if($count==0){echo ('<tr><td>-Empty-</td><td>-Empty-</td><td>-Empty-</td></tr>');}
@@ -113,7 +113,7 @@ if (isset($_GET["dname"])){
 			</table>			
 		</section>
 	<!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade modal-open" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -123,7 +123,7 @@ if (isset($_GET["dname"])){
       
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="glyphicon glyphicon-plus" name="delete" id="removal">Delete Permanently</button>
+        <button type="button" class="btn btn-primary" name="delete" id="removal">Delete Permanently</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -136,19 +136,21 @@ if (isset($_GET["dname"])){
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Enter new information</h4>
       </div>
-      <div class="modal-body"><form name="contactform" method="post" class="form-horizontal">
-									<div class="form-group">
-										<label for="inputName" class="col-sm-3 control-label nopadding">Name</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control input-sm" id="inputName" name="pname" placeholder="Name" value="" required />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputVersion" class="col-sm-3 control-label nopadding" align=right style="vertical-align:bottom;">Version</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control input-sm" id="version" name="version" placeholder="Version"  required />
-										</div>
-									</div></form>
+      <div class="modal-body">
+		<form name="contactform" method="post" class="form-horizontal">
+			<div class="form-group">
+				<label for="inputName" class="col-sm-3 control-label nopadding">Name</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control input-sm" id="inputName" name="pname" placeholder="Name" value="" required />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputVersion" class="col-sm-3 control-label nopadding" align=right style="vertical-align:bottom;">Version</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control input-sm" id="version" name="version" placeholder="Version"  required />
+				</div>
+			</div>
+		</form>
 		</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -186,8 +188,9 @@ $(document).ready(function() {
 	var selec_name = $(this).html();
 	var selec_version = $(this).closest('td').next().html();
 	var $url= "sub.php?sname="+selec_name+"&sver="+selec_version+"&sel=1";
-	window.location.replace($url);
+	$('.selec_name').attr("href", $url);
 	});
+
 });
 	</script>
 </body>

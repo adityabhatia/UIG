@@ -169,8 +169,8 @@ if(!$mail->Send()) {
 				$random = $_GET["chk"];
 				$query2 = "select * from password where random='$random' and token = '1'";
 				$result2 = mysql_query($query2) or die("error: " . mysql_error()) ;
-				$count=mysql_num_rows($result2);
-				if($count==1){
+				$countchk=mysql_num_rows($result2);
+				if($countchk==1){
 					echo("okay");
 						if (isset($_POST['newpass'])){
 							$rows1=mysql_fetch_array($result2);

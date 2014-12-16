@@ -45,6 +45,7 @@ if($result){ ?>
 
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			<link type="text/css" rel="stylesheet" href="css/main.css">
+			<link href="css/datepicker.css" rel="stylesheet">
 			 <!--[if lt IE 9]>
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->

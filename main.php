@@ -150,8 +150,6 @@ if($_SESSION['username']==""){
 							frameborder="0" scrolling=no class="iframe" id="iframe"> </iframe>
 						</div>
 					</div>
-
-
 			</div>
 
 	</div>
