@@ -27,12 +27,7 @@ if($_SESSION['username']==""){
 						$( this ).addClass( " active" );
 						$(".sublist").css("display","none");
 					});
-					$('#nav1 li').click(function() {
-						$('#nav li').removeClass();
-						$(".list-group-item").removeClass('active');
-						$( this ).addClass( " active" );
-						$(".sublist").css("display","none");
-					});
+					
 					$(".external").click(function(){
 						$(".sublist").css("display","none");
 					});
