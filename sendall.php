@@ -4,16 +4,19 @@
 	
 	$name=$_POST['name'];
   	$nmail=$_POST['mail'];
+  	$role = $_POST['role'];
+  	$invitations = $_POST['invitations'];
+
   	$product_id=$_POST['id'];
   	$product_name=$_POST['product_name'];
   	$product_version=$_POST['product_version'];
-  	$role = $_POST['role'];
+  	$product_end = $_POST['product_end'];
 
   	//$mail = trim($mail);
 			if (is_string($nmail)) {
 				$nmail = trim($nmail);
 			}
-			$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".$product_name."&c=".$product_version;
+			$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".$product_name."&c=".$product_version."&d=".$product_end;
 			$survey_url = str_replace(' ','%', $survey_url);
 
 			//LINK TO SEND IN E-MAIL
@@ -48,10 +51,14 @@
 			} 
 			else {
 				$msg = "Message sent!";
-
+				$invitations++;
 				//SAVE PARTICIPANTS IN DB
-				$query_insert= "INSERT INTO participants VALUES ('$name','$nmail','$role','$product_id')";
+				$query_insert= "INSERT INTO participants VALUES ('$name','$nmail','$role','1','$product_id')";
 				$result_insert= mysql_query($query_insert);
+				if ($result_insert==null) {
+						$query_update = "UPDATE `participants` SET `invitations`='$invitations' WHERE `email`='$nmail'";
+						$result_update= mysql_query($query_update);
+				}
 			}
 	
 	

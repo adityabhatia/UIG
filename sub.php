@@ -16,10 +16,10 @@
 
 
 	//VARIABLES
-	$product_id = 0;
-	$product_name = null;
-	$product_version = 0;
-	$product_budget = 0;
+	$product_id;
+	$product_name;
+	$product_version;
+	$product_budget;
 	$product_start;
 	$product_end;
 	$product_gsize;
@@ -63,78 +63,12 @@
 			$array_name[$counter] = $row2['name'];
 			$array_mail[$counter] = $row2['email'];
 			$array_role[$counter] = $row2['role'];
+			$array_invitations[$counter] = $row2['invitations'];
 			$counter++;
 		}
 	}
-							
-
-	//SEND INVITATION TO ALL
-	if (isset($_POST['submitall'])){
-
-			$counter=0;
-
-			$array_name = $_POST['name'];
-			$array_mail = $_POST['mail'];
-			$array_role = $_POST['role'];
-
-			foreach ($array_name as $value) {
-				$name=$value;
-				$mail=$array_mail[$counter];
-				$role=$array_role[$counter];
-				$counter++;
-				
-			//$mail = trim($mail);
-			if (is_string($mail)) {
-				$nmail = trim($mail);
-			}
-			$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".$product_name."&c=".$product_version;
-			$survey_url = str_replace(' ','%', $survey_url);
-
-			//LINK TO SEND IN E-MAIL
-			$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey:". $survey_url  . "<br />" . "Your team role: " .  $role;					
-			require_once('Mailer/class.phpmailer.php');
-			$mail = new PHPMailer();
-			$mail->IsSMTP(); // telling the class to use SMTP
-			//$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
-			//$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
-													   // 1 = errors and messages
-													   // 2 = messages only
-			$mail->SMTPAuth   = true;                  // enable SMTP authentication
-			$mail->SMTPSecure = "tls";                 // sets the prefix to the servier
-			$mail->Host       = "smtp.office365.com";      // sets GMAIL as the SMTP server
-			$mail->Port       = 587;                   // set the SMTP port for the GMAIL server
-			$mail->Username   = "UIG@es.uni-mannheim.de";  // GMAIL username
-			$mail->Password   = "n123456789/*-";            // GMAIL password
-
-			$mail->SetFrom('UIG@es.uni-mannheim.de', 'Usability in Germany');
-
-			$mail->AddReplyTo("UIG@es.uni-mannheim.de","Usability in Germany");
-
-			$mail->Subject    = "Survey Invitation: UIG!";
-
-			//$mail->AltBody    = "Password: " . $pass; // optional, comment out and test
-
-			$mail->MsgHTML($pass);
-
-			$mail->AddAddress($nmail, $name);
-			if(!$mail->Send()) {
-				$msg = "Mailer Error: " . $mail->ErrorInfo;
-			} 
-			else {
-				$msg = "Message sent!";
-
-				//SAVE PARTICIPANTS IN DB
-				$query_insert= "INSERT INTO participants VALUES ('$name','$nmail','$role','$product_id')";
-				$result_insert= mysql_query($query_insert);
-			}
-	}
-	}
-
-	
-
-	//SEND SINGLE INVITATION
-
 ?>
+
 
 <html lang="en">
 	<head>
@@ -168,6 +102,7 @@
 				var product_id;
 				var product_name;
 				var product_version;
+				var product_end;
 				var counter;
 
 				var table_name=1;
@@ -217,6 +152,7 @@
 					product_id = <?php echo($product_id);?>;
 					product_name = <?php echo json_encode($product_name);?>;
 					product_version = <?php echo json_encode($product_version);?>;
+					product_end = <?php echo json_encode($product_end);?>;
 
 
 
@@ -225,7 +161,7 @@
 						var mail = mail_array[i];
 						var role = role_array[i];
 						var invitations = invitations_array[i];
-						$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" value="'+name+'" readonly></td><td><input class="table-form" type="text" name="mail[]" value="'+mail+'" readonly></td><td><input class="table-form" type="text" name="role[]" value="'+role+'" readonly ></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a></td></tr>');
+						$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" value="'+name+'" readonly></td><td><input class="table-form" type="text" name="mail[]" value="'+mail+'" readonly></td><td><input class="table-form" type="text" name="role[]" value="'+role+'" readonly ></td><td><input class="table-form" type="text" name="invitations[]" value="'+invitations+'" readonly ></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a></td></tr>');
 					};
 
 					$("#participant-table").on('click','.sendINV',function(){
@@ -234,33 +170,56 @@
    						var ajaxName;
    						var ajaxMail;
    						var ajaxRole;
+   						var invitations;
    						var counter3 = 0;
 
    						$.each($tds, function() {
    							var $type = $(this).children('input').val();
    							if(counter3 ==0){
    								ajaxName = $type;
-   								alert(ajaxName);
    							}
    							else if(counter3==1){
    								ajaxMail = $type;
-   								alert(ajaxMail);
    							}
    							else if(counter3==2){
    								ajaxRole = $type;
-   								alert(ajaxRole);
+   							}
+   							else if(counter3==3){
+   								invitations = $type;
    							}
 
    							counter3++;
 
     					});
-    					counter3=0;
    						$.ajax({
 							type: "POST",
 							url: "sendall.php",
-							data: 'name='+ajaxName+'&mail='+ajaxMail+'$role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version
+							data: 'name='+ajaxName+'&mail='+ajaxMail+'&role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version+'&product_end='+product_end+'&invitations='+invitations
 						});
 					});
+
+
+					// this is the id of the form
+						$("form").submit(function() {
+
+							var url = "sendsingle.php"; // the script where you handle the form input.
+							var postdata = $("form").serializeArray();
+
+							postdata[postdata.length] = { name: "product_id", value: product_id };
+							postdata[postdata.length] = { name: "product_name", value: product_name };
+							postdata[postdata.length] = { name: "product_version", value: product_version };
+							postdata[postdata.length] = { name: "product_end", value: product_end };
+
+
+						    $.ajax({
+						           type: "POST",
+						           url: url,
+						           data: postdata // serializes the form's elements.
+						    });
+						    alert(postdata);
+						});
+
+
 				});
 				
 				
@@ -271,7 +230,7 @@
 					table_mail++;
 					table_role++;
 					row_counter++;
-					$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" placeholder="Name"></td><td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td><td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF"><i class="glyphicon glyphicon-minus"></i></a></td></tr>');
+					$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" placeholder="Name"></td><td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td><td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td><td><input class="table-form" type="text" name="invitations[]" placeholder="Invitations" readonly></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF"><i class="glyphicon glyphicon-minus"></i></a></td></tr>');
 				}
 
 			</script>
@@ -353,26 +312,28 @@
 
 					<p>Link to product development survey:</p>
 					<form id="team-survey-form">
-					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version));?>" class="field left" readonly>
+					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_end);?>" class="field left" readonly>
 					</form>
 					<p></p>
 					<h3>Survey Participants</h3>
 					<button class="btn btn-default" id="btn-addRow" type="button" name="table_row" value="Add Participant" onclick="addRow();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add participant</button>
 					
 					<!-- TODO: Form/Submit functionality-->
-					<form id="team-survey-form" method="post" action="" class="form-horizontal">	
+					<form method="post" action="" class="form-horizontal">	
 						<button class="btn btn-default" id="btn-sendIn" type="submit" name="submitall" value="Send invitation" ><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Send invitation</button>
 						<table class="col-md-12 table-bordered table-striped table-condensed" id="participant-table" style="border-spacing: 5px;">
 						  <tr>
 						    <th>Name</th>
 						    <th>Email</th>		
 						    <th>Team Role</th>
+						    <th>Invitations</th>
 						    <th>Action</th>
 						  </tr>
 						  <tr>
-						    <td><input class="table-form" type="text" name="names[]" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mails[]" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="roles[]" placeholder="Team Role"></td>
+						    <td><input class="table-form" type="text" name="name[]" placeholder="Name"></td>
+						    <td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td>		
+						    <td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td>
+						    <td><input class="table-form" type="text" name="invitations[]" placeholder="Invitations" readonly></td>
 						    <td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a></td>
 						  </tr>
 						</table>
@@ -394,7 +355,7 @@
 					
 						<p>Link:</p>
 					<form id="user-survey-form">	
-						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version));?>" class="field left" readonly>
+						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_end);?>" class="field left" readonly>
 					</form>
 					<br>
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
@@ -414,6 +375,3 @@
 </html>
 
 <?php }} ?>
-
-
-
