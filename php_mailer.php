@@ -30,13 +30,18 @@ require_once('Mailer/class.phpmailer.php');
 //include("class.smtp.php"); // optional, gets called from within class.phpmailer.php if not already loaded
 
 $mail             = new PHPMailer();
-
+$arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+    ),
+);
 //$body             = file_get_contents('contents.html');
 //$body             = eregi_replace("[\]",'',$body);
 
 $mail->IsSMTP(); // telling the class to use SMTP
 //$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
-//$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
                                            // 1 = errors and messages
                                            // 2 = messages only
 $mail->SMTPAuth   = true;                  // enable SMTP authentication

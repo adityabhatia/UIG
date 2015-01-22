@@ -1,6 +1,7 @@
 <?php
 	require('connect.php');
 	$msg="";
+	$msg1="";
     // If the values are posted, insert them into the database.
     if (isset($_POST['username']) && isset($_POST['password'])){
 		
@@ -12,11 +13,19 @@
 		$email = $_POST['email'];
         $password = $_POST['password'];
  
+ 		$query_check = "SELECT * FROM `user` WHERE `username`='$username' or 'email'='$email'";
+ 		$result_check = mysql_query($query_check) or die(mysql_error());
+ 		$count = mysql_num_rows($result_check);
+ 		if ($count>=1){
+ 			$msg1="User already exists!";
+ 		}
+ 		else{
         $query = "INSERT INTO `user`(`name`, `company`, `desig`, `experience`, `username`, `email`, `password`) 
 		VALUES ('','','','0.0','$username','$email',MD5('$password'))";
         $result = mysql_query($query) or die(mysql_error());
 		$msg = $result;
 		}
+	}
     ?>
 <!DOCTYPE html>
 <html>
@@ -59,6 +68,7 @@
 		<div class="wrapper">
 			<form class=form-signin action="" method="POST">      
 				  <h2 class="form-signin-heading" align=center>REGISTER</h2>
+				  <div align=center><?php echo($msg1);?></div>
 				  <!--<input type="text" class="form-control" name="name" placeholder="Name" required="" autofocus="" />
 				  <input type="text" class="form-control" name="company" placeholder="Company" required />
 				  <input type="text" class="form-control" name="desig" placeholder="Designation" required="" />
