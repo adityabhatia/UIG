@@ -56,7 +56,11 @@ if($_SESSION['username']==""){
 								
 								if(sel==1){ $(".list-group-item").removeClass('active'); $(".sublist a:nth-child(1)").addClass('active');}
 								
-							}                       
+							}  
+							if ( "reset" == queryStringNameValueArray[0] ){
+								$(".list-group-item").removeClass('active');}
+								$(".list-group a:nth-child(1)").addClass( " active" );
+
 						}}
 						$urlnew = "sub.php?sname="+s_name+"&sver="+s_ver+"&sel=";			
 						$(".sublist a:nth-child(1)").attr("href", $urlnew+1);

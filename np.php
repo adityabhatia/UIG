@@ -23,7 +23,7 @@ $sdate=date('Y-m-d', strtotime($sdate));
 $query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno')";
 $result = mysql_query($query) or die(mysql_error());
 if($result){ ?>
-<script>window.location.replace("mp.php");</script>
+<script>window.location.replace("mp.php?reset=1&");</script>
 <?php
         }
 }
