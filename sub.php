@@ -216,7 +216,6 @@
 						           url: url,
 						           data: postdata // serializes the form's elements.
 						    });
-						    alert(postdata);
 						});
 
 

@@ -33,7 +33,7 @@
 				$survey_url = str_replace(' ','%', $survey_url);
 
 				//LINK TO SEND IN E-MAIL
-				$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey:". $survey_url  . "<br />" . "Your team role: " .  $role;					
+				$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey: ". $survey_url  . "<br />" . "Your team role: " .  $role;					
 				require_once('Mailer/class.phpmailer.php');
 				$mail = new PHPMailer();
 				$mail->IsSMTP(); // telling the class to use SMTP
