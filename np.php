@@ -148,18 +148,36 @@ if($result){ ?>
 		<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 		<script>
 		$(document).ready(function(){
-			$('#dp2').datepicker();
-			$('#dp2').attr('value', "01/01/2014");
+			/*$('#dp2').datepicker();
+			
 		$('#dp2').datepicker()
 				.on('changeDate', function(ev){
 		$('#dp2').datepicker('hide');
 		});
-		$('#dp1').datepicker();
+		//var checkin = $('#dp1').datepicker();
 		$('#dp1').attr('value', "01/01/2014");
-		$('#dp1').datepicker()
+		var checkin = $('#dp1').datepicker()
 				.on('changeDate', function(ev){
 		$('#dp1').datepicker('hide');
-		});
+		});*/
+			$('#dp2').attr('value', "01/01/2014");
+			$('#dp1').attr('value', "01/01/2014");
+
+			var newDate;
+			var checkin = $('#dp1').datepicker().on('changeDate', function(ev) {
+			    newDate = new Date(ev.date)
+			    newDate.setDate(newDate.getDate() + 1);
+			    checkout.setValue(newDate);
+			  checkin.hide();
+			  $('#dp2')[0].focus();
+			}).data('datepicker');
+			var checkout = $('#dp2').datepicker({
+			  onRender: function(date) {
+			    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			  }
+			}).on('changeDate', function(ev) {
+			  checkout.hide();
+			}).data('datepicker');
 		
 		$('#teamallocation').append('<tr><th>Location</th><th>No.</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" /></td><td style="padding:0;"><input type=text class="table-form nopadding" /></td></tr>');
 				
