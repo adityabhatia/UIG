@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <?php 
 session_start();
+require('connect.php');
 if($_SESSION['username']==""){
 ?>
 <script>window.location.replace("login.php");</script>
 <?php } else{ 
+
 	?>
 
 <html lang="en">
@@ -176,6 +178,16 @@ if($_SESSION['username']==""){
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        
+        <?php 
+        	if (isset($_POST['submit'])){
+        		$user = $_SESSION['username'];
+        		$newpass = $_POST['pass'];
+        		$query = "UPDATE `user` SET password = MD5('$newpass') where username = '$user'";
+				$result = mysql_query($query) or die("error: " . mysql_error()) ;
+        	}
+
+        ?>
         <h4 class="modal-title">Enter New Password</h4>
       </div>
       <div class="modal-body">
@@ -183,14 +195,11 @@ if($_SESSION['username']==""){
 			<div class="form-group">
 				<label for="inputName" class="col-sm-3 control-label nopadding">Password</label>
 				<div class="col-sm-9">
-					<input type="password" class="form-control input-sm" id="inputName" name="pname" placeholder="Name" value="" required />
+					<input type="password" class="form-control input-sm" id="inputName" name="pass" placeholder="New Password" value="" required />
 				</div>
 			</div>
-		</form>
-		</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" name="delete" id="edit">Change Password</button>
+        <button type="submit" class="btn btn-primary center-block" name=submit id="edit" >Change Password</button>
+        </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
