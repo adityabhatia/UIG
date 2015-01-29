@@ -1,5 +1,7 @@
 
 <?php 
+
+	session_start();
 	require("connect.php");
 	
 	$name=$_POST['name'];
@@ -12,6 +14,8 @@
   	$product_version=$_POST['product_version'];
   	$product_end = $_POST['product_end'];
 
+  	$user = $_SESSION['username'];
+
   	//$mail = trim($mail);
 			if (is_string($nmail)) {
 				$nmail = trim($nmail);
@@ -20,7 +24,23 @@
 			$survey_url = str_replace(' ','%', $survey_url);
 
 			//LINK TO SEND IN E-MAIL
-			$pass = "Hello " . $name . "," . "<br />" . "You have been invited for a survey: ". $survey_url  . "<br />" . "Your team role: " .  $role;					
+
+
+
+
+
+
+
+			$pass = "Dear ". $name .",<br/><br/>
+
+			As you're an active team member within the development of the product " . $product_name . ", " . $user . " has selected you to participate in a short 8-10 mins questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
+
+			You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members' responses.
+
+			<br/>We thank you for your time!<br/>" . $survey_url .
+			"
+			<br/>Best Regards,<br/>
+			UIG Team";			
 			require_once('Mailer/class.phpmailer.php');
 			$mail = new PHPMailer();
 			$mail->IsSMTP(); // telling the class to use SMTP
