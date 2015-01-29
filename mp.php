@@ -105,7 +105,7 @@ if (isset($_GET["dname"])){
 							echo ('<tr><td><a href="" class=selec_name>' . $row['p_name'] . '</a></td>');
 							echo ('<td class=selec_version>' . $row['p_class'] . '</td>');
 							echo ('<td><a href="" data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
-							<a data-toggle="modal" data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td></tr>');
+							<a href="" data-toggle="modal" data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td></tr>');
 							} 
 						if($count==0){echo ('<tr><td>-Empty-</td><td>-Empty-</td><td>-Empty-</td></tr>');}
 						}?>

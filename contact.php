@@ -56,13 +56,13 @@ if($result){
 							<div class="panel-body">
 							<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 									<div class="form-group">
-										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding">Subject</label>
+										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Subject</label>
 										<div class="col-sm-9 col-xs-9">
 											<input type="text" class="form-control" id="reason" name="reason" placeholder="Subject" value="" required />
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="username" class="col-sm-3 col-xs-3 control-label nopadding">Message</label>
+										<label for="username" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Message</label>
 										<div class="col-sm-9 col-xs-9">
 											<textarea type="text" class="form-control" id="message" name="message" placeholder="Message" value="" style="resize:none;"required /></textarea>
 										</div>

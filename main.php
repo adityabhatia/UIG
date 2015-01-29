@@ -4,7 +4,8 @@ session_start();
 if($_SESSION['username']==""){
 ?>
 <script>window.location.replace("login.php");</script>
-<?php } else{ ?>
+<?php } else{ 
+	?>
 
 <html lang="en">
 	<head>
@@ -17,17 +18,27 @@ if($_SESSION['username']==""){
 					$("#nav li:nth-child(1)").addClass( " active" );
 					$(".sublist").css("display","none");
 					$(".list-group-item").click(function(){
+						$(".dropdown-menu li").removeClass('active');
 						$('#nav li').removeClass();
 						$(".list-group-item").removeClass('active');
 						$( this ).addClass( " active" );
 					});	
 					$('#nav li').click(function() {
+						$(".dropdown-menu li").removeClass('active');
 						$('#nav li').removeClass();
 						$(".list-group-item").removeClass('active');
 						$( this ).addClass( " active" );
 						$(".sublist").css("display","none");
 					});
 					
+					$('.dropdown-menu li').click(function(){
+							$('#nav li').removeClass();
+							$(".list-group-item").removeClass('active');
+							$(".dropdown-menu li").removeClass('active');
+							$(".sublist").css("display","none");
+							$( this ).addClass( " active" );
+
+					});
 					$(".external").click(function(){
 						$(".sublist").css("display","none");
 					});
@@ -58,8 +69,8 @@ if($_SESSION['username']==""){
 								
 							}  
 							if ( "reset" == queryStringNameValueArray[0] ){
-								$(".list-group-item").removeClass('active');}
-								$(".list-group a:nth-child(1)").addClass( " active" );
+								$(".list-group-item").removeClass('active');
+								$(".list-group a:nth-child(1)").addClass( " active" );}
 
 						}}
 						$urlnew = "sub.php?sname="+s_name+"&sver="+s_ver+"&sel=";			
@@ -68,6 +79,11 @@ if($_SESSION['username']==""){
 						$(".sublist a:nth-child(3)").attr("href", $urlnew+3);
 						$(".sublist a:nth-child(4)").attr("href", $urlnew+4);
 				});
+				/*$('#edit').click(function(){
+					var newname = $("#inputName").val();
+					var $url= "main.php?cname="+substr[1]+"&cver="+substr[2]+"&nn="+newname+"&nv="+newver;
+					window.location.replace($url);
+				});*/
 				});
 		</script>
 		<!--Inclusions-->
@@ -118,9 +134,9 @@ if($_SESSION['username']==""){
 						<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" style="display:block; width:160px;">
 						<i class="glyphicon glyphicon-user"></i>   <?php echo($_SESSION['username']); ?>
 							<span class="caret"></span></a>
-						<ul class="dropdown-menu nopadding" role="menu" aria-labelledby="dropdownMenu1" style="min-width:100%;" id=nav1>
+						<ul class="dropdown-menu nopadding" role="menu" aria-labelledby="dropdownMenu1" style="min-width:100%;" id="nav1">
 							<li class="nopadding" role="presentation"><a class="nopadding" role="menuitem" tabindex="-1" href="user.php" target="myiframe">Profile</a></li>
-							<li class="nopadding" role="presentation"><a role="menuitem" tabindex="-1" href="user.php" target="myiframe">Change Password</a></li>
+							<li data-toggle="modal" data-target="#password" class="nopadding" role="presentation"><a role="menuitem" tabindex="-1" href="user.php" target="myiframe">Change Password</a></li>
 							<li role="presentation" class="divider nopadding"></li>
 							<li  class="nopadding" role="presentation"><a role="menuitem" tabindex="-1" href="logout.php">Logout</a></li>
 						</ul>
@@ -141,7 +157,9 @@ if($_SESSION['username']==""){
 							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none; border-bottom:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspReview</a>
 							</span>
 							<a href="np.php" target="myiframe" class="list-group-item deactive external" id="listnp"><i class="glyphicon glyphicon-plus"></i>&nbsp&nbspNew Product</a>
-						</div>
+							<br /><a href="" data-toggle="modal" data-target="#feedback" type="button" class="btn btn-default center-block" align=right>Give your Feedback here!</a>
+							<br /><img class=beta src="img/beta.jpg" height=120 width=120></img>
+							</div>
 					</div>
 					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
 						<div class="embe">
@@ -152,6 +170,52 @@ if($_SESSION['username']==""){
 			</div>
 
 	</div>
+
+	<div class="modal fade" id="password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Enter New Password</h4>
+      </div>
+      <div class="modal-body">
+		<form name="contactform" method="post" class="form-horizontal">
+			<div class="form-group">
+				<label for="inputName" class="col-sm-3 control-label nopadding">Password</label>
+				<div class="col-sm-9">
+					<input type="password" class="form-control input-sm" id="inputName" name="pname" placeholder="Name" value="" required />
+				</div>
+			</div>
+		</form>
+		</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" name="delete" id="edit">Change Password</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+	<div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      <iframe src="contact.php" frameBorder=no scrolling=no style="display:block; width:100%;" height=325	></iframe>
+		</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+	<style type="text/css">
+	.beta {
+					    display: block;
+					    margin-left: auto;
+					    margin-right: auto;
+					   
+				}
+	</style>
 	</body>
 </html>
 <?php } ?>

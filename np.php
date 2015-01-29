@@ -107,9 +107,9 @@ if($result){ ?>
 										<br />
 										<h2 class="panel-title" align=center><b>Development Information</b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Total size of the team</label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Team Size</label>
 											<div class="col-sm-7 col-xs-6">
-												<input type="number" class="form-control" id="groupsize" name="groupsize" placeholder="Group Size" required />
+												<input type="number" class="form-control" id="groupsize" name="groupsize" placeholder="No. of Team Members" required />
 											</div>
 										</div>
 										<div class="row" style="margin-bottom:5px;">
@@ -121,13 +121,13 @@ if($result){ ?>
 										<div class="row" style="margin-bottom:5px;">
 											<label class="col-sm-5 col-xs-6 control-label nopadding">Designers</label>
 												<div class="col-sm-7 col-xs-6">
-													<input type="number" class="form-control" min="0" id="designers" name="designers" placeholder="No. of Developers" required />
+													<input type="number" class="form-control" min="0" id="designers" name="designers" placeholder="No. of Designers" required />
 												</div>
 										</div>
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >No. of sites</label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Sites</label>
 											<div class="col-sm-7 col-xs-6">
-												<input type="number" min="1" class=form-control id="teamno" name="teamno" placeholder="Number of Team Members" required />
+												<input type="number" min="1" class=form-control id="teamno" name="teamno" placeholder="No. of Sites" required />
 											</div>
 										</div>
 									</div>
@@ -171,8 +171,8 @@ if($result){ ?>
 				.on('changeDate', function(ev){
 		$('#dp1').datepicker('hide');
 		});*/
-			$('#dp2').attr('value', "01/01/2014");
-			$('#dp1').attr('value', "01/01/2014");
+			$('#dp2').attr('value', "01/01/2015");
+			$('#dp1').attr('value', "01/01/2015");
 
 			var newDate;
 			var checkin = $('#dp1').datepicker().on('changeDate', function(ev) {

@@ -52,7 +52,7 @@
 	</head>
 	
 	<body style="background-color:#f5f5f5">
-
+		<?php if(!$msg){ ?>
 		<div class="row">
 		<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -64,7 +64,6 @@
 		</nav>
 		</div>
 		<!-- Form for logging in the users -->
-		<?php if(!$msg){ ?>
 		<div class="wrapper">
 			<form class=form-signin action="" method="POST">      
 				  <h2 class="form-signin-heading" align=center>REGISTER</h2>
