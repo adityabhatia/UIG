@@ -10,18 +10,29 @@ if($_SESSION['username']==""){
 <?php } 
 else{
 if (isset($_POST['submit'])){
-$username = $_SESSION['username'];
-$pname = $_POST['inputName'];
-$pversion = $_POST['version'];
-$budget = $_POST['budget'];
-$sdate = $_POST['sdate'];
-$edate = $_POST['edate'];
-$groupsize = $_POST['groupsize'];
-$teamno = $_POST['teamno'];
-$edate=date('Y-m-d', strtotime($edate));
-$sdate=date('Y-m-d', strtotime($sdate));
-$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno')";
-$result = mysql_query($query) or die(mysql_error());
+	$username = $_SESSION['username'];
+	$pname = $_POST['inputName'];
+	$pversion = $_POST['version'];
+	$budget = $_POST['budget'];
+	$sdate = $_POST['sdate'];
+	$edate = $_POST['edate'];
+	$groupsize = $_POST['groupsize'];
+	$teamno = $_POST['teamno'];
+	$edate=date('Y-m-d', strtotime($edate));
+	$sdate=date('Y-m-d', strtotime($sdate));
+
+	
+
+
+	date_default_timezone_set('Europe/Berlin');
+	$timestamp = time();
+
+	$date = date('Y/m/d', time());
+	$surveyEnd = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +4 week"));
+
+	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `surveyEnd`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$surveyEnd')";
+	$result = mysql_query($query) or die(mysql_error());
+
 if($result){ ?>
 <script>window.location.replace("mp.php?reset=1&");</script>
 <?php
