@@ -61,7 +61,7 @@ if($result){ ?>
 							<div class="panel-body">
 								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 									<div class="col-xs-12 col-sm-6 ">
-										<h2 class="panel-title" align=center><b><i>General Product Information</i></b></h2><br />
+										<h2 class="panel-title"><b><i>General Product Information</i></b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
 											<label for="inputName" class="col-sm-5 col-xs-6 control-label nopadding">Product Name</label>
 											<div class="col-sm-7 col-xs-6">
@@ -94,7 +94,7 @@ if($result){ ?>
 											</div>
 										</div>
 										<HR WIDTH="100%" SIZE="3" style=" border-width:2px;" > 
-										<h2 class="panel-title" align=center><b><i>Development Information</i></b></h2><br />
+										<h2 class="panel-title"><b><i>Development Information</i></b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
 											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Team Size</label>
 											<div class="col-sm-7 col-xs-6">
@@ -121,7 +121,7 @@ if($result){ ?>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6">
-										<h2 class="panel-title" align=center><b><i>Location Information</i></b></h2><br />
+										<h2 class="panel-title"><b><i>Location Information</i></b></h2><br />
 										<div>
 											<table class="table-bordered table-striped table-condensed" id="teamallocation" align=center>
 												

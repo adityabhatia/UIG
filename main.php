@@ -201,7 +201,7 @@ if($result){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-      		<div class="panel panel-default" style="margin:0 auto; max-width:500px;">
+      		<div class="panel panel-default" style="margin:0 auto; max-width:500px; width=200px">
 							<div class="panel-heading">
 								<h2 class="panel-title">Feedback<!--<?php echo($msg);?>--></h2>
 							</div>
@@ -254,7 +254,7 @@ if($result){
 									<h2 class="panel-title" align=center><b><i>Improvement Areas</i></b></h2><br /> 
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Category</label>
-										<div class="col-sm-9 col-xs-9">
+										<div class="col-sm-9 col-xs-10">
 												<label class="checkbox-inline">
 											      <input type="checkbox" name="category[]" value="Page"> Page 
 											    </label>
