@@ -10,31 +10,20 @@ if($_SESSION['username']==""){
 <?php } 
 else{
 if (isset($_POST['submit'])){
-	$username = $_SESSION['username'];
-	$pname = $_POST['inputName'];
-	$pversion = $_POST['version'];
-	$budget = $_POST['budget'];
-	$sdate = $_POST['sdate'];
-	$edate = $_POST['edate'];
-	$groupsize = $_POST['groupsize'];
-	$teamno = $_POST['teamno'];
-	$edate=date('Y-m-d', strtotime($edate));
-	$sdate=date('Y-m-d', strtotime($sdate));
-
-	
-
-
-	date_default_timezone_set('Europe/Berlin');
-	$timestamp = time();
-
-	$date = date('Y/m/d', time());
-	$surveyEnd = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +4 week"));
-
-	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `surveyEnd`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$surveyEnd')";
-	$result = mysql_query($query) or die(mysql_error());
-
+$username = $_SESSION['username'];
+$pname = $_POST['inputName'];
+$pversion = $_POST['version'];
+$budget = $_POST['budget'];
+$sdate = $_POST['sdate'];
+$edate = $_POST['edate'];
+$groupsize = $_POST['groupsize'];
+$teamno = $_POST['teamno'];
+$edate=date('Y-m-d', strtotime($edate));
+$sdate=date('Y-m-d', strtotime($sdate));
+$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno')";
+$result = mysql_query($query) or die(mysql_error());
 if($result){ ?>
-<script>window.location.replace("mp.php?reset=1&");</script>
+<script>window.location.replace("mp.php");</script>
 <?php
         }
 }
@@ -67,12 +56,12 @@ if($result){ ?>
 		<div class = "col-sm-12 col-xs-12" >
 						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">
 							<div class="panel-heading">
-								<h2 class="panel-title">Register a new product</h2>
+								<h2 class="panel-title" align=center>Register a new product</h2>
 							</div>
 							<div class="panel-body">
 								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 									<div class="col-xs-12 col-sm-6 ">
-										<h2 class="panel-title" align=center><b>General Product Information</b></h2><br />
+										<h2 class="panel-title" align=center><b><i>General Product Information</i></b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
 											<label for="inputName" class="col-sm-5 col-xs-6 control-label nopadding">Product Name</label>
 											<div class="col-sm-7 col-xs-6">
@@ -104,8 +93,8 @@ if($result){ ?>
 												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="dp2" name="edate" placeholder="End Date" required />
 											</div>
 										</div>
-										<br />
-										<h2 class="panel-title" align=center><b>Development Information</b></h2><br />
+										<HR WIDTH="100%" SIZE="3" style=" border-width:2px;" > 
+										<h2 class="panel-title" align=center><b><i>Development Information</i></b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
 											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Team Size</label>
 											<div class="col-sm-7 col-xs-6">
@@ -132,7 +121,7 @@ if($result){ ?>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6">
-										<h2 class="panel-title" align=center><b>Location Information</b></h2><br />
+										<h2 class="panel-title" align=center><b><i>Location Information</i></b></h2><br />
 										<div>
 											<table class="table-bordered table-striped table-condensed" id="teamallocation" align=center>
 												

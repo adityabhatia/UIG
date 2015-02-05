@@ -24,7 +24,6 @@
 	$product_end;
 	$product_gsize;
 	$product_teamno;
-	$product_surveyEnd;
 
 	$array_name = array();
 	$array_mail = array();
@@ -49,7 +48,6 @@
 			$product_budget = $selected_product['budget'];
 			$product_gsize = $selected_product['gsize'];
 			$product_teamno = $selected_product['teamno'];
-			$product_surveyEnd = $selected_product['surveyEnd'];
 		}
 	}
 
@@ -105,7 +103,6 @@
 				var product_name;
 				var product_version;
 				var product_end;
-				var product_surveyEnd;
 				var counter;
 
 				var table_name=1;
@@ -156,7 +153,6 @@
 					product_name = <?php echo json_encode($product_name);?>;
 					product_version = <?php echo json_encode($product_version);?>;
 					product_end = <?php echo json_encode($product_end);?>;
-					product_surveyEnd = <?php echo json_encode($product_surveyEnd);?>;
 
 
 
@@ -198,7 +194,7 @@
    						$.ajax({
 							type: "POST",
 							url: "sendall.php",
-							data: 'name='+ajaxName+'&mail='+ajaxMail+'&role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version+'&product_end='+product_surveyEnd+'&invitations='+invitations
+							data: 'name='+ajaxName+'&mail='+ajaxMail+'&role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version+'&product_end='+product_end+'&invitations='+invitations
 						});
 					});
 
@@ -212,7 +208,7 @@
 							postdata[postdata.length] = { name: "product_id", value: product_id };
 							postdata[postdata.length] = { name: "product_name", value: product_name };
 							postdata[postdata.length] = { name: "product_version", value: product_version };
-							postdata[postdata.length] = { name: "product_end", value: product_surveyEnd };
+							postdata[postdata.length] = { name: "product_end", value: product_end };
 
 
 						    $.ajax({
@@ -220,6 +216,7 @@
 						           url: url,
 						           data: postdata // serializes the form's elements.
 						    });
+						    alert(postdata);
 						});
 
 
@@ -312,10 +309,9 @@
 
 					<p>Link to product development survey:</p>
 					<form id="team-survey-form">
-					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_surveyEnd);?>" class="field left" readonly>
+					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_end);?>" class="field left" readonly>
 					</form>
-					<br/>
-					<p>The questionnaire will be made available for you until <?php echo($product_surveyEnd)?> </p>
+					<p></p>
 					<h3>Survey Participants</h3>
 					<button class="btn btn-default" id="btn-addRow" type="button" name="table_row" value="Add Participant" onclick="addRow();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add participant</button>
 					
@@ -356,10 +352,9 @@
 					
 						<p>Link:</p>
 					<form id="user-survey-form">	
-						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_surveyEnd);?>" class="field left" readonly>
+						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_end);?>" class="field left" readonly>
 					</form>
 					<br>
-					<p>The questionnaire will be made available for you until <?php echo($product_surveyEnd)?> </p>
 					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
 
 				</div>

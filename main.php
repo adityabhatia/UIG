@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php 
 session_start();
 require('connect.php');
@@ -6,9 +5,32 @@ if($_SESSION['username']==""){
 ?>
 <script>window.location.replace("login.php");</script>
 <?php } else{ 
+	$msg="";
+	if (isset($_POST['submit'])){
+$username = $_SESSION['username'];
+$performance = $_POST['performance'];
+$usability = $_POST['usability'];
+$category = $_POST['category'];
+$comments = $_POST['comments'];
+$ncategory = "";
+    $N = count($category);
+    for($i=0; $i < $N; $i++)
+    {
+    	if($ncategory)
+      $ncategory = $ncategory . ', ' . $category[$i];
+  		else
+  			$ncategory = $category[$i];
+    }
+
+$query = "INSERT INTO `feedback` (username, performance, usability, category, comments) VALUES ('$username', '$performance', '$usability', '$ncategory', '$comments')";
+$result = mysql_query($query) or die(mysql_error());
+if($result){
+            $msg = ": Thanks for your Message!";
+        }
+}
 
 	?>
-
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<!--Inclusions-->
@@ -138,7 +160,7 @@ if($_SESSION['username']==""){
 							<span class="caret"></span></a>
 						<ul class="dropdown-menu nopadding" role="menu" aria-labelledby="dropdownMenu1" style="min-width:100%;" id="nav1">
 							<li class="nopadding" role="presentation"><a class="nopadding" role="menuitem" tabindex="-1" href="user.php" target="myiframe">Profile</a></li>
-							<li data-toggle="modal" data-target="#password" class="nopadding" role="presentation"><a role="menuitem" tabindex="-1" href="user.php" target="myiframe">Change Password</a></li>
+							<!--<li data-toggle="modal" data-target="#password" class="nopadding" role="presentation"><a role="menuitem" tabindex="-1" href="user.php" target="myiframe">Change Password</a></li>-->
 							<li role="presentation" class="divider nopadding"></li>
 							<li  class="nopadding" role="presentation"><a role="menuitem" tabindex="-1" href="logout.php">Logout</a></li>
 						</ul>
@@ -159,7 +181,7 @@ if($_SESSION['username']==""){
 							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none; border-bottom:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspReview</a>
 							</span>
 							<a href="np.php" target="myiframe" class="list-group-item deactive external" id="listnp"><i class="glyphicon glyphicon-plus"></i>&nbsp&nbspNew Product</a>
-							<br /><a href="" data-toggle="modal" data-target="#feedback" type="button" class="btn btn-default center-block" align=right>Give your Feedback here!</a>
+							<br /><a href="" data-toggle="modal" data-target="#feedback" type="button" class="btn btn-default center-block" align=right style="display:block; white-space: normal;">Give your Feedback here!</a>
 							<br /><img class=beta src="img/beta.jpg" height=120 width=120></img>
 							</div>
 					</div>
@@ -173,47 +195,94 @@ if($_SESSION['username']==""){
 
 	</div>
 
-	<div class="modal fade" id="password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        
-        <?php 
-        	if (isset($_POST['submit'])){
-        		$user = $_SESSION['username'];
-        		$newpass = $_POST['pass'];
-        		$query = "UPDATE `user` SET password = MD5('$newpass') where username = '$user'";
-				$result = mysql_query($query) or die("error: " . mysql_error()) ;
-        	}
-
-        ?>
-        <h4 class="modal-title">Enter New Password</h4>
-      </div>
-      <div class="modal-body">
-		<form name="contactform" method="post" class="form-horizontal">
-			<div class="form-group">
-				<label for="inputName" class="col-sm-3 control-label nopadding">Password</label>
-				<div class="col-sm-9">
-					<input type="password" class="form-control input-sm" id="inputName" name="pass" placeholder="New Password" value="" required />
-				</div>
-			</div>
-        <button type="submit" class="btn btn-primary center-block" name=submit id="edit" >Change Password</button>
-        </form>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+	
 
 	<div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-      <iframe src="contact.php" frameBorder=no scrolling=no style="display:block; width:100%;" height=325	></iframe>
+      		<div class="panel panel-default" style="margin:0 auto; max-width:500px;">
+							<div class="panel-heading">
+								<h2 class="panel-title">Feedback<!--<?php echo($msg);?>--></h2>
+							</div>
+							<div class="panel-body">
+							Please fill in this form. Your feedback is important to us. It will help us to improve the tool further and make it more efficient and usable from the user's point of view. Thanks!
+							<form name="contactform" method="post" action="" class="form-horizontal" role="form" style="">
+								<h2 class="panel-title" align=center><b><i>Ratings</i></b></h2><br />
+									<div class="form-group">
+										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Performance</label>
+										<div class="col-sm-9 col-xs-9">
+											<label class="radio-inline">
+											      <input type="radio" name="performance" value="1" required /> 1 
+											    </label>
+											    <label class="radio-inline">
+											      <input type="radio" name="performance" value="2"> 2
+											    </label>
+											   
+											    <label class="radio-inline">
+											      <input type="radio" name="performance" value="3"> 3
+											    </label>
+											    <label class="radio-inline">
+											      <input type="radio" name="performance" value="4"> 4
+											    </label>
+											    <label class="radio-inline">
+											      <input type="radio" name="performance" value="5"> 5
+											    </label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Usability</label>
+										<div class="col-sm-9 col-xs-9">
+												<label class="radio-inline">
+											      <input type="radio" name="usability" value="1" required /> 1 
+											    </label>
+											    <label class="radio-inline">
+											      <input type="radio" name="usability" value="2"> 2
+											    </label>
+											    <label class="radio-inline">
+											      <input type="radio" name="usability" value="3"> 3
+											    </label>
+											    <label class="radio-inline">
+											      <input type="radio" name="usability" value="4"> 4
+											    </label>
+											    <label class="radio-inline">
+											      <input type="radio" name="usability" value="5"> 5
+											    </label>
+										</div>
+									</div>
+									 <div style="text-align:right; font-size:12px;">(1-Poor, 5-Outstanding)</div> 
+									<h2 class="panel-title" align=center><b><i>Improvement Areas</i></b></h2><br /> 
+									<div class="form-group">
+										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Category</label>
+										<div class="col-sm-9 col-xs-9">
+												<label class="checkbox-inline">
+											      <input type="checkbox" name="category[]" value="Page"> Page 
+											    </label>
+											    <label class="checkbox-inline">
+											      <input type="checkbox" name="category[]" value="Menu"> Menu
+											    </label>
+											   
+											    <label class="checkbox-inline">
+											      <input type="checkbox" name="category[]" value="Feature"> Feature
+											    </label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="username" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Comments</label>
+										<div class="col-sm-9 col-xs-9">
+											<textarea type="text" class="form-control" id="message" name="comments" placeholder="Message" value="" style="resize:none;"required /></textarea>
+										</div>
+									</div>
+									<div class="form-group" align=center style="margin-bottom:-10px;">
+											<button type="submit" class="btn btn-default" name=submit >
+												Send Message
+											</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</form>
+							</div>
+			</div>
 		</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
