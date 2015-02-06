@@ -212,9 +212,13 @@ if($result){
 								<h2 class="panel-title">Feedback<!--<?php echo($msg);?>--></h2>
 							</div>
 							<div class="panel-body">
-							Please fill in this form. Your feedback is important to us. It will help us to improve the tool further and make it more efficient and usable from the user's point of view. Thanks!
+							Your feedback is important to us. We appreciate, if you would fill in this form.
+							It will help us to improve the tool further and make it more efficient and usable for you.<br/><br/>
+							Thank you!<br/>
+							Your UIG Team
+							<br/><br/>
 							<form name="contactform" method="post" action="" class="form-horizontal" role="form" style="">
-								<h2 class="panel-title" align=center><b><i>Ratings</i></b></h2><br />
+								<h2 class="panel-title" align=center><b>Ratings</b></h2><br />
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Performance</label>
 										<div class="col-sm-9 col-xs-9">
@@ -257,19 +261,19 @@ if($result){
 										</div>
 									</div>
 									 <div style="text-align:right; font-size:12px;">(1-Poor, 5-Outstanding)</div> 
-									<h2 class="panel-title" align=center><b><i>Improvement Areas</i></b></h2><br /> 
+									<h2 class="panel-title" align=center><b>Improvement Areas</b></h2><br /> 
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Category</label>
 										<div class="col-sm-9 col-xs-10">
 												<label class="checkbox-inline">
-											      <input type="checkbox" name="category[]" value="Page"> Page 
+											      <input type="checkbox" name="category[]" value="Page"> Pages 
 											    </label>
 											    <label class="checkbox-inline">
 											      <input type="checkbox" name="category[]" value="Menu"> Menu
 											    </label>
 											   
 											    <label class="checkbox-inline">
-											      <input type="checkbox" name="category[]" value="Feature"> Feature
+											      <input type="checkbox" name="category[]" value="Feature"> Features
 											    </label>
 										</div>
 									</div>
