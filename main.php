@@ -174,13 +174,19 @@ if($result){
 			<div class="row">
 					<div class="col-sm-3 col-md-2 sidebar" id="sidebar" role="navigation">
 						<div class="list-group">
-							<a href="mp.php" target="myiframe" class="list-group-item deactive external" id="listh"><i class="glyphicon glyphicon-cog"></i>&nbsp&nbspManage Products</a>
-							<span class = "sublist"><a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspOverview</a>
-							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspSoftware Team</a>
-							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspUser</a>
-							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none; border-bottom:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspReview</a>
+							<a href="mp.php" target="myiframe" class="list-group-item deactive external" id="listh"><i class="glyphicon glyphicon-cog"></i>&nbsp&nbspOrganize Products</a>
+							<span class = "sublist"><a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbsp Product Overview</a>
+							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspTeam Survey</a>
+							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspUser Survey</a>
+							<a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none; border-bottom:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbspSurvey Report</a>
 							</span>
-							<a href="np.php" target="myiframe" class="list-group-item deactive external" id="listnp"><i class="glyphicon glyphicon-plus"></i>&nbsp&nbspNew Product</a>
+							<a href="np.php" target="myiframe" class="list-group-item deactive external" id="listnp"><i class="glyphicon glyphicon-plus"></i>&nbsp&nbspRegister Product</a>
+							
+							
+							<br /> 	<div class="panel"> 
+										<img class=beta src="img/logoBMWi.png"></img> 
+								 		<img class=beta src="img/logoMittelstandDigital.gif"></img>
+								 	</div>
 							<br /><a href="" data-toggle="modal" data-target="#feedback" type="button" class="btn btn-default center-block" align=right style="display:block; white-space: normal;">Give your Feedback here!</a>
 							<br /><img class=beta src="img/beta.jpg" height=120 width=120></img>
 							</div>

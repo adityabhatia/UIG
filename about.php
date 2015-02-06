@@ -35,6 +35,14 @@ if($_SESSION['username']==""){
 			<div class="col-md-12">
 			<h2 class="page-header">About Us</h2>
 			<br/>
+
+			<p style="float:left;">	
+				UIG e.V. aims to academically substantiate and distribute best practices, in order to improve software development and software usage in medium-sized companies.
+				The association's goal is to establish a network and user-oriented based development and usage of software, consisting of medium-sized companies, service providers, consultants, academic institutes and other experts and relevant stakeholders.
+			</p><br/>
+			<a href="http://www.usability-in-germany.de/" target="_blank" align=center><img class="about-img" src="img/uig.jpg" style="border: 2px solid #BDBDBD;"></img></a><br/><br/>
+			<br /><br/><br /><br/>
+
 			<p style="float:left;">	The Chair of Information Systems IV of the University of Mannheim in Germany focuses in research & education on Enterprise Systems.
 			 	Thereby Information Systems are seen beeing a fundamentally sociotechnical matter.
 			 	Central part is to investigate the lifecycle covering a development, implementation and use phase as well as novel concepts of Enterprise Systems.
@@ -51,13 +59,7 @@ if($_SESSION['username']==""){
 			<br /><br/><br />
 			
 			
-			<p style="float:left;">	Der UIG e.V. verfolgt das Ziel,
-				Praktiken zur Verbesserung der Software-Entwicklung und –Nutzung bei mittelständischen Unternehmen
-				wissenschaftlich zu fundieren und durch Weiter­bildung zu verbreiten.
-				Durch den Verein soll eine Netzwerks, bestehend aus mittelständischen Unternehmen, Dienstleitsern und Beratern, wissenschaftlichen und ausbildenden Einrichtungen sowie weiteren Experten und relevanten Akteuren im Feld benutzerzentrierter Entwicklung und Nutzung, etabliert werden.
-			</p><br/>
-			<a href="http://www.usability-in-germany.de/" target="_blank" align=center><img class="about-img" src="img/uig.jpg" style="border: 2px solid #BDBDBD;"></img></a><br/><br/>
-			<br /><br/><br /><br/>
+			
 			</div>
 		</div>
 	</body>

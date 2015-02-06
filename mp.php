@@ -70,30 +70,17 @@ if (isset($_GET["dname"])){
 
 <body id="tabular" >
 	<div class="container">
-		<h2 class="page-header"><b> Manage Products </b></h2><br />
+		<h2 class="page-header"><b> Organize Products </b></h2><br/>
+		<p>Please select a product to get more detailed information.</p>
 		<section>
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Product</th>
 						<th>Version</th>
-						<!--<th>Entry Date</th>
-						<th>Type&nbsp&nbsp </th>
-						<th>Questionnaire&nbsp&nbsp  </th>-->
 						<th>Actions</th>
 					</tr>
 				</thead>
-
-				<!--<tfoot>
-					<tr>
-						<th>Name</th>
-						<th>Version</th>
-						<th>Entry Date</th>
-						<th>Type&nbsp&nbsp </th>
-						<th>Questionnaire&nbsp&nbsp  </th>
-						<th>Actions</th>
-					</tr>
-				</tfoot>-->
 
 				<tbody>
 					<?php 

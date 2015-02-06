@@ -54,6 +54,7 @@ if($result){
 								<h2 class="panel-title">Contact Form<?php echo($msg);?></h2>
 							</div>
 							<div class="panel-body">
+							<p>Feel free to send us your questions and comments regarding the UIG - survey tool </p>
 							<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Subject</label>

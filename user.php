@@ -72,7 +72,7 @@ while($row = mysql_fetch_array($result)){
 								<HR WIDTH="100%" SIZE="3" style="margin-bottom:-10px; border-width:2px;" > 
 								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 								<div class="col-sm-12">	
-									<h4><b><i>Account Information</i></b></h4>
+									<h4><b>Account Information</b></h4>
 									<div class="form-group">
 										<label for="inputName" class="col-sm-5 col-xs-4 control-label nopadding" >Name</label>
 										<div class="col-sm-7 col-xs-8">
@@ -91,7 +91,7 @@ while($row = mysql_fetch_array($result)){
 											<input type="email" class="form-control" style="margin-top:-10px;" id="email" name="email" placeholder="E-Mail" value="<?php echo($row['email']);?>" required />
 										</div>
 									</div>
-									<h4><b><i>General Information</i></b></h4>
+									<h4><b>General Information</b></h4>
 									<div class="form-group">
 										<label for="company" class="col-sm-5 col-xs-4 control-label nopadding" >Company</label>
 										<div class="col-sm-7 col-xs-8">

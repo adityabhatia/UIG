@@ -37,7 +37,7 @@
 				//LINK TO SEND IN E-MAIL
 				$pass = "Dear ". $name .",<br/><br/>
 
-				As you're an active team member within the development of the product " . $product_name . ", " . $user . " has selected you to participate in a short 8-10 mins questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
+				As you're an active team member within the development of the product " . $product_name . ", " . $user . " has selected you to participate in a short 8-10 minutes questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
 
 				You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members' responses.
 
