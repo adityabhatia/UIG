@@ -38,8 +38,7 @@ if($_SESSION['username']==""){
 		<div class="well well-sm">
 						<h1>Welcome to the UIG survey tool, <?php echo($_SESSION['username']);?></h1>
 							
-								<br/><br/>
-								<p>	
+								<p style="text-align:justify;">	
 									65% of enterprises mention usability as an important role for selecting the right software for their business.<br/>
 									Therefore software companies can bring differentiation benefits by investing in usability.<br/>
 									But how successful and effective does your company already turn common usability procedures into reality?<br/>

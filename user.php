@@ -126,16 +126,6 @@ while($row = mysql_fetch_array($result)){
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-						        
-						        <?php 
-						        	if (isset($_POST['submit1'])){
-						        		$user = $_SESSION['username'];
-						        		$newpass = $_POST['pass'];
-						        		$query1 = "UPDATE `user` SET password = MD5('$newpass') where username = '$user'";
-										$result1 = mysql_query($query1) or die("error: " . mysql_error()) ;
-						        	}
-
-						        ?>
 						        <h4 class="modal-title">Enter New Password</h4>
 						      </div>
 						      <div class="modal-body">
@@ -152,6 +142,14 @@ while($row = mysql_fetch_array($result)){
 						    </div><!-- /.modal-content -->
 						  </div><!-- /.modal-dialog -->
 						</div><!-- /.modal -->
+						<?php 
+						        	if (isset($_POST['submit1'])){
+						        		$user = $_SESSION['username'];
+						        		$newpass = $_POST['pass'];
+						        		$query1 = "UPDATE `user` SET password = MD5('$newpass') where username = '$user'";
+										$result1 = mysql_query($query1) or die("error: " . mysql_error()) ;
+						        	}
+						        ?>
 	</body>
 </html>
 <?php }}?>

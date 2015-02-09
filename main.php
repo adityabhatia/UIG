@@ -10,17 +10,17 @@ if($_SESSION['username']==""){
 $username = $_SESSION['username'];
 $performance = $_POST['performance'];
 $usability = $_POST['usability'];
-$category = $_POST['category'];
+//$category = $_POST['category'];
 $comments = $_POST['comments'];
-$ncategory = "";
-    $N = count($category);
+$ncategory = $_POST['mydropdown'];
+    /*$N = count($category);
     for($i=0; $i < $N; $i++)
     {
     	if($ncategory)
       $ncategory = $ncategory . ', ' . $category[$i];
   		else
   			$ncategory = $category[$i];
-    }
+    }*/
 
 $query = "INSERT INTO `feedback` (username, performance, usability, category, comments) VALUES ('$username', '$performance', '$usability', '$ncategory', '$comments')";
 $result = mysql_query($query) or die(mysql_error());
@@ -209,16 +209,12 @@ if($result){
       <div class="modal-body">
       		<div class="panel panel-default" style="margin:0 auto; max-width:500px; width=200px">
 							<div class="panel-heading">
-								<h2 class="panel-title">Feedback<!--<?php echo($msg);?>--></h2>
+								<h2 class="panel-title">Your Feedback<!--<?php echo($msg);?>--></h2>
 							</div>
 							<div class="panel-body">
-							Your feedback is important to us. We appreciate, if you would fill in this form.
-							It will help us to improve the tool further and make it more efficient and usable for you.<br/><br/>
-							Thank you!<br/>
-							Your UIG Team
-							<br/><br/>
+							Your feedback is important to us. Please let us know how can we improve this tool further.<br/><br/>
 							<form name="contactform" method="post" action="" class="form-horizontal" role="form" style="">
-								<h2 class="panel-title" align=center><b>Ratings</b></h2><br />
+								<h2 class="panel-title"><b>Please rate your experience using this tool</b></h2>
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Performance</label>
 										<div class="col-sm-9 col-xs-9">
@@ -260,12 +256,18 @@ if($result){
 											    </label>
 										</div>
 									</div>
-									 <div style="text-align:right; font-size:12px;">(1-Poor, 5-Outstanding)</div> 
-									<h2 class="panel-title" align=center><b>Improvement Areas</b></h2><br /> 
+									 <div style="text-align:right; font-size:12px;">(1-Poor, 5-Outstanding)</div><br />
+									<h2 class="panel-title"><b>Improvement Areas</b></h2>
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Category</label>
-										<div class="col-sm-9 col-xs-10">
-												<label class="checkbox-inline">
+										<div class="col-sm-9 col-xs-9" style="margin-top:5px;">
+												<select name="mydropdown">
+													<option value="Main Menu">Main Menu</option>
+													<option value="roduct Area">Product Area</option>
+													<option value="Teamsurvey">Teamsurvey</option>
+													<option value="Usersurvey">Usersurvey</option>
+												</select>
+												<!--<label class="checkbox-inline">
 											      <input type="checkbox" name="category[]" value="Page"> Pages 
 											    </label>
 											    <label class="checkbox-inline">
@@ -274,13 +276,13 @@ if($result){
 											   
 											    <label class="checkbox-inline">
 											      <input type="checkbox" name="category[]" value="Feature"> Features
-											    </label>
+											    </label>-->
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="username" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Comments</label>
 										<div class="col-sm-9 col-xs-9">
-											<textarea type="text" class="form-control" id="message" name="comments" placeholder="Message" value="" style="resize:none;"required /></textarea>
+											<textarea type="text" rows="4" class="form-control" id="message" name="comments" placeholder="Message" value="" style="resize:none;"required /></textarea>
 										</div>
 									</div>
 									<div class="form-group" align=center style="margin-bottom:-10px;">
@@ -291,6 +293,7 @@ if($result){
 									</div>
 								</form>
 							</div>
+							<div align=center>Thanks for taking out the time to give us your feedback.</div>
 			</div>
 		</div>
     </div><!-- /.modal-content -->

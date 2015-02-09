@@ -70,7 +70,7 @@ if (isset($_GET["dname"])){
 
 <body id="tabular" >
 	<div class="container">
-		<h2 class="page-header"><b> Organize Products </b></h2><br/>
+		<h2 class="page-header"><b> Organize Products </b></h2>
 		<p>Please select a product to get more detailed information.</p>
 		<section>
 			<table class="table table-striped table-bordered">
