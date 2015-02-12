@@ -182,13 +182,14 @@ if($result){
 							</span>
 							<a href="np.php" target="myiframe" class="list-group-item deactive external" id="listnp"><i class="glyphicon glyphicon-plus"></i>&nbsp&nbspRegister Product</a>
 							
+							<br /><a href="" data-toggle="modal" data-target="#feedback" type="button" class="btn btn-default center-block" align=right style="display:block; white-space: normal;">Give your Feedback here!</a>
+							<br /><img class=beta src="img/beta.jpg" height=120 width=120></img>
 							
 							<br /> 	<div class="panel"> 
 										<img class=beta src="img/logoBMWi.png"></img> 
 								 		<img class=beta src="img/logoMittelstandDigital.gif"></img>
 								 	</div>
-							<br /><a href="" data-toggle="modal" data-target="#feedback" type="button" class="btn btn-default center-block" align=right style="display:block; white-space: normal;">Give your Feedback here!</a>
-							<br /><img class=beta src="img/beta.jpg" height=120 width=120></img>
+							
 							</div>
 					</div>
 					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >

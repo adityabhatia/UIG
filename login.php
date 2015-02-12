@@ -51,7 +51,11 @@ else{
 			<meta name="description" content="UIG Questionnaire">
 			<meta name="author" content="adityabhatia">
 			
-			
+			<p style="text-align:justify;">
+				Please use your existing login credentials.<br/><br/>
+				If you do not have an existing account, please register first.<br/>
+
+			</p>
 			<link href="css/bootstrap.min.css" rel="stylesheet">
 			
 			<link type="text/css" rel="stylesheet" href="css/login.css">
