@@ -26,7 +26,7 @@ if (isset($_POST['username'])){
 		$pass = "http://eris-vm08.uni-mannheim.de/php_mailer.php?chk=" . $randomString;
 	
 	
-require_once('Mailer/class.phpmailer.php');
+require("Mailer/PHPMailerAutoload.php");
 //include("class.smtp.php"); // optional, gets called from within class.phpmailer.php if not already loaded
 
 $mail             = new PHPMailer();
@@ -41,7 +41,7 @@ $arrContextOptions=array(
 
 $mail->IsSMTP(); // telling the class to use SMTP
 //$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
-$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+//$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
                                            // 1 = errors and messages
                                            // 2 = messages only
 $mail->SMTPAuth   = true;                  // enable SMTP authentication
@@ -56,17 +56,25 @@ $mail->SetFrom('UIG@es.uni-mannheim.de', 'Usability in Germany');
 $mail->AddReplyTo("UIG@es.uni-mannheim.de","Usability in Germany");
 
 $mail->Subject    = "Password Lost!";
+//$mail->IsHTML(true);
+$mail->AddEmbeddedImage('img/uig.jpg', 'myattach');
+$mail->Body = '<img src="cid:myattach"  style="display: block;
+    margin-left: auto;
+    margin-right: auto" /><br /><br />
+Dear <b>'. $username .'</b>,<br /><br />
+You have requested for a password reset. Please click the below button to continue. The button would be only be valid once.<br /><br />
+    <a href="' . $pass .'" style="background-color:#373737;border:1px solid grey;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:14px;line-height:30px;text-align:center;text-decoration:none;width:100px;-webkit-text-size-adjust:none;mso-hide:all;">Click here! &rarr;</a>
+<br /><br />
+Thanks,<br />
+Your UIG Team.';
 
-$mail->AddEmbeddedImage("abc.png", "my-attach", "abc.png");
-$mail->Body = 'Your <b>HTML</b> with an embedded Image: <img src="cid:my-attach"> Here is an image!';
+$mail->AltBody    = "Reset your UIG account password." ; // optional, comment out and test
 
-//$mail->AltBody    = "Password: " . $pass; // optional, comment out and test
-
-$mail->MsgHTML("Password: " . $pass);
+//$mail->MsgHTML("Password:" . $pass);
 
 $mail->AddAddress($recep, $username);
 
-//$mail->AddAttachment("images/phpmailer.gif");      // attachment
+//$mail->AddAttachment("abc.png");      // attachment
 //$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
 
 if(!$mail->Send()) {
@@ -179,7 +187,6 @@ if(!$mail->Send()) {
 				$result2 = mysql_query($query2) or die("error: " . mysql_error()) ;
 				$countchk=mysql_num_rows($result2);
 				if($countchk==1){
-					echo("okay");
 						if (isset($_POST['newpass'])){
 							$rows1=mysql_fetch_array($result2);
 							$user  =  $rows1['username'];
