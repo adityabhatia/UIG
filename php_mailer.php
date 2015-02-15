@@ -57,7 +57,10 @@ $mail->AddReplyTo("UIG@es.uni-mannheim.de","Usability in Germany");
 
 $mail->Subject    = "Password Lost!";
 
-$mail->AltBody    = "Password: " . $pass; // optional, comment out and test
+$mail->AddEmbeddedImage("abc.png", "my-attach", "abc.png");
+$mail->Body = 'Your <b>HTML</b> with an embedded Image: <img src="cid:my-attach"> Here is an image!';
+
+//$mail->AltBody    = "Password: " . $pass; // optional, comment out and test
 
 $mail->MsgHTML("Password: " . $pass);
 
