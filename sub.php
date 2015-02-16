@@ -77,6 +77,7 @@
 		<!--Inclusions-->
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/spin.min.js"></script>
 		
 		<!--Inclusions-->
 			<meta charset="utf-8">
@@ -116,7 +117,7 @@
 
 
 				$( document ).ready(function() {
-
+					$("#spinner").hide();
 					//var url = document.URL;
 					//document.write(url);
 						$("span").css("display","none");
@@ -177,6 +178,8 @@
    						var invitations;
    						var counter3 = 0;
 
+   						$("#spinner").show();
+
    						$.each($tds, function() {
    							var $type = $(this).children('input').val();
    							if(counter3 ==0){
@@ -198,7 +201,13 @@
    						$.ajax({
 							type: "POST",
 							url: "sendall.php",
-							data: 'name='+ajaxName+'&mail='+ajaxMail+'&role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version+'&product_end='+product_surveyEnd+'&invitations='+invitations
+							data: 'name='+ajaxName+'&mail='+ajaxMail+'&role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version+'&product_end='+product_surveyEnd+'&invitations='+invitations,
+							success: function(data){
+								alert("Invitation has been sent!");
+								$("#spinner").hide();
+								location.reload();
+								
+							}
 						});
 					});
 
@@ -213,14 +222,45 @@
 							postdata[postdata.length] = { name: "product_name", value: product_name };
 							postdata[postdata.length] = { name: "product_version", value: product_version };
 							postdata[postdata.length] = { name: "product_end", value: product_surveyEnd };
-
+							$("#spinner").show();
 
 						    $.ajax({
 						           type: "POST",
 						           url: url,
-						           data: postdata // serializes the form's elements.
+						           data: postdata, // serializes the form's elements.
+						           success: function(data){
+					           		alert("Invitations have been sent!");
+					           		$("#spinner").hide();
+					           		location.reload();
+					           		
+					           }
 						    });
+						    return false;
 						});
+
+					//SPINNER ELEMENT
+					var opts = {
+					  lines: 13, // The number of lines to draw
+					  length: 0, // The length of each line
+					  width: 5, // The line thickness
+					  radius: 10, // The radius of the inner circle
+					  corners: 0.8, // Corner roundness (0..1)
+					  rotate: 1, // The rotation offset
+					  direction: 1, // 1: clockwise, -1: counterclockwise
+					  color: '#333', // #rgb or #rrggbb or array of colors
+					  speed: 1.3, // Rounds per second
+					  trail: 66, // Afterglow percentage
+					  shadow: false, // Whether to render a shadow
+					  hwaccel: false, // Whether to use hardware acceleration
+					  className: 'spinner', // The CSS class to assign to the spinner
+					  zIndex: 2e9, // The z-index (defaults to 2000000000)
+					  top: '50%', // Top position relative to parent
+					  left: '50%', // Left position relative to parent
+					  
+					};
+					var target = document.getElementById('spinner');
+					var spinner = new Spinner(opts).spin(target);
+
 
 
 				});
@@ -310,7 +350,9 @@
 					<!-- TODO: Form/Submit functionality-->
 					<form method="post" action="" class="form-horizontal">	
 						<button class="btn btn-default" id="btn-sendIn" type="submit" name="submitall" value="Send invitation" ><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Send invitation</button>
-						<table class="col-md-12 table-bordered table-striped table-condensed" id="participant-table" style="border-spacing: 5px;">
+						<div id="spinner">
+						</div>
+						<table class="col-xs-12 table-bordered table-striped table-condensed" id="participant-table" style="border-spacing: 5px;">
 						  <tr>
 						    <th>Name</th>
 						    <th>Email</th>		

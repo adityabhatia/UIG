@@ -42,7 +42,7 @@ if($_SESSION['username']==""){
 									65% of enterprises mention usability as an important role for selecting the right software for their business.<br/>
 									Therefore software companies can bring differentiation benefits by investing in usability.<br/>
 									But how successful and effective does your company already turn common usability procedures into reality?<br/>
-									This platform provides a self-test, designed for estimating the usability level of your company.<br/><br/>
+									This platform provides a self-test, designed for estimating the usability level of your product.<br/><br/>
 
 								</p>
 								<h4> Required steps:</h4>

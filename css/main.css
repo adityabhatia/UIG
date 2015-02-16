@@ -227,7 +227,18 @@ color:#373737;
 
  	margin-top: 60px;
  }
+}
 
+ 
+  #spinner{
+ 	display: table-cell;
+ 	vertical-align: middle;
+ 	width: 50px;
+ 	height: 52px;
+ 	z-index: 2;
+ 	position: relative;
+ 	border-radius: 20px;
+ 	margin: 0px auto;
  }
 
 
