@@ -78,6 +78,9 @@ else{
 		<div class="wrapper">
 			<form class=form-signin action="login.php" method="POST">      
 				  <h2 class="form-signin-heading" align=center>LOGIN</h2>
+				  <div style="margin-top:-20px; text-align: justify;">
+				  Please use existing login credentials to continue. Incase you do not have an account, please register first.<br /><br />
+				  </div>
 				  <div align=center><?php echo($msg);?></div>
 				  <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
 				  <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      

@@ -62,7 +62,7 @@ $mail->Body = '<img src="cid:myattach"  style="display: block;
     margin-left: auto;
     margin-right: auto" /><br /><br />
 Dear <b>'. $username .'</b>,<br /><br />
-You have requested for a password reset. Please click the below button to continue. The button would be only be valid once.<br /><br />
+You have requested for password reset. Please click the below button to continue. The button would only be valid once.<br /><br />
     <a href="' . $pass .'" style="background-color:#373737;border:1px solid grey;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:14px;line-height:30px;text-align:center;text-decoration:none;width:100px;-webkit-text-size-adjust:none;mso-hide:all;">Click here! &rarr;</a>
 <br /><br />
 Thanks,<br />
@@ -160,6 +160,9 @@ if(!$mail->Send()) {
 			<?php if (isset($_GET["chk"]) == null){ ?>
 			<form class=form-signin action="" method="POST">      
 				  <h2 class="form-signin-heading" align=center>FORGOT PASSWORD</h2>
+				  <div align=center style="margin-top:-20px; text-align: justify;">
+				  Please enter a username to reset your password. An e-mail with a unique link, would be sent to the registered e-mail id shortly.<br /><br />
+				  </div>
 				  <div align=center><?php echo($msg);?></div>
 				  <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />      
 				  <!--<label class="checkbox">

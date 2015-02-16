@@ -26,6 +26,56 @@ $query = "INSERT INTO `feedback` (username, performance, usability, category, co
 $result = mysql_query($query) or die(mysql_error());
 if($result){
             $msg = ": Thanks for your Message!";
+            require("Mailer/PHPMailerAutoload.php");
+				$mail             = new PHPMailer();
+				$arrContextOptions=array(
+				    "ssl"=>array(
+				        "verify_peer"=>false,
+				        "verify_peer_name"=>false,
+				    ),
+				);
+									$mail->IsSMTP(); // telling the class to use SMTP
+					//$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
+					//$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+					                                           // 1 = errors and messages
+					                                           // 2 = messages only
+					$mail->SMTPAuth   = true;                  // enable SMTP authentication
+					$mail->SMTPSecure = "tls";                 // sets the prefix to the servier
+					$mail->Host       = "smtp.office365.com";      // sets GMAIL as the SMTP server
+					$mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+					$mail->Username   = "UIG@es.uni-mannheim.de";  // GMAIL username
+					$mail->Password   = "n123456789/*-";            // GMAIL password
+
+					$mail->SetFrom('UIG@es.uni-mannheim.de', 'Usability in Germany');
+
+					$mail->AddReplyTo("UIG@es.uni-mannheim.de","Usability in Germany");
+
+					$mail->Subject    = "New Feedback!";
+					//$mail->IsHTML(true);
+					$mail->AddEmbeddedImage('img/uig.jpg', 'myattach');
+					$mail->Body = '<img src="cid:myattach"  style="display: block;
+						    margin-left: auto;
+						    margin-right: auto" /><br /><br />
+						Dear <b>Admin</b>,<br /><br />
+						You have received a new feedback. 
+						<br /><br />
+						Username: ' . $username . 
+						'<br />Performance: ' . $performance . 
+						'<br />Usability: ' . $usability . 
+						'<br />Category: ' . $ncategory . 
+						'<br />Comments: ' . $comments . 
+						'<br /><br />Thanks,<br />
+						UIG Team.';
+
+						$mail->AltBody    = "New UIG Feedback!" ; // optional, comment out and test
+
+						$mail->AddAddress("bhatia.aditya11@gmail.com", "admin");
+
+						if(!$mail->Send()) {
+						  $msg = "Mailer Error: " . $mail->ErrorInfo;
+						} else {
+						  $msg = "Message sent!";
+						}
         }
 }
 

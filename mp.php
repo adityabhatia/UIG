@@ -19,12 +19,15 @@ if (isset($_GET["cname"])){
 			$cver = $_GET["cver"];
 			$np_name = $_GET['nn'];
 			$np_class = $_GET['nv'];
+			if (strlen($np_name)==0 || strlen($np_class)==0)
+			$msg=": Fill both fields to edit the product!";
+			else{  
 			$query =  "UPDATE products SET p_name='$np_name', p_class='$np_class' WHERE username = '$uname' and p_name='$cname' and p_class='$cver'";
 			$result = mysql_query($query) or die(mysql_error());
 				if($result==1)
-					$msg = "Updated!";
-					echo($msg);
-					}		
+					$msg = ": Updated!";
+					}	
+					}	
 						}	
 if (isset($_GET["dname"])){
 			$result = 0;
@@ -70,7 +73,7 @@ if (isset($_GET["dname"])){
 
 <body id="tabular" >
 	<div class="container">
-		<h2 class="page-header"><b> Organize Products </b></h2>
+		<h2 class="page-header"><b> Organize Products<?php echo($msg);?> </b></h2>
 		<p>Please select a product to get more detailed information.</p>
 		<section>
 			<table class="table table-striped table-bordered">
@@ -137,12 +140,12 @@ if (isset($_GET["dname"])){
 					<input type="text" class="form-control input-sm" id="version" name="version" placeholder="Version"  required />
 				</div>
 			</div>
-		</form>
 		</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" name="delete" id="edit">Save Details</button>
+        <button type="submit" class="btn btn-primary" name="delete" id="edit">Save Details</button>
       </div>
+      	</form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

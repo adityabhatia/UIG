@@ -67,6 +67,9 @@
 		<div class="wrapper">
 			<form class=form-signin action="" method="POST">      
 				  <h2 class="form-signin-heading" align=center>REGISTER</h2>
+				  <div align=center style="margin-top:-20px; text-align: justify;">
+				  Please enter following details details to create an account.<br /><br />
+				  </div>
 				  <div align=center><?php echo($msg1);?></div>
 				  <!--<input type="text" class="form-control" name="name" placeholder="Name" required="" autofocus="" />
 				  <input type="text" class="form-control" name="company" placeholder="Company" required />

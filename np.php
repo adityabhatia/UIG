@@ -9,6 +9,7 @@ if($_SESSION['username']==""){
 <script>window.location.replace("login.php");</script>
 <?php } 
 else{
+	$msg="";
 if (isset($_POST['submit'])){
 	$username = $_SESSION['username'];
 	$pname = $_POST['inputName'];
@@ -20,19 +21,28 @@ if (isset($_POST['submit'])){
 	$teamno = $_POST['teamno'];
 	$edate=date('Y-m-d', strtotime($edate));
 	$sdate=date('Y-m-d', strtotime($sdate));
-
+	if(strtotime($edate)<strtotime($sdate))
+		$msg="End Date should be greater than Start Date!";
+	else{
 	date_default_timezone_set('Europe/Berlin');
 	$timestamp = time();
 
 	$date = date('Y/m/d', time());
 	$surveyEnd = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +4 week"));
-
+	$validate = "SELECT * FROM `products` WHERE `p_name`='$pname' AND `p_class`='$pversion'";
+	$validation = mysql_query($validate) or die(mysql_error());
+	$count = mysql_num_rows($validation);
+	if ($count>=1)
+		$msg="Product already exists!";
+	else{
 	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `surveyEnd`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$surveyEnd')";
 	$result = mysql_query($query) or die(mysql_error());
 if($result){ ?>
-<script>window.location.replace("mp.php");</script>
+<script>location.replace("mp.php?reset=1");</script>
 <?php
         }
+       }
+      }
 }
 }
 
@@ -63,7 +73,7 @@ if($result){ ?>
 		<div class = "col-sm-12 col-xs-12" >
 						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">
 							<div class="panel-heading">
-								<h2 class="panel-title" align=center>Register a new product</h2>
+								<h2 class="panel-title" align=center>Register a new product: <?php echo($msg);?></h2>
 							</div>
 							<div class="panel-body">
 								<p>Please fill out the form below to register a new product for the UIG survey.</p>
