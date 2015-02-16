@@ -7,6 +7,7 @@ if($_SESSION['username']==""){
 <script>window.location.replace("login.php");</script>
 <?php }  else 
 {	$msg ="";
+	$success="";
 	$uname = $_SESSION['username'];
 	
 if (isset($_GET["cname"])){
@@ -22,11 +23,18 @@ if (isset($_GET["cname"])){
 			if (strlen($np_name)==0 || strlen($np_class)==0)
 			$msg=": Fill both fields to edit the product!";
 			else{  
-			$query =  "UPDATE products SET p_name='$np_name', p_class='$np_class' WHERE username = '$uname' and p_name='$cname' and p_class='$cver'";
-			$result = mysql_query($query) or die(mysql_error());
-				if($result==1)
-					$msg = ": Updated!";
-					}	
+				$validate = "SELECT * FROM `products` WHERE `username` = '$uname' AND `p_name`='$np_name' AND `p_class`='$np_class'";
+				$validation = mysql_query($validate) or die(mysql_error());
+				$count = mysql_num_rows($validation);
+				if ($count>=1)
+					$msg=": Similar product already exists!";
+				else{
+						$query =  "UPDATE products SET p_name='$np_name', p_class='$np_class' WHERE username = '$uname' and p_name='$cname' and p_class='$cver'";
+						$result = mysql_query($query) or die(mysql_error());
+							if($result==1)
+							$success = ": Updated!";
+					}
+					}
 					}	
 						}	
 if (isset($_GET["dname"])){
@@ -40,7 +48,7 @@ if (isset($_GET["dname"])){
 			$query = "DELETE FROM products WHERE username = '$uname' and p_name='$dname' and p_class='$dver'";
 			$result = mysql_query($query) or die(mysql_error());
 				if($result==1)
-					$msg = "Deleted!";
+					$success = ": Deleted!";
 					echo($msg);
 					}		
 						}	
@@ -73,7 +81,7 @@ if (isset($_GET["dname"])){
 
 <body id="tabular" >
 	<div class="container">
-		<h2 class="page-header"><b> Organize Products<?php echo($msg);?> </b></h2>
+		<h2 class="page-header"><b> Organize Products<span style="color:#AA4139;"><?php echo($msg);?></span><span style="color:#408E2F"><?php echo($success);?></span></b></h2>
 		<p>Please select a product to get more detailed information.</p>
 		<section>
 			<table class="table table-striped table-bordered">
@@ -141,11 +149,12 @@ if (isset($_GET["dname"])){
 				</div>
 			</div>
 		</div>
+		</form>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="delete" id="edit">Save Details</button>
+        <button class="btn btn-primary" name="delete" id="edit">Save Details</button>
       </div>
-      	</form>
+      	
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

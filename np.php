@@ -10,6 +10,7 @@ if($_SESSION['username']==""){
 <?php } 
 else{
 	$msg="";
+	$success="";
 if (isset($_POST['submit'])){
 	$username = $_SESSION['username'];
 	$pname = $_POST['inputName'];
@@ -29,16 +30,19 @@ if (isset($_POST['submit'])){
 
 	$date = date('Y/m/d', time());
 	$surveyEnd = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +4 week"));
-	$validate = "SELECT * FROM `products` WHERE `p_name`='$pname' AND `p_class`='$pversion'";
+	$validate = "SELECT * FROM `products` WHERE `username` = '$username' AND `p_name`='$pname' AND `p_class`='$pversion'";
 	$validation = mysql_query($validate) or die(mysql_error());
 	$count = mysql_num_rows($validation);
 	if ($count>=1)
-		$msg="Product already exists!";
+		$msg=": Product already exists!";
 	else{
 	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `surveyEnd`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$surveyEnd')";
 	$result = mysql_query($query) or die(mysql_error());
-if($result){ ?>
-<script>location.replace("mp.php?reset=1");</script>
+if($result){ 	$success=": Product Added!";
+	?>
+				<script>//location.replace("mp.php?reset=1");
+				document.write('<meta http-equiv="refresh" content="2; url=mp.php?reset=1" />')</script>
+
 <?php
         }
        }
@@ -73,7 +77,7 @@ if($result){ ?>
 		<div class = "col-sm-12 col-xs-12" >
 						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">
 							<div class="panel-heading">
-								<h2 class="panel-title" align=center>Register a new product: <?php echo($msg);?></h2>
+								<h2 class="panel-title" align=center>Register a new product<span style="color:#408E2F"><?php echo($success);?></span><span style="color:#AA4139;"><?php echo($msg);?></span></h2>
 							</div>
 							<div class="panel-body">
 								<p>Please fill out the form below to register a new product for the UIG survey.</p>

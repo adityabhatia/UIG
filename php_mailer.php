@@ -160,10 +160,10 @@ if(!$mail->Send()) {
 			<?php if (isset($_GET["chk"]) == null){ ?>
 			<form class=form-signin action="" method="POST">      
 				  <h2 class="form-signin-heading" align=center>FORGOT PASSWORD</h2>
-				  <div align=center style="margin-top:-20px; text-align: justify;">
-				  Please enter a username to reset your password. An e-mail with a unique link, would be sent to the registered e-mail id shortly.<br /><br />
+				  <div align=center style="margin-top:-20px; text-align: justify; margin-bottom:5px;">
+				  Please enter a username to reset your password. An e-mail with a unique link, would be sent to the registered e-mail id shortly.<br />
 				  </div>
-				  <div align=center><?php echo($msg);?></div>
+				  <div align=center><span style="color:#AA4139;"><?php echo($msg);?></span></div>
 				  <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />      
 				  <!--<label class="checkbox">
 					<input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me

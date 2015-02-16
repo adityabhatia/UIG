@@ -50,9 +50,9 @@
 				<![endif]-->
 
 	</head>
-	
+
+	<?php if(!$msg){ ?>
 	<body style="background-color:#f5f5f5">
-		<?php if(!$msg){ ?>
 		<div class="row">
 		<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -67,10 +67,10 @@
 		<div class="wrapper">
 			<form class=form-signin action="" method="POST">      
 				  <h2 class="form-signin-heading" align=center>REGISTER</h2>
-				  <div align=center style="margin-top:-20px; text-align: justify;">
-				  Please enter following details details to create an account.<br /><br />
+				  <div align=center style="margin-top:-20px; text-align: justify; margin-bottom:5px;">
+				  Please enter following details details to create an account.<br />
 				  </div>
-				  <div align=center><?php echo($msg1);?></div>
+				  <div align=center><span style="color:#AA4139;"><?php echo($msg1);?></span></div>
 				  <!--<input type="text" class="form-control" name="name" placeholder="Name" required="" autofocus="" />
 				  <input type="text" class="form-control" name="company" placeholder="Company" required />
 				  <input type="text" class="form-control" name="desig" placeholder="Designation" required="" />
@@ -109,8 +109,9 @@
 
 <?php }	if($msg){
         ?>
+        <body style="background-color:#2E2E2E;">
 		<div align=center style="margin-left:auto; margin-right:auto;">
-		<div class=" well well-sm" align=center >User Successfully added. Redirecting to Login Screen..</div>
+		<div class=" well well-sm" align=center>User Successfully added. Redirecting to Login Screen..</div>
 	</div>
 	</body>
 </html>
