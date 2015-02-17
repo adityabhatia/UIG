@@ -23,7 +23,7 @@ if (isset($_POST['submit'])){
 	$edate=date('Y-m-d', strtotime($edate));
 	$sdate=date('Y-m-d', strtotime($sdate));
 	if(strtotime($edate)<strtotime($sdate))
-		$msg="End Date should be greater than Start Date!";
+		$msg=": End Date should be greater than Start Date!";
 	else{
 	date_default_timezone_set('Europe/Berlin');
 	$timestamp = time();
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])){
 if($result){ 	$success=": Product Added!";
 	?>
 				<script>//location.replace("mp.php?reset=1");
-				document.write('<meta http-equiv="refresh" content="2; url=mp.php?reset=1" />')</script>
+				document.write('<meta http-equiv="refresh" content="1; url=mp.php?reset=1" />')</script>
 
 <?php
         }

@@ -11,12 +11,7 @@ if($_SESSION['username']==""){
 	$uname = $_SESSION['username'];
 	
 if (isset($_GET["cname"])){
-			$result = 0;
 			$cname = $_GET["cname"];
-			$query = "SELECT p_name FROM products where p_name='$cname' and username = '$uname'";
-			$result = mysql_query($query) or die(mysql_error());
-			$count = mysql_num_rows($result);
-			if($count==1){
 			$cver = $_GET["cver"];
 			$np_name = $_GET['nn'];
 			$np_class = $_GET['nv'];
@@ -35,7 +30,7 @@ if (isset($_GET["cname"])){
 							$success = ": Updated!";
 					}
 					}
-					}	
+					
 						}	
 if (isset($_GET["dname"])){
 			$result = 0;
