@@ -204,7 +204,14 @@
 					$("#errorstatus").html("**Invalid Date!");
 				}
 
+
 				if(valid==0){
+					var sdatesplit = dp11.split("/");
+				dp11 = sdatesplit[2]+"-"+sdatesplit[1]+"-"+sdatesplit[0];
+
+					var edatesplit = dp21.split("/");
+				dp21 = edatesplit[2]+"-"+edatesplit[1]+"-"+edatesplit[0];
+
 				$.post("form.php", {
 
 					inputName: inputName1,
@@ -219,7 +226,7 @@
 					}, function(data) {
 						if (parseInt(data)==1){
 							$("#errorstatus").html("");
-							$("#errorstatus").html("**Start Date should be less than End Date");
+							$("#errorstatus").html("**Start Date should be less than End Date!");
 							$("#tb4").css("border", "solid 1.5px #AA4139");
 							$("#tb5").css("border", "solid 1.5px #AA4139");
 						}

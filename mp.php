@@ -190,7 +190,7 @@ $(document).ready(function() {
 					ajaxname: newname,
 					ajaxversion: newversion,
 					}, function(data) {
-						if (parseInt(data)==1){
+						if (parseInt(data)==5){
 							$("#errorstatus").html("");
 							$("#errorstatus").html("**Similar product already exists!");
 							$("#inputName").css("border", "solid 1.5px #AA4139");

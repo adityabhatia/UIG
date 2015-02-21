@@ -14,7 +14,7 @@ else if (isset($_POST['ajaxname'])){
 				$validation = mysql_query($validate) or die(mysql_error());
 				$count = mysql_num_rows($validation);
 					if ($count>=1){
-						$msg="1";
+						$msg="5";
 						echo($msg);
 					}
 				}
@@ -32,7 +32,7 @@ else{
 	$edate=date('Y-m-d', strtotime($edate));
 	$sdate=date('Y-m-d', strtotime($sdate));
 	if(strtotime($edate)<strtotime($sdate)){
-		$msg="1";
+		$msg=1;
 		echo($msg);
 	}
 	else{
@@ -44,7 +44,7 @@ else{
 	$validation = mysql_query($validate) or die(mysql_error());
 	$count = mysql_num_rows($validation);
 	if ($count>=1){
-		$msg="2";
+		$msg=2;
 		echo($msg);}
 	else{
 	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `surveyEnd`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$surveyEnd')";
