@@ -77,7 +77,7 @@ else{
 	<div class="row">
 		<div class="wrapper">
 			<form class=form-signin action="login.php" method="POST">      
-				  <h2 class="form-signin-heading" align=center>LOGIN</h2>
+				  <h2 class="form-signin-heading" align=center>Login</h2>
 				  <div style="margin-top:-20px; text-align: justify; margin-bottom:5px;">
 				  Please use existing login credentials to continue. Incase you do not have an account, please register first.<br />
 				  </div>

@@ -66,7 +66,7 @@
 		<!-- Form for logging in the users -->
 		<div class="wrapper">
 			<form class=form-signin action="" method="POST">      
-				  <h2 class="form-signin-heading" align=center>REGISTER</h2>
+				  <h2 class="form-signin-heading" align=center>Register</h2>
 				  <div align=center style="margin-top:-20px; text-align: justify; margin-bottom:5px;">
 				  Please enter following details details to create an account.<br />
 				  </div>

@@ -159,7 +159,7 @@ if(!$mail->Send()) {
 		<div class="wrapper">
 			<?php if (isset($_GET["chk"]) == null){ ?>
 			<form class=form-signin action="" method="POST">      
-				  <h2 class="form-signin-heading" align=center>FORGOT PASSWORD</h2>
+				  <h2 class="form-signin-heading" align=center>Forgot Password</h2>
 				  <div align=center style="margin-top:-20px; text-align: justify; margin-bottom:5px;">
 				  Please enter a username to reset your password. An e-mail with a unique link, would be sent to the registered e-mail id shortly.<br />
 				  </div>
@@ -212,7 +212,7 @@ if(!$mail->Send()) {
 			else if (isset($_POST['newpass'])==null) {
 			?>
 			<form class=form-signin action="" method="POST">      
-				  <h2 class="form-signin-heading" align=center>CHANGE PASSWORD</h2>
+				  <h2 class="form-signin-heading" align=center>Change Password</h2>
 				  <div align=center><?php echo($msg);?></div>
 				  <input type="password" class="form-control" name="newpass" placeholder="Enter New Password" required="" autofocus="" />      
 				  <div class="col-sm-6 nopadding">

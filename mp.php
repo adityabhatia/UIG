@@ -14,23 +14,11 @@ if (isset($_GET["cname"])){
 			$cname = $_GET["cname"];
 			$cver = $_GET["cver"];
 			$np_name = $_GET['nn'];
-			$np_class = $_GET['nv'];
-			if (strlen($np_name)==0 || strlen($np_class)==0)
-			$msg=": Fill both fields to edit the product!";
-			else{  
-				$validate = "SELECT * FROM `products` WHERE `username` = '$uname' AND `p_name`='$np_name' AND `p_class`='$np_class'";
-				$validation = mysql_query($validate) or die(mysql_error());
-				$count = mysql_num_rows($validation);
-				if ($count>=1)
-					$msg=": Similar product already exists!";
-				else{
+			$np_class = $_GET['nv']; 
 						$query =  "UPDATE products SET p_name='$np_name', p_class='$np_class' WHERE username = '$uname' and p_name='$cname' and p_class='$cver'";
 						$result = mysql_query($query) or die(mysql_error());
 							if($result==1)
-							$success = ": Updated!";
-					}
-					}
-					
+							$success = "**Updated!";
 						}	
 if (isset($_GET["dname"])){
 			$result = 0;
@@ -43,7 +31,7 @@ if (isset($_GET["dname"])){
 			$query = "DELETE FROM products WHERE username = '$uname' and p_name='$dname' and p_class='$dver'";
 			$result = mysql_query($query) or die(mysql_error());
 				if($result==1)
-					$success = ": Deleted!";
+					$success = "**Deleted!";
 					echo($msg);
 					}		
 						}	
@@ -76,8 +64,9 @@ if (isset($_GET["dname"])){
 
 <body id="tabular" >
 	<div class="container">
-		<h2 class="page-header"><b> Organize Products<span style="color:#AA4139;"><?php echo($msg);?></span><span style="color:#408E2F"><?php echo($success);?></span></b></h2>
-		<p>Please select a product to get more detailed information.</p>
+		<h2 class="page-header"><b> Organize Products</b></h2>
+		Please select a product to get more detailed information.<br />
+		<div style="color:#AA4139;"><?php echo($msg);?></span><span style="color:#408E2F"><?php echo($success);?></div><br />
 		<section>
 			<table class="table table-striped table-bordered">
 				<thead>
@@ -127,7 +116,8 @@ if (isset($_GET["dname"])){
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Enter new information</h4>
+        <h4 class="modal-title">Enter new product information</h4>
+        <div id="errorstatus" style="color:#AA4139;"></div>
       </div>
       <div class="modal-body">
 		<form name="contactform" method="post" class="form-horizontal">
@@ -147,9 +137,8 @@ if (isset($_GET["dname"])){
 		</form>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary" name="delete" id="edit">Save Details</button>
+        <input type="button" name="delete" id="edit" class="btn btn-default" value="Save Details" />
       </div>
-      	
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -157,7 +146,11 @@ if (isset($_GET["dname"])){
 
 	<script>
 $(document).ready(function() {
-	$('#example').dataTable();
+		//$.post("mp.php", {
+		//	inputName: "",
+		//	version: "",
+		//});
+	//	$('#example').dataTable();
 	var className, substr;
 	$('.glyphicon').click(function(){
 		$("#inputName").val("");
@@ -173,10 +166,46 @@ $(document).ready(function() {
 			window.location.replace($url);
 	});
 	$('#edit').click(function(){
+			var counter=2;
+			$("#version").css("border", "");
+			$("#inputName").css("border", "");
+		if($("#inputName").val()==""){
+			$("#inputName").css("border", "solid 1.5px #AA4139");
+			$("#errorstatus").html("");
+			$("#errorstatus").html("**Please fill in both fields!");
+			counter=1;
+		}
+
+		if ($("#version").val()==""){
+			$("#version").css("border", "solid 1.5px #AA4139");
+			$("#errorstatus").html("");
+			$("#errorstatus").html("**Please fill in both fields!");
+			counter=1;
+		}
+
+		if(counter==2){
 		var newname = $("#inputName").val();
-		var newver = $("#version").val();
-		var $url= "mp.php?cname="+substr[1]+"&cver="+substr[2]+"&nn="+newname+"&nv="+newver;
-			window.location.replace($url);
+		var newversion = $("#version").val();
+		$.post("form.php", {
+					ajaxname: newname,
+					ajaxversion: newversion,
+					}, function(data) {
+						if (parseInt(data)==1){
+							$("#errorstatus").html("");
+							$("#errorstatus").html("**Similar product already exists!");
+							$("#inputName").css("border", "solid 1.5px #AA4139");
+							$("#version").css("border", "solid 1.5px #AA4139");
+							counter=1;
+						}
+						else{
+							var newname = $("#inputName").val();
+							var newver = $("#version").val();
+							var $url= "mp.php?cname="+substr[1]+"&cver="+substr[2]+"&nn="+newname+"&nv="+newver;
+							window.location.replace($url);	
+						}
+					});
+		}
+		
 	});
 	$('.selec_name').click(function(){
 	var selec_name = $(this).html();

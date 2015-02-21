@@ -266,6 +266,7 @@ if($result){
 							Your feedback is important to us. Please let us know how can we improve this tool further.<br/><br/>
 							<form name="contactform" method="post" action="" class="form-horizontal" role="form" style="">
 								<h2 class="panel-title"><b>Please rate your experience using this tool</b></h2>
+									<div style="text-align:left; font-size:12px;">(1-Poor, 5-Outstanding)</div>
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Performance</label>
 										<div class="col-sm-9 col-xs-9">
@@ -306,8 +307,7 @@ if($result){
 											      <input type="radio" name="usability" value="5"> 5
 											    </label>
 										</div>
-									</div>
-									 <div style="text-align:right; font-size:12px;">(1-Poor, 5-Outstanding)</div><br />
+									</div><br />
 									<h2 class="panel-title"><b>Improvement Areas</b></h2>
 									<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Category</label>
