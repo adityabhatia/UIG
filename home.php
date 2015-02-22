@@ -51,7 +51,7 @@ if($_SESSION['username']==""){
 									<b>Third step:</b> Provide the user survey link to your software customers.
 								</p>
 								<br/><br/><br/><br/>
-						<p>In the end we will present you a precise evaluation and analysis of the usability level of your company.</p>
+						<p>In the end we will present you a precise evaluation and analysis of the usability level of your product.</p>
 						
 		</div>
 	
