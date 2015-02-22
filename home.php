@@ -25,8 +25,6 @@ if($_SESSION['username']==""){
 			
 			<link href="css/bootstrap.min.css" rel="stylesheet">
 			
-			
-			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 			<link type="text/css" rel="stylesheet" href="css/main.css">
 			 <!--[if lt IE 9]>
@@ -42,7 +40,7 @@ if($_SESSION['username']==""){
 									65% of enterprises mention usability as an important role for selecting the right software for their business.<br/>
 									Therefore software companies can bring differentiation benefits by investing in usability.<br/>
 									But how successful and effective does your company already turn common usability procedures into reality?<br/>
-									This platform provides a self-test, designed for estimating the usability level of your company.<br/><br/>
+									This platform provides a self-test, designed for estimating the usability level of your product.<br/><br/>
 
 								</p>
 								<h4> Required steps:</h4>
@@ -53,10 +51,6 @@ if($_SESSION['username']==""){
 									<b>Third step:</b> Provide the user survey link to your software customers.
 								</p>
 								<br/><br/><br/><br/>
-								
-							
-						
-							
 						<p>In the end we will present you a precise evaluation and analysis of the usability level of your company.</p>
 						
 		</div>

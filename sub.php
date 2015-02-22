@@ -24,7 +24,8 @@
 	$product_end;
 	$product_gsize;
 	$product_teamno;
-	$product_surveyEnd;
+	$product_team_survey_end;
+	$product_user_survey_end;
 
 	$array_name = array();
 	$array_mail = array();
@@ -49,7 +50,8 @@
 			$product_budget = $selected_product['budget'];
 			$product_gsize = $selected_product['gsize'];
 			$product_teamno = $selected_product['teamno'];
-			$product_surveyEnd = $selected_product['surveyEnd'];
+			$product_team_survey_end = $selected_product['team_survey_end'];
+			$product_user_survey_end = $selected_product['user_survey_end'];
 		}
 	}
 
@@ -87,8 +89,6 @@
 			<meta name="author" content="adityabhatia">
 	
 			<link href="css/bootstrap.min.css" rel="stylesheet">
-
-			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 			 <!--[if lt IE 9]>
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -106,7 +106,9 @@
 				var product_name;
 				var product_version;
 				var product_end;
-				var product_surveyEnd;
+				var product_user_survey_end;
+				var product_team_survey_end;
+
 				var counter;
 
 				var table_name=1;
@@ -157,9 +159,31 @@
 					product_name = <?php echo json_encode($product_name);?>;
 					product_version = <?php echo json_encode($product_version);?>;
 					product_end = <?php echo json_encode($product_end);?>;
-					product_surveyEnd = <?php echo json_encode($product_surveyEnd);?>;
+					product_team_survey_end = <?php echo json_encode($product_team_survey_end);?>;
+					product_user_survey_end = <?php echo json_encode($product_user_survey_end);?>;
 
 
+
+
+					if(product_team_survey_end == 0){
+						$('#survey_not').show();
+						$('#survey_started').hide();
+					}
+					else{
+						$('#survey_not').hide();
+						$('#survey_started').show();
+					}
+
+					if(product_user_survey_end == 0){
+						$('#c_survey_not').show();
+						$('#btn-create_link').show();
+						$('#c_survey_started').hide();
+					}
+					else{
+						$('#c_survey_not').hide();
+						$('#c_survey_started').show();
+						$('#btn-create_link').hide();
+					}
 
 					for (var i = 0; i < counter; i++) {
 						var name = name_array[i];
@@ -201,7 +225,7 @@
    						$.ajax({
 							type: "POST",
 							url: "sendall.php",
-							data: 'name='+ajaxName+'&mail='+ajaxMail+'&role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version+'&product_end='+product_surveyEnd+'&invitations='+invitations,
+							data: 'name='+ajaxName+'&mail='+ajaxMail+'&role='+ajaxRole+'&id='+product_id+'&product_name='+product_name+'&product_version='+product_version+'&product_end='+product_end+'&survey_end='+product_team_survey_end+'&invitations='+invitations,
 							success: function(data){
 								alert("Invitation has been sent!");
 								$("#spinner").hide();
@@ -221,7 +245,8 @@
 							postdata[postdata.length] = { name: "product_id", value: product_id };
 							postdata[postdata.length] = { name: "product_name", value: product_name };
 							postdata[postdata.length] = { name: "product_version", value: product_version };
-							postdata[postdata.length] = { name: "product_end", value: product_surveyEnd };
+							postdata[postdata.length] = { name: "product_end", value: product_end };
+							postdata[postdata.length] = { name: "survey_end", value: product_team_survey_end };
 							$("#spinner").show();
 
 						    $.ajax({
@@ -273,139 +298,172 @@
 					$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" placeholder="Name"></td><td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td><td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td><td><input class="table-form" type="text" name="invitations[]" placeholder="Invitations" readonly></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF"><i class="glyphicon glyphicon-minus"></i></a></td></tr>');
 				}
 
+				function createLink(){
+					$.ajax({
+			        	type: "POST",
+			        	url: "start_user_survey.php",
+			        	data: 'product_id='+product_id,
+			      		success: function(data){
+			           		alert("Link has been created");
+			           		location.reload();
+		           		}
+					});
+				}
+
 			</script>
 
 
 
 	</head>
 	<body>
-	<div class="container">
-		<span class="sel1">
-			<h2 class="page-header"><b>Product Overview:</b> <?php echo($product_name);?></h2><br />
-			<div id="table-responsive">
-	            <table class="col-xs-12 table-bordered table-striped table-condensed">
-	        		<thead>
-	        			<tr>
-	        				<th>Attribute</th>
-	        				<th>Value</th>
-	        			</tr>
-	        		</thead>
-					<tbody>
-	        			<tr>
-							<td data-title="Attribute">Product Name</td>
-	        				<td data-title="Attribute"><?php echo($product_name);?></td>
-	        			</tr>
-						<tr>
-							<td data-title="Attribute">Version</td>
-	        				<td data-title="Attribute"><?php echo($product_version);?></td>
-	        			</tr>
-						<tr>
-							<td data-title="Attribute">Budget (in thousand € /year)</td>
-	        				<td data-title="Attribute"><?php echo($product_budget);?></td>
-	        			</tr>
-						<tr>
-							<td data-title="Attribute">Start of product design and development</td>
-	        				<td data-title="Attribute"><?php $sdate=date('d/m/Y', strtotime($product_start));
-							echo($sdate);?></td>
-	        			</tr>
-						<tr>
-							<td data-title="Attribute">End of product design and development</td>
-	        				<td data-title="Attribute"><?php $edate=date('d/m/Y', strtotime($product_end));
-							echo($edate);?></td>
-	        			</tr>
-						<tr>
-							<td data-title="Attribute">Group size of the design and development team</td>
-	        				<td data-title="Attribute"><?php echo($product_gsize);?></td>
-	        			</tr>
-						<tr>
-							<td data-title="Attribute">Number of team members located at each site</td>
-	        				<td data-title="Attribute"><?php echo($product_teamno);?></td>
-	        			</tr>
-					</tbody>
-				</table>
-			</div>
-		</span>
-			<span class="sel2">
-				<h2 class="page-header" ><b> Product Development Survey:</b> <?php echo($product_name);?> </h2><br/>
-				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
-					<p>
-						The results of the team survey help us to diagnose the status quo of the software development team, providing suggestions for future improvements.<br>
-						Therefore we ask you to provide the survey link to the project's team members.
-						<p>The questionnaire will be made available for you until <b><?php echo($product_surveyEnd)?></b>! </p>
+		<div class="container">
 
-						<h3>Invitation Instructions</h3>
-						The questionnaire for the product <b><?php echo($product_name);?></b> can be accessed through the link below. <br>
-						To invite members of the development team you can provide them the access link, or fill out the form below and click "Send invitation".<br>
-						A single invitation can be send through a click on the envelope of the table's right column.
-					</p>
-					<br/>
-					<p>Link to product development survey:</p>
-					<form id="team-survey-form">
-					<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_surveyEnd);?>" class="field left" readonly>
-					</form>
-					<p></p>
-					<h3>Survey Participants</h3>
-					<button class="btn btn-default" id="btn-addRow" type="button" name="table_row" value="Add Participant" onclick="addRow();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add participant</button>
-					
-					<!-- TODO: Form/Submit functionality-->
-					<form method="post" action="" class="form-horizontal">	
-						<button class="btn btn-default" id="btn-sendIn" type="submit" name="submitall" value="Send invitation" ><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Send invitation</button>
-						<div id="spinner">
-						</div>
-						<table class="col-xs-12 table-bordered table-striped table-condensed" id="participant-table" style="border-spacing: 5px;">
-						  <tr>
-						    <th>Name</th>
-						    <th>Email</th>		
-						    <th>Team Role</th>
-						    <th>Invitations</th>
-						    <th>Action</th>
-						  </tr>
-						  <tr>
-						    <td><input class="table-form" type="text" name="name[]" placeholder="Name"></td>
-						    <td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td>		
-						    <td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td>
-						    <td><input class="table-form" type="text" name="invitations[]" placeholder="Invitations" readonly></td>
-						    <td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a></td>
-						  </tr>
+
+				<!--
+				UIG PRODUCT OVERVIEW
+				-->
+				<span class="sel1">
+					<h2 class="page-header"><b>Product Overview:</b> <?php echo($product_name);?></h2><br />
+					<div id="table-responsive">
+			            <table class="col-xs-12 table-bordered table-striped table-condensed">
+			        		<thead>
+			        			<tr>
+			        				<th>Attribute</th>
+			        				<th>Value</th>
+			        			</tr>
+			        		</thead>
+							<tbody>
+			        			<tr>
+									<td data-title="Attribute">Product Name</td>
+			        				<td data-title="Attribute"><?php echo($product_name);?></td>
+			        			</tr>
+								<tr>
+									<td data-title="Attribute">Version</td>
+			        				<td data-title="Attribute"><?php echo($product_version);?></td>
+			        			</tr>
+								<tr>
+									<td data-title="Attribute">Budget (in thousand € /year)</td>
+			        				<td data-title="Attribute"><?php echo($product_budget);?></td>
+			        			</tr>
+								<tr>
+									<td data-title="Attribute">Start of product design and development</td>
+			        				<td data-title="Attribute"><?php $sdate=date('d/m/Y', strtotime($product_start));
+									echo($sdate);?></td>
+			        			</tr>
+								<tr>
+									<td data-title="Attribute">End of product design and development</td>
+			        				<td data-title="Attribute"><?php $edate=date('d/m/Y', strtotime($product_end));
+									echo($edate);?></td>
+			        			</tr>
+								<tr>
+									<td data-title="Attribute">Group size of the design and development team</td>
+			        				<td data-title="Attribute"><?php echo($product_gsize);?></td>
+			        			</tr>
+								<tr>
+									<td data-title="Attribute">Number of team members located at each site</td>
+			        				<td data-title="Attribute"><?php echo($product_teamno);?></td>
+			        			</tr>
+							</tbody>
 						</table>
+					</div>
+				</span>
+
+
+
+				<!--
+				UIG TEAM SURVEY
+				-->
+				<span class="sel2">
+					<h2 class="page-header" ><b> Product Development Survey:</b> <?php echo($product_name);?> </h2><br/>
+					<div class="col-xs-12 col-sm-12" style="text-align:left;" >
+						<p>
+							The results of the team survey help us to diagnose the status quo of the software development team, providing suggestions for future improvements.<br>
+							Therefore we ask you to invite the project's team members to our UIG survey. 
+							As soon as you have invited a team member by adding to the following table the survey starts and will be available for you the next 3 weeks.
+
+							<h3>Invitation Instructions</h3>
+							To invite members of the development team you can fill out the form below and click "Send invitation".<br>
+							A single invitation can be send through a click on the envelope of the table's right column.
+
+							<h3>Team Survey Status</h3>
+							<p id="survey_not">The survey hasn't started yet!</p>
+							<p id="survey_started">The questionnaire will be made available for you until <b><?php echo($product_team_survey_end)?></b>!</p>
+						</p>
+						<br/>
+						<p></p>
+						<h3>Survey Participants</h3>
+						<button class="btn btn-default" id="btn-addRow" type="button" name="table_row" value="Add Participant" onclick="addRow();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add participant</button>
 						
-					</form>					
-				</div>
-				<div class="col-xs-12 col-sm-12" style="text-align:left;" ><br>
-					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
-					
-				</div>
-			</span>
-			<span class="sel3">	
-				<h2 class="page-header" ><b>Product User Survey:</b> <?php echo($product_name);?></h2><br />
-				<div class="col-xs-12 col-sm-12" style="text-align:left;" >
-					
-						<p>	The user survey contains questions about the usability of the product <?php echo($product_name);?>.<br>
-							The survey can be accessed by the link below.<br>
-							To invite your product's users and customers you can provide them the access link.</p>
-					
-						<p>Link to customer survey:</p>
-					<form id="user-survey-form">	
-						<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_surveyEnd);?>" class="field left" readonly>
-					</form>
-					<br>
-					<p>An overview of the results of all product-related surveys is shown in the review section.</p>
+						<!-- TODO: Form/Submit functionality-->
+						<form method="post" action="" class="form-horizontal">	
+							<button class="btn btn-default" id="btn-sendIn" type="submit" name="submitall" value="Send invitations" ><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Send invitations</button>
+							<div id="spinner">
+							</div>
+							<table class="col-xs-12 table-bordered table-striped table-condensed" id="participant-table" style="border-spacing: 5px;">
+							  <tr>
+							    <th>Name</th>
+							    <th>Email</th>		
+							    <th>Team Role</th>
+							    <th>Invitations</th>
+							    <th>Action</th>
+							  </tr>
+							  <tr>
+							    <td><input class="table-form" type="text" name="name[]" placeholder="Name"></td>
+							    <td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td>		
+							    <td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td>
+							    <td><input class="table-form" type="text" name="invitations[]" placeholder="Invitations" readonly></td>
+							    <td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a></td>
+							  </tr>
+							</table>
+							
+						</form>					
+					</div>
+					<div class="col-xs-12 col-sm-12" style="text-align:left;" ><br>
+						<p>An overview of the results of all product-related surveys is shown in the review section.</p>
+						
+					</div>
+				</span>
 
-				</div>
 
-			</span>
-			<span class="sel4">	
-				<h2 class="page-header" ><b>Review</b></h2><br />
+				<!--
+				UIG CUSTOMER SURVEY
+				-->
+				<span class="sel3">	
+					<h2 class="page-header" ><b>Product User Survey:</b> <?php echo($product_name);?></h2><br />
+					<div class="col-xs-12 col-sm-12" style="text-align:left;" >
+						
+						<p>	The user survey contains questions about the usability of the product <b><?php echo($product_name);?></b>.<br>
+							<p>To start the survey it is necessary to create a link by clicking the button below. As soon as you have created the link the survey starts and will be available for you the <b>next 4 weeks</b>.</p>
+							To invite your product's users and customers you can provide them the access link.
+						</p>
+						
+						<h3>Customer Survey Status</h3>
+						<p id="c_survey_not">The survey hasn't started yet!</p>
+						<button class="btn btn-default" id="btn-create_link" type="button" value="Create Customer Survey Link" onclick="createLink();">&nbsp;Create Customer Survey Link</button>
+						<div id="c_survey_started">Link to customer survey:
+							<form id="user-survey-form">	
+								<input id="survey-link" type="text" value="<?php echo("http://www.unipark.de/uc/UIG_SUS/?a=".$product_id."&b=".str_replace(' ','%',$product_name)."&c=".str_replace(' ','%',$product_version)."&d=".$product_user_survey_end);?>" class="field left" readonly>
+							</form>
+							<br/>
+							<p>The questionnaire will be made available for you until <b><?php echo($product_user_survey_end)?></b>!</p>
+						</div>
+					</div>
+				</span>
+
+
+				<!--
+				UIG SURVEY REPORT
+				-->
+				<span class="sel4">	
+					<h2 class="page-header" ><b>Review</b></h2><br />
 				<p align=center style="font-size:20px;">	Work in Progress. <br /><br />
 					<img src="img/construction.jpg" width="40%" height="40%"></img>
 				</p>
 
 				<div class="col-xs-12 col-sm-12" style="text-align:right;" >
 				</div>
-			</span>
-	</div>
-	
-	
+				</span>
+		</div>
 	</body>
 </html>
 

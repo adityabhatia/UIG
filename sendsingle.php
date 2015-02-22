@@ -14,11 +14,19 @@
 			$product_version = $_POST['product_version'];
 			$product_name = $_POST['product_name'];
 			$product_end = $_POST['product_end'];
+			$survey_end = $_POST['survey_end'];
+
 
 			$user = $_SESSION['username'];
+
+			if($survey_end == 0){
+		  		$date = date('Y/m/d', time());
+				$link_date = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +3 week"));
+		  	}
+		  	else{
+		  		$link_date = $survey_end;
+		  	}
 			
-
-
 
 			foreach ($array_name as $value) {
 				$name=$value;
@@ -31,7 +39,7 @@
 				if (is_string($mail)) {
 					$nmail = trim($mail);
 				}
-				$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".$product_name."&c=".$product_version."&d=".$product_end;
+				$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".$product_name."&c=".$product_version."&d=".$link_date;
 				$survey_url = str_replace(' ','%', $survey_url);
 
 				//LINK TO SEND IN E-MAIL
@@ -81,10 +89,20 @@
 					//SAVE PARTICIPANTS IN DB
 					$query_insert= "INSERT INTO participants VALUES ('$name','$nmail','$role','1','$product_id')";
 					$result_insert= mysql_query($query_insert);
+
+					
 					if ($result_insert==null) {
 						$query_update = "UPDATE `participants` SET `invitations`='$invitations' WHERE `email`='$nmail'";
 						$result_update= mysql_query($query_update);
 					}
+
+					if($survey_end == 0){
+			  			$date = date('Y/m/d', time());
+						$survey_end = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +3 week"));
+						$query_update= "UPDATE `products` SET `team_survey_end`='$survey_end' WHERE `product_id`='$product_id'";
+						$result_update= mysql_query($query_update);
+						echo json_encode($survey_end);
+		  			}
 
 
 				}

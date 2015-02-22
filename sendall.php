@@ -13,22 +13,30 @@
   	$product_name=$_POST['product_name'];
   	$product_version=$_POST['product_version'];
   	$product_end = $_POST['product_end'];
+  	$survey_end = $_POST['survey_end'];
+
+  	$link_date = $survey_end;
 
   	$user = $_SESSION['username'];
 
+
+  	if($survey_end == 0){
+  		$date = date('Y/m/d', time());
+		$link_date = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +3 week"));
+  	}
+  	else{
+  		$link_date = $survey_end;
+  	}
+
+  	
   	//$mail = trim($mail);
 			if (is_string($nmail)) {
 				$nmail = trim($nmail);
 			}
-			$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".$product_name."&c=".$product_version."&d=".$product_end;
+			$survey_url =  "http://www.unipark.de/uc/agileSDT/?a=".$product_id."&b=".$product_name."&c=".$product_version."&d=".$link_date;
 			$survey_url = str_replace(' ','%', $survey_url);
 
 			//LINK TO SEND IN E-MAIL
-
-
-
-
-
 
 
 			$pass = "Dear ". $name .",<br/><br/>
@@ -37,9 +45,9 @@
 
 			You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members' responses.
 
-			<br/>We thank you for your time!<br/>" . $survey_url .
+			<br/>We thank you for your time!<br/><br/>" . $survey_url .
 			"
-			<br/>Best Regards,<br/>
+			<br/><br/>Best Regards,<br/>
 			UIG Team";			
 			require_once('Mailer/class.phpmailer.php');
 			$mail = new PHPMailer();
@@ -79,6 +87,14 @@
 						$query_update = "UPDATE `participants` SET `invitations`='$invitations' WHERE `email`='$nmail'";
 						$result_update= mysql_query($query_update);
 				}
+				if($survey_end == 0){
+			  		$date = date('Y/m/d', time());
+					$survey_end = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +3 week"));
+					$query_update= "UPDATE `products` SET `team_survey_end`='$survey_end' WHERE `product_id`='$product_id'";
+					$result_update= mysql_query($query_update);
+
+					echo json_encode($survey_end);
+  				}
 			}
 	
 	
