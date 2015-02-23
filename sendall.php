@@ -88,8 +88,15 @@
 				$query_insert= "INSERT INTO participants VALUES ('$name','$nmail','$role','1','$product_id')";
 				$result_insert= mysql_query($query_insert);
 				if ($result_insert==null) {
-						$query_update = "UPDATE `participants` SET `invitations`='$invitations' WHERE `email`='$nmail'";
-						$result_update= mysql_query($query_update);
+
+					if ($result_insert==null) {
+						if($invitations == 1){
+						}	
+						else{
+							$query_update = "UPDATE `participants` SET `invitations`='$invitations' WHERE `email`='$nmail' AND `product_id`='$product_id'";
+							$result_update= mysql_query($query_update);
+						}
+					}
 				}
 				if($survey_end == 0){
 			  		$date = date('Y/m/d', time());
