@@ -60,13 +60,13 @@ $mail->Subject    = "Password Lost!";
 $mail->AddEmbeddedImage('img/uig.jpg', 'myattach');
 $mail->Body = '<img src="cid:myattach"  style="display: block;
     margin-left: auto;
-    margin-right: auto" /><br /><br />
+    margin-right: auto" /><br />
 Dear <b>'. $username .'</b>,<br /><br />
 You have requested for password reset. Please click the below button to continue. The button would only be valid once.<br /><br />
     <a href="' . $pass .'" style="background-color:#373737;border:1px solid grey;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:14px;line-height:30px;text-align:center;text-decoration:none;width:100px;-webkit-text-size-adjust:none;mso-hide:all;">Click here! &rarr;</a>
 <br /><br />
-Thanks,<br />
-Your UIG Team.';
+Best Regards,<br />
+UIG Team';
 
 $mail->AltBody    = "Reset your UIG account password." ; // optional, comment out and test
 
@@ -82,40 +82,7 @@ if(!$mail->Send()) {
 } else {
   $msg = "Message sent!";
 }
-?>
-
-<?php
-   /*require("Mailer/class.phpmailer.php"); // path to the PHPMailer class.
- 
-   $mail = new PHPMailer();
-   $mail->IsSMTP();
-   $mail->Mailer = "smtp";
-   $mail->Host = "smtp.gmail.com"; //Enter your SMTP2GO account's SMTP server.
-   $mail->Port = "465"; // 8025, 587 and 25 can also be used. Use Port 465 for SSL.
-   $mail->SMTPAuth = true;
-   $mail->SMTPSecure = 'ssl'; // Uncomment this line if you want to use SSL.
-   $mail->Username = "bhatia.aditya1@gmail.com";
-   $mail->Password = "n123456789";
-    
-   $mail->From     = "bhatia.aditya1@gmail.com";
-   $mail->FromName = "Susan Sender";
-   $mail->AddAddress("bhatia.aditya11@gmail.com", "Rachel Recipient");
-   $mail->AddReplyTo("bhatia.aditya1@gmail.com", "Sender's Name");
- 
-   $mail->Subject  = "Hi!";
-   $mail->Body     = "Hi! How are you?";
-   $mail->WordWrap = 50;  
- 
-   if(!$mail->Send()) {
-		echo 'Message was not sent.';
-		echo 'Mailer error: ' . $mail->ErrorInfo;
-		exit;
-   } else {
-		echo 'Message has been sent.';
-   }*/
-?>
-
- <?php }
+}
  else $msg = "Invalid User!";
  }
  ?>

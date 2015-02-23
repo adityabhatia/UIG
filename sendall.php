@@ -37,19 +37,7 @@
 			$survey_url = str_replace(' ','%', $survey_url);
 
 			//LINK TO SEND IN E-MAIL
-
-
-			$pass = "Dear ". $name .",<br/><br/>
-
-			As you're an active team member within the development of the product " . $product_name . ", " . $user . " has selected you to participate in a short 20-25 minutes questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
-
-			You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members' responses.
-
-			<br/>We thank you for your time!<br/><br/>" . $survey_url .
-			"
-			<br/><br/>Best Regards,<br/>
-			UIG Team";			
-			require_once('Mailer/class.phpmailer.php');
+			require_once('Mailer/PHPMailerAutoload.php');
 			$mail = new PHPMailer();
 			$mail->IsSMTP(); // telling the class to use SMTP
 			//$mail->Host       = "ssl://smtp.gmail.com"; // SMTP server
@@ -69,9 +57,25 @@
 
 			$mail->Subject    = "Survey Invitation: UIG!";
 
-			//$mail->AltBody    = "Password: " . $pass; // optional, comment out and test
+			$mail->IsHTML(true);
+			$mail->AddEmbeddedImage('img/uig.jpg', 'myattach');
+			$mail->Body = '<img src="cid:myattach"  style="display: block;
+			    margin-left: auto;
+			    margin-right: auto" /><br /> Dear <b>'. $name .'</b>,<br/><br />
 
-			$mail->MsgHTML($pass);
+			As you&apos;re an active team member within the development of the product ' . $product_name . ', ' . $user . ' has selected you to participate in a short 20-25 minutes questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
+
+			You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members&apos; responses.
+
+			<br/>We thank you for your time!<br/><br /> 
+
+			<a href="' . $survey_url .'" style="background-color:#373737;border:1px solid grey;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:14px;line-height:30px;text-align:center;text-decoration:none;width:100px;-webkit-text-size-adjust:none;mso-hide:all;">Click here! &rarr;</a>
+			
+			<br/><br/>Best Regards,<br/>
+			UIG Team';
+
+			$mail->AltBody    = "Survey Invitation" ; // optional, comment out and test
+			$mail->AddAddress($nmail, $name);
 
 			$mail->AddAddress($nmail, $name);
 			if(!$mail->Send()) {
