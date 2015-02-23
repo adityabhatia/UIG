@@ -176,6 +176,12 @@ $(document).ready(function() {
 			counter=1;
 		}
 
+	$('.glyphicon-pencil').click(function(){
+		$("#version").css("border", "");
+		$("#inputName").css("border", "");
+		$("#errorstatus").html("");
+	});
+
 		if ($("#version").val()==""){
 			$("#version").css("border", "solid 1.5px #AA4139");
 			$("#errorstatus").html("");
