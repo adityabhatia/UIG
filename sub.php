@@ -390,6 +390,9 @@
 							<p id="survey_started">The questionnaire will be made available for you until <b><?php echo($product_team_survey_end)?></b>!</p>
 						</p>
 						<br/>
+						<h4>Hint:</h4>
+						<p>To make the measurement as accurate as possible, we would be very grateful if every member of the development team could participate in the UIG questionnaire.</p>
+						<br/>
 						<p></p>
 						<h3>Survey Participants</h3>
 						<button class="btn btn-default" id="btn-addRow" type="button" name="table_row" value="Add Participant" onclick="addRow();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add participant</button>
@@ -447,6 +450,9 @@
 							<br/>
 							<p>The questionnaire will be made available for you until <b><?php echo($product_user_survey_end)?></b>!</p>
 						</div>
+						<br/>
+						<h4>Hint:</h4>
+						<p>To make the measurement as accurate as possible, we would be very grateful if 30 customers could participate in the UIG questionnaire.</p>
 					</div>
 				</span>
 

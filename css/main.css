@@ -166,6 +166,10 @@ color:#373737;
 	padding:50px 20px 50px 20px;
 	background-color: #D5D3D4;
 }
+	.main{
+		padding-right:0px;
+		padding-left:0px; 
+	}
 
 
 /* Large desktop */
