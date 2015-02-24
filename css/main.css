@@ -97,9 +97,13 @@ color:#373737;
 
  }
 
+ .row{
+ 	margin: 0px;
+ }
+
  .iframe{
  	max-width: 1200px;
- 	height: 1200px;
+ 	height: 2000px;
 
  }
  .navbar{
@@ -167,6 +171,11 @@ color:#373737;
 	background-color: #D5D3D4;
 }
 
+	.main{
+		padding-right:0px;
+		padding-left:0px; 
+	}
+
 
 /* Large desktop */
 @media (min-width: 1200px) { ... }
@@ -177,6 +186,7 @@ color:#373737;
 		padding-left: 0px;
 		padding-right: 0px;
 	}
+
 
  }
  
@@ -236,6 +246,47 @@ color:#373737;
  	border-radius: 20px;
  	margin: 0px auto;
  }
+
+
+/*REPORT PAGE*/
+
+.tile{
+	width: 200px;
+	height:126px;
+	margin: 10px;
+	padding:5px;
+	color: white;
+	background-color: #333;
+	border-radius: 5px;
+}
+
+.tile:hover{
+	background-color: rgba(44,139,183,1);
+
+
+}
+
+//The accordion is closed
+.accordion-icon:before {
+    content: "\f0d7";
+}
+//The accordion is open
+.active .accordion-icon:before {
+    content: "\f0d8";
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
