@@ -66,19 +66,20 @@
 
 				$mail->IsHTML(true);
 				$mail->AddEmbeddedImage('img/uig.jpg', 'myattach');
-				$mail->Body = '<img src="cid:myattach"  style="display: block;
+				$mail->Body = '<div style="width:100%;"><img src="cid:myattach"  style="display: block;
 			    margin-left: auto;
-			    margin-right: auto" /><br />Dear <b>'. $name .'</b>,<br/><br/>
+			    margin-right: auto" /></div><br />Dear <b>'. $name .'</b>,<br/><br/>
 
-				As you&apos;re an active team member within the development of the product ' . $product_name . ', ' . $user . ' has selected you to participate in a short 20-25 minutes questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
+				As you&#39;re an active team member within the development of the product ' . $product_name . ', ' . $user . ' has selected you to participate in a short 20-25 minutes questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
 
-				You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members&apos; responses.
+				You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members&#39; responses.
 
-				<br/>We thank you for your time!<br/><br/>
+				<br/>We thank you for your time!<br/><br /> 
 
 				<a href="' . $survey_url .'" style="background-color:#373737;border:1px solid grey;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:14px;line-height:30px;text-align:center;text-decoration:none;width:100px;-webkit-text-size-adjust:none;mso-hide:all;">Click here! &rarr;</a>
+				
 				<br/><br/>Best Regards,<br/>
-				UIG Team';	
+				UIG Team';
 
 				$mail->AltBody    = "Survey Invitation" ; // optional, comment out and test
 
