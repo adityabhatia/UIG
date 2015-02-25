@@ -40,6 +40,8 @@ else{
 	$timestamp = time();
 	$date = date('Y/m/d', time());
 	$surveyEnd = date("Y-m-d", strtotime(date("Y-m-d", strtotime($date)) . " +4 week"));
+	$team_survey_end = 0;
+	$user_survey_end = 0;
 	$validate = "SELECT * FROM `products` WHERE `username` = '$username' AND `p_name`='$pname' AND `p_class`='$pversion'";
 	$validation = mysql_query($validate) or die(mysql_error());
 	$count = mysql_num_rows($validation);
@@ -47,7 +49,7 @@ else{
 		$msg=2;
 		echo($msg);}
 	else{
-	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `surveyEnd`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$surveyEnd')";
+	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `team_survey_end`,`user_survey_end`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$team_survey_end','$user_survey_end')";
 	$result = mysql_query($query) or die(mysql_error());
 		if($result){ 	$success="Product Added!";
 						echo($success);
