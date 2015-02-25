@@ -463,7 +463,7 @@
 				<span class="sel4">	
 					<h2 class="page-header" ><b>Review</b></h2><br />
 				<p align=center style="font-size:20px;">	Work in Progress. <br /><br />
-					<img src="img/construction.jpg" width="40%" height="40%"></img>
+					<img src="img/construction.png" width="40%" height="40%"></img>
 				</p>
 
 				<div class="col-xs-12 col-sm-12" style="text-align:right;" >
