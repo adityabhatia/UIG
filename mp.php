@@ -126,7 +126,7 @@ if (isset($_GET["dname"])){
 							echo('<script>$(".progres'.$counter.':eq(0)").attr("title","Product Launched");</script>');
 
 							if($uend==0 && $tend==0)
-							{		for ($i=0; $i<5; $i++){
+							{		for ($i=1; $i<5; $i++){
 									echo('<script>$(".progres'.$counter.':eq('.$i.')").attr("title","User/Team Survey Not Started");</script>');}
 							}
 
@@ -297,14 +297,14 @@ for(var i=0; i<totalproducts;i++)
 			$("#version").css("border", "");
 			$("#inputName").css("border", "");
 		if($("#inputName").val()==""){
-			$("#inputName").css("border", "solid 1.5px #AA4139");
+			$("#inputName").css("border", "solid 2px #AA4139");
 			$("#errorstatus").html("");
 			$("#errorstatus").html("**Please fill in both fields!");
 			counter=1;
 		}
 
 		if ($("#version").val()==""){
-			$("#version").css("border", "solid 1.5px #AA4139");
+			$("#version").css("border", "solid 2px #AA4139");
 			$("#errorstatus").html("");
 			$("#errorstatus").html("**Please fill in both fields!");
 			counter=1;
@@ -320,8 +320,8 @@ for(var i=0; i<totalproducts;i++)
 						if (parseInt(data)==5){
 							$("#errorstatus").html("");
 							$("#errorstatus").html("**Similar product already exists!");
-							$("#inputName").css("border", "solid 1.5px #AA4139");
-							$("#version").css("border", "solid 1.5px #AA4139");
+							$("#inputName").css("border", "solid 2px #AA4139");
+							$("#version").css("border", "solid 2px #AA4139");
 							counter=1;
 						}
 						else{
