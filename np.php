@@ -170,7 +170,7 @@
 					var check = "#tb"+i; 
 					$(check).css("border", "");
 					if($(check).val()==""){
-						$(check).css("border", "solid 1.5px #AA4139");
+						$(check).css("border", "solid 2px #AA4139");
 						counter++;
 					}
 				}
@@ -189,7 +189,7 @@
 				queryStringNameValueArray = dp11.split("/");
 				if (queryStringNameValueArray[0]>31 || queryStringNameValueArray[1]>12 || queryStringNameValueArray[2]<2000 ||
 					!queryStringNameValueArray[1] || !queryStringNameValueArray[2]){
-					$("#tb4").css("border", "solid 1.5px #AA4139");
+					$("#tb4").css("border", "solid 2px #AA4139");
 					valid=1;
 					$("#errorstatus").html("");
 					$("#errorstatus").html("**Invalid Date!");
@@ -198,7 +198,7 @@
 				queryStringNameValueArray = dp21.split("/");
 				if (queryStringNameValueArray[0]>31 || queryStringNameValueArray[1]>12 || queryStringNameValueArray[2]<2000 |
 					!queryStringNameValueArray[1] || !queryStringNameValueArray[2]){
-					$("#tb5").css("border", "solid 1.5px #AA4139");
+					$("#tb5").css("border", "solid 2px #AA4139");
 					valid=1;
 					$("#errorstatus").html("");
 					$("#errorstatus").html("**Invalid Date!");
@@ -227,14 +227,14 @@
 						if (parseInt(data)==1){
 							$("#errorstatus").html("");
 							$("#errorstatus").html("**Start Date should be less than End Date!");
-							$("#tb4").css("border", "solid 1.5px #AA4139");
-							$("#tb5").css("border", "solid 1.5px #AA4139");
+							$("#tb4").css("border", "solid 2px #AA4139");
+							$("#tb5").css("border", "solid 2px #AA4139");
 						}
 						else if (parseInt(data)==2){
 							$("#errorstatus").html("");
 							$("#errorstatus").html("**Product already exists!");
-							$("#tb1").css("border", "solid 1.5px #AA4139");
-							$("#tb2").css("border", "solid 1.5px #AA4139");
+							$("#tb1").css("border", "solid 2px #AA4139");
+							$("#tb2").css("border", "solid 2px #AA4139");
 						}
 						else{
 							alert(data);
