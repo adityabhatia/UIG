@@ -34,8 +34,7 @@
 	$count2=0;
 	$counter=0;
 
-
-	//SELECT PRODUCT
+	//SELECT THE CHOSEN PRODUCT'S DATA
 	$query = "SELECT * FROM `products` WHERE username = '$user' and  p_name = '$sname' and p_class = '$sversion'";
 	$result = mysql_query($query) or die(mysql_error());
 	$count = mysql_num_rows($result);
@@ -77,15 +76,10 @@
 <html lang="en">
 	<head>
 		<!--Inclusions-->
-		<script src="js/jquery.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/spin.min.js"></script>
-		
-		<!--Inclusions-->
 			<meta charset="utf-8">
 			<title></title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<meta name="description" content="INES Questionnaire">
+			<meta name="description" content="UIG Questionnaire">
 			<meta name="author" content="adityabhatia">
 	
 			<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -94,14 +88,22 @@
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->
 			<link type="text/css" rel="stylesheet" href="css/main.css">
+
+			<script src="js/jquery.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/Chart.min.js"></script>
+			<script src="js/spin.min.js"></script>
+
 			<script type="text/javascript">
 
 
-				//VARIABLES
+				//VARIABLES PARTICIPANTS
 				var name_array;
 				var mail_array;
 				var role_array;
 				var invitations_array;
+
+				//VARIABLES PRODUCT
 				var product_id;
 				var product_name;
 				var product_version;
@@ -109,33 +111,30 @@
 				var product_user_survey_end;
 				var product_team_survey_end;
 
+				//OTHERS
 				var counter;
 
-				var table_name=1;
-				var table_mail=1;
-				var table_role=1;
 
-				var row_counter=1;
-
-
+				/**
+				########################################
+				########### DOCUMENT READY #############
+				########################################
+				*/
 				$( document ).ready(function() {
 					$("#spinner").hide();
-					//var url = document.URL;
-					//document.write(url);
-						$("span").css("display","none");
-							var value = null;
-							var winURL = window.location.href;
-							var queryStringArray = winURL.split("?");
-							var queryStringParamArray = queryStringArray[1].split("&");
-							for ( var i=0; i<queryStringParamArray.length; i++ )
-							{           
-								queryStringNameValueArray = queryStringParamArray[i].split("=");
-
-								if ( "sel" == queryStringNameValueArray[0] )
-								{
-									value = queryStringNameValueArray[1];
-								}                       
-							}
+					$("span").css("display","none");
+					var value = null;
+					var winURL = window.location.href;
+					var queryStringArray = winURL.split("?");
+					var queryStringParamArray = queryStringArray[1].split("&");
+					for ( var i=0; i<queryStringParamArray.length; i++ )
+					{           
+						queryStringNameValueArray = queryStringParamArray[i].split("=");
+						if ( "sel" == queryStringNameValueArray[0] )
+						{
+							value = queryStringNameValueArray[1];
+						}                       
+					}
 					if(value==2)
 						$(".sel2").css("display","block");
 					else if(value==3)
@@ -150,6 +149,7 @@
 							$(this).parent().parent().remove();
 						});
 
+
 					name_array = <?php echo json_encode($array_name);?>;
 					mail_array = <?php echo json_encode($array_mail);?>;
 					role_array  = <?php echo json_encode($array_role);?>;
@@ -163,8 +163,7 @@
 					product_user_survey_end = <?php echo json_encode($product_user_survey_end);?>;
 
 
-
-
+					//SURVEY STATUS SHOW / HIDE
 					if(product_team_survey_end == 0){
 						$('#survey_not').show();
 						$('#survey_started').hide();
@@ -185,6 +184,7 @@
 						$('#btn-create_link').hide();
 					}
 
+					//SHOW PARTICIPANTS FROM DB IN TABLE
 					for (var i = 0; i < counter; i++) {
 						var name = name_array[i];
 						var mail = mail_array[i];
@@ -193,6 +193,7 @@
 						$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" value="'+name+'" readonly></td><td><input class="table-form" type="text" name="mail[]" value="'+mail+'" readonly></td><td><input class="table-form" type="text" name="role[]" value="'+role+'" readonly ></td><td><input class="table-form" type="text" name="invitations[]" value="'+invitations+'" readonly ></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a></td></tr>');
 					};
 
+					//SEND SINGLE INVITATION
 					$("#participant-table").on('click','.sendINV',function(){
     					var $row = $(this).closest("tr");    // Find the row
    						var $tds = $row.find("td");
@@ -236,34 +237,33 @@
 					});
 
 
-					// this is the id of the form
-						$("form").submit(function() {
+					//SEND INVITATIONS TO ALL
+					$("form").submit(function() {
 
-							var url = "sendsingle.php"; // the script where you handle the form input.
-							var postdata = $("form").serializeArray();
+						var url = "sendsingle.php"; // the script where you handle the form input.
+						var postdata = $("form").serializeArray();
 
-							postdata[postdata.length] = { name: "product_id", value: product_id };
-							postdata[postdata.length] = { name: "product_name", value: product_name };
-							postdata[postdata.length] = { name: "product_version", value: product_version };
-							postdata[postdata.length] = { name: "product_end", value: product_end };
-							postdata[postdata.length] = { name: "survey_end", value: product_team_survey_end };
-							$("#spinner").show();
+						postdata[postdata.length] = { name: "product_id", value: product_id };
+						postdata[postdata.length] = { name: "product_name", value: product_name };
+						postdata[postdata.length] = { name: "product_version", value: product_version };
+						postdata[postdata.length] = { name: "product_end", value: product_end };
+						postdata[postdata.length] = { name: "survey_end", value: product_team_survey_end };
+						$("#spinner").show();
+					    $.ajax({
+					           type: "POST",
+					           url: url,
+					           data: postdata, // serializes the form's elements.
+					           success: function(data){
+				           		alert("Invitations have been sent!");
+				           		$("#spinner").hide();
+				           		location.reload();
+				           		
+				           }
+					    });
+					    return false;
+					});
 
-						    $.ajax({
-						           type: "POST",
-						           url: url,
-						           data: postdata, // serializes the form's elements.
-						           success: function(data){
-					           		alert("Invitations have been sent!");
-					           		$("#spinner").hide();
-					           		location.reload();
-					           		
-					           }
-						    });
-						    return false;
-						});
-
-					//SPINNER ELEMENT
+					//CONFIGURE SPINNER ELEMENT
 					var opts = {
 					  lines: 13, // The number of lines to draw
 					  length: 0, // The length of each line
@@ -288,16 +288,178 @@
 
 
 
-				});
+					/**
+					########################################
+					##### COLLECT SURVEY DATA FROM DB ######
+					########################################
+					*/
+					var data;
+					var agility;
+					var involvement;
+					var organization;
+					var enabling;
 
+					//INTERNAL DATA
+					$.ajax({
+						type: "GET",
+						url: "getData.php",
+						dataType: "json",
+						data: 'product_id='+product_id,
+						async: false,
+						success: function(data){
+							agility = data['item1'];
+							involvement = data['item2'];
+							enabling = data['item3'];
+							organization = data['item4'];
+							agility_absolute = data['item5'];
+							user_absolute = data['item6'];
+							en_absolute = data['item7'];
+							org_absolute = data['item8'];
+
+						}
+
+					});
+
+					$("#agility_absolute").html(Math.round(agility_absolute));
+					$("#user_absolute").html(Math.round(user_absolute));
+					$("#en_absolute").html(Math.round(en_absolute));
+					$("#org_absolute").html(Math.round(org_absolute));
+					$(".final_internal").html(Math.round(agility)+Math.round(involvement)+Math.round(enabling)+Math.round(organization))
+					
+
+
+					//DATA ARRAY FOR BAR CHART
+					data = {
+					    	labels: ["Agility", "User Involvement", "Enabling Structure", "Organization"],
+						    	datasets: [
+						        {
+						            label: "My First dataset",
+						            fillColor: "rgba(44,139,183,1)",
+						            strokeColor: "rgba(44,139,183,0.1)",
+						            highlightFill: "rgba(44,139,183,0.75)",
+						            highlightStroke: "rgba(44,139,183,0.75)",
+						            data: [Math.round(agility), Math.round(involvement), Math.round(enabling), Math.round(organization)]
+						        }
+						       
+						    ]
+					};
+					
+
+					var ctx = document.getElementById("barChart").getContext("2d");
+					var barChart = new Chart(ctx).Bar(data,
+						{
+    						//Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+						    scaleBeginAtZero : true,
+
+						    //Boolean - Whether grid lines are shown across the chart
+						    scaleShowGridLines : false,
+
+						    //String - Colour of the grid lines
+						    scaleGridLineColor : "rgba(0,0,0,.05)",
+
+						    //Number - Width of the grid lines
+						    scaleGridLineWidth : 1,
+
+						    //Boolean - Whether to show horizontal lines (except X axis)
+						    scaleShowHorizontalLines: false,
+
+						    //Boolean - Whether to show vertical lines (except Y axis)
+						    scaleShowVerticalLines: false,
+
+						    //Boolean - If there is a stroke on each bar
+						    barShowStroke : true,
+
+						    //Number - Pixel width of the bar stroke
+						    barStrokeWidth : 0,
+
+						    //Number - Spacing between each of the X value sets
+						    barValueSpacing : 40,
+
+						    //Number - Spacing between data sets within X values
+						    barDatasetSpacing : 1
+					});
+					
+					var ctx1 = document.getElementById("doughnutChart").getContext("2d");
+					var dataDoughnut = [
+					    {
+					        value: 16.75,
+					        color:"#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "Agility"
+					    },
+					    {
+					        value: 16.75,
+					        color: "#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "User Involvement"
+					    },
+					    {
+					        value: 16.75,
+					        color: "#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "Enabling Structure"
+					    },
+					    {
+					        value: 16.75,
+					        color: "#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "Organization"
+					    },
+					    {
+					        value: 33,
+					        color: "#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "SUS"
+					    }
+					]
+					var doughnutChart = new Chart(ctx1).Pie(dataDoughnut);
+
+					$("#agility-toggle").slideUp();
+					$("#user-toggle").slideUp();
+					$("#enabling-toggle").slideUp();
+					$("#org-toggle").slideUp();
+				
+					//EXTERNAL DATA
+					/**
+						TODO: GET SURVEY DATA FROM DB
+					*/
+
+				}); /* END DOCUMENT READY */
+
+
+
+				//TOGGLE DESCRIPTIONS
+				function showAgility(){
+					$("#agility-toggle").slideToggle();
+					$("#user-toggle").slideUp();
+					$("#enabling-toggle").slideUp();
+					$("#org-toggle").slideUp();
+				}
+				function showUser(){
+					$("#agility-toggle").slideUp();
+					$("#user-toggle").slideToggle();
+					$("#enabling-toggle").slideUp();
+					$("#org-toggle").slideUp();
+				}
+				function showEn(){
+					$("#agility-toggle").slideUp();
+					$("#user-toggle").slideUp();
+					$("#enabling-toggle").slideToggle();
+					$("#org-toggle").slideUp();
+				}
+				function showOrg(){
+					$("#agility-toggle").slideUp();
+					$("#user-toggle").slideUp();
+					$("#enabling-toggle").slideUp();
+					$("#org-toggle").slideToggle();
+				}
+				
+				//ADD A NEW ROW TO THE PARTICPIANT TABLE
 				function addRow(){
-					table_name++;
-					table_mail++;
-					table_role++;
-					row_counter++;
 					$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" placeholder="Name"></td><td><input class="table-form" type="text" name="mail[]" placeholder="Email"></td><td><input class="table-form" type="text" name="role[]" placeholder="Team Role"></td><td><input class="table-form" type="text" name="invitations[]" placeholder="Invitations" readonly></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a>&nbsp;&nbsp;<a href="javascript:void(0);" class="remCF"><i class="glyphicon glyphicon-minus"></i></a></td></tr>');
 				}
 
+				//CREATE THE LINK FOR THE USER SURVEY
 				function createLink(){
 					$.ajax({
 			        	type: "POST",
@@ -309,9 +471,7 @@
 		           		}
 					});
 				}
-
 			</script>
-
 
 
 	</head>
@@ -393,7 +553,7 @@
 						<h4>Hint:</h4>
 						<p>To make the measurement as accurate as possible, we would be very grateful if every member of the development team could participate in the UIG questionnaire.</p>
 						<br/>
-						<p></p>
+						<hr>
 						<h3>Survey Participants</h3>
 						<button class="btn btn-default" id="btn-addRow" type="button" name="table_row" value="Add Participant" onclick="addRow();"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add participant</button>
 						
@@ -460,18 +620,108 @@
 				<!--
 				UIG SURVEY REPORT
 				-->
-				<span class="sel4">	
-					<h2 class="page-header" ><b>Review</b></h2><br />
-				<p align=center style="font-size:20px;">	Work in Progress. <br /><br />
-					<img src="img/construction.png" width="40%" height="40%"></img>
-				</p>
+				<span class="sel4">
+					<!--<div class="report_not" style="color:grey;">
+						<h2 class="page-header" ><b>UIG survey report:</b> <?php echo($product_name);?> </h2>
+						<p>The team and user survey of the product <b> <?php echo($product_name);?></b> has not been completed.</br> Please come back later. The status bar in the product overview section will infrom you when a first analyses is available.</p>
+					</div>-->
 
-				<div class="col-xs-12 col-sm-12" style="text-align:right;" >
-				</div>
+						<div class ="row">
+						<h2 class="page-header" ><b>UIG survey report:</b> <?php echo($product_name);?> </h2>
+						<p>The team and user survey of the product <b> <?php echo($product_name);?></b> has been completed.</p>
+						<p>The evaluation process works as described in the following.</p>
+						<p><b>At the moment we can only provide you data of the team development survey (internal factor), as long as the survey has been completed by some team members.</b></p>
+						</div>
+						<hr>
+						<div class ="row">
+							<h3 >Factors of the evaluation process</h3>
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								
+								<br/>
+								<p>In the end of the evaluation a final score is presented.<br/>
+								The final score is composed of the two main factors:</p>
+									<ul>
+										<li>The external factor represents the score of the user survey. (Not available!) </li>
+										<li>The internal factor represents the score of the team development survey.</li>
+									</ul>
+								</p>
+								<p>All constructs are weighted within the final score with the weights shown in the cake diagram</p>				
+							</div>
+								
+							<div class="col-xs-12 col-sm-6 col-md-6">
+								<br/>
+								<canvas id="doughnutChart" width="250" height="150"></canvas>
+							</div>
+						</div>
+					<hr>
+					<div class="row">
+						<h3>Results: Team Survey</h3>
+						<br/>
+						<div class="col-xs-12 col-sm-8 col-md-6">
+							<p>The product <b><?php echo($product_name);?></b> achieved the following values in the team survey.</p>
+							<canvas id="barChart" width="450" height="300"></canvas>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-6">
+								<div class="row">
+								<p><b>67%</b> of the score is weighted as 4 main constructs (internal factors): </p>
+								<ul>
+									<li>
+										<h4><b>Agility:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
+										<p id="agility-toggle">The agility value reflexes the flexibility of development process.</p>
+										<p><i>Absolute score / Max. score  (normalized):&nbsp;</i><b id="agility_absolute" style="color:#2C8BB7;"></b><b>/ 65</b></p>
+									</li>
+									<li>
+										<h4><b>User Involvement:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showUser()"></a></h4>
+										<p id="user-toggle">The user involvement value reflexes the level of user involvement during the development process.</p>
+										<p><i>Absolute score / Max. score (normalized)&nbsp;</i> <b id="user_absolute" style="color:#2C8BB7;"></b> <b> / 30</b></p>
+									</li>
+									<li>
+										<h4 ><b>Enabling Structure:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
+										<p id="enabling-toggle">The enabling structure value considers the composition of the team, its standards and tasks.</p>
+										<p><i>(Absolute score / Max. score) (normalized):&nbsp;</i> <b id="en_absolute" style="color:#2C8BB7;"></b><b> / 100</b></p>
+									</li>
+									<li>
+										<h4><b>Organization:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showOrg()"></a></h4>
+										<p id="org-toggle">The organzation value reflexes the level of the top management support (TMS) during the development process.</p>
+										<p><i>Absolute score / Max. score (normalized):&nbsp;</i> <b id="org_absolute" style="color:#2C8BB7;"></b> <b> / 20</b></p>
+									</li>
+								</ul>
+								</div>
+						</div>
+					</div>
+						<div class ="row">
+									<h3>Final team survey score: <b class="final_internal" style="font-size:24px; color:#2C8BB7;"></b> / 100.</h3>
+									<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_internal"></b> points in the team development survey.</p>
+						
+					</div>
+					</div>
+					<!--<div class="row">
+						<div class="col-xs-12">
+							<h3>Results: user survey SUS</h3>
+							<p>The product <b><?php echo($product_name);?></b> achieved the following values in the customer survey.</p>
+							<div class="jumbotron"> TODO!!!!!!!! SUS: 78</div>
+							<p> 33% of the score is considered as the <b>SUS</b> (external factors), max score:100.</p>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<h3>Final score and certificate</h3>
+						<div>
+							<div style="height:200px; width:400px; background-color:#E6E6E6; border: 1px solid #000">
+								<div style="height:150px; width:300px; background-color:#FFFFFF; border: 1px solid #000; box-shadow: 0px 5px 10px grey; margin: 25px auto; text-align:center;" >
+									<img id="uig-logo" src="img/uig-logo2.png" style="margin:20px auto"></img>
+									<p>Nutzerzentrierungsausweis</p>
+									<p>Software Inc.</p>
+								</div>	
+							</div>
+							<div style="height:100px; width:131px; background-color:#E6E6E6; border: 1px solid #000; display:inline-block"></div>
+							<div style="height:100px; width:131px; background-color:#E6E6E6; border: 1px solid #000; display:inline-block"></div>
+							<div style="height:100px; width:131px; background-color:#E6E6E6; border: 1px solid #000; display:inline-block"></div>
+						</div>
+					</div>-->
 				</span>
 		</div>
 	</body>
 </html>
 
 <?php }} ?>
-
