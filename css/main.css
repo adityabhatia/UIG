@@ -98,7 +98,6 @@ color:#373737;
  }
 
  .iframe{
- 	max-width: 1200px;
  	height: 2500px;
 
  }
@@ -135,7 +134,6 @@ color:#373737;
 }
 
 
-
 #survey-link{
 	width:80%;
 	color: #2C8BB7;
@@ -166,9 +164,10 @@ color:#373737;
 	padding:50px 20px 50px 20px;
 	background-color: #D5D3D4;
 }
-	.main{
-		padding-right:0px;
-		padding-left:0px; 
+
+.main{
+		padding-right:10px;
+		padding-left:10px; 
 	}
 
 
@@ -228,7 +227,6 @@ color:#373737;
  	margin-top: 60px;
  }
 }
-
  
   #spinner{
  	display: table-cell;
@@ -240,6 +238,5 @@ color:#373737;
  	border-radius: 20px;
  	margin: 0px auto;
  }
-
 
 
