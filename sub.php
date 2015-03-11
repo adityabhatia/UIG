@@ -614,13 +614,13 @@
 					</div>-->
 
 						<div class ="row">
-						<h2 class="page-header" ><b>UIG survey report:</b> <?php echo($product_name);?> <i class="glyphicon glyphicon-stats"></i></h2>
+						<h2 class="page-header" ><b>UIG Survey Report:</b> <?php echo($product_name);?> <i class="glyphicon glyphicon-stats"></i></h2>
 						<p><i class="glyphicon glyphicon-check" style="color:green;"></i> The team and user survey of the product <b> <?php echo($product_name);?></b> have been completed.</p>
 						<p><b>At the moment we can only provide you data of the team development survey (internal factor), as long as the survey has been completed by some team members.</b></p>
 						</div>
 						<hr>
 						<div class ="row">
-							<h3 >The evaluation process</h3>
+							<h3 >The Evaluation Process</h3>
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<br/>
 								<p>In the end of the evaluation a <b>final score</b> is presented.<br/>
@@ -678,16 +678,17 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-6">
 							<br/><br/>
-							<canvas id="barChart" width="450" height="350"></canvas>
+							<canvas id="barChart" width="450" height="300"></canvas>
 						</div>
 					</div>
 					<div class ="row">
 							<br/>
-							<h3>Final team survey score: <b class="final_internal" style="font-size:24px; color:#2C8BB7;"></b> / 100.</h3>
-							<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_internal"></b> points in the team development survey.</p>
+							<h4>Final team survey score: <b class="final_internal" style="font-size:24px; color:#2C8BB7;"></b> / 100.</h4>
+							<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_internal"></b> points in the team development survey. This value is used for the final score in the end.</p>
 					</div>
 
 					<hr>
+					<br/>
 					<div class="row">
 						
 						<h3>Evaluation: User Survey</h3>
