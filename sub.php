@@ -325,10 +325,6 @@
 					$("#en_absolute").html(Math.round(en_absolute));
 					$("#org_absolute").html(Math.round(org_absolute));
 					$(".final_internal").html(Math.round(agility)+Math.round(involvement)+Math.round(enabling)+Math.round(organization))
-					$("#agility_weighted").html(Math.round(agility));
-					$("#user_weighted").html(Math.round(involvement));
-					$("#en_weighted").html(Math.round(enabling));
-					$("#org_weighted").html(Math.round(organization));
 					
 
 
@@ -386,18 +382,35 @@
 					var ctx1 = document.getElementById("doughnutChart").getContext("2d");
 					var dataDoughnut = [
 					    {
-					        value: 67,
+					        value: 16.75,
 					        color:"#333",
 					        highlight: "rgba(44,139,183,1)",
-					        label: "Internal"
+					        label: "Agility"
+					    },
+					    {
+					        value: 16.75,
+					        color: "#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "User Involvement"
+					    },
+					    {
+					        value: 16.75,
+					        color: "#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "Enabling Structure"
+					    },
+					    {
+					        value: 16.75,
+					        color: "#333",
+					        highlight: "rgba(44,139,183,1)",
+					        label: "Organization"
 					    },
 					    {
 					        value: 33,
 					        color: "#333",
 					        highlight: "rgba(44,139,183,1)",
-					        label: "External"
+					        label: "SUS"
 					    }
-					    
 					]
 					var doughnutChart = new Chart(ctx1).Pie(dataDoughnut);
 
@@ -614,89 +627,82 @@
 					</div>-->
 
 						<div class ="row">
-						<h2 class="page-header" ><b>UIG Survey Report:</b> <?php echo($product_name);?> <i class="glyphicon glyphicon-stats"></i></h2>
-						<p><i class="glyphicon glyphicon-check" style="color:green;"></i> The team and user survey of the product <b> <?php echo($product_name);?></b> have been completed.</p>
+						<h2 class="page-header" ><b>UIG survey report:</b> <?php echo($product_name);?> </h2>
+						<p>The team and user survey of the product <b> <?php echo($product_name);?></b> has been completed.</p>
+						<p>The evaluation process works as described in the following.</p>
 						<p><b>At the moment we can only provide you data of the team development survey (internal factor), as long as the survey has been completed by some team members.</b></p>
 						</div>
 						<hr>
 						<div class ="row">
-							<h3 >The Evaluation Process</h3>
+							<h3 >Factors of the evaluation process</h3>
 							<div class="col-xs-12 col-sm-6 col-md-6">
+								
 								<br/>
-								<p>In the end of the evaluation a <b>final score</b> is presented.<br/>
-								The diagnose differentiate between a internal and external perspective.</p>
+								<p>In the end of the evaluation a final score is presented.<br/>
+								The final score is composed of the two main factors:</p>
 									<ul>
-										<li>The <b>external</b> factor represents the score of the user survey: 1/3 of the final score (Not available yet!) </li>
-										<li>The <b>internal</b> factor represents the score of the team development survey: 2/3 of the final score</li>
+										<li>The external factor represents the score of the user survey. (Not available!) </li>
+										<li>The internal factor represents the score of the team development survey.</li>
 									</ul>
 								</p>
+								<p>All constructs are weighted within the final score with the weights shown in the cake diagram</p>				
 							</div>
-							
+								
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<br/>
-								<canvas id="doughnutChart" width="250" height="120"></canvas>
+								<canvas id="doughnutChart" width="250" height="150"></canvas>
 							</div>
 						</div>
 					<hr>
 					<div class="row">
-						<h3>Evaluation: Team Survey</h3>
-						<p>The team is investigated along four factors: Agility, User Involvement, Enabling Structure and Organization.</p>
+						<h3>Results: Team Survey</h3>
 						<br/>
-						
-
-						<div class="col-xs-12 col-sm-4 col-md-6">
-								<div class="row">
-								
-									<h4><b>Agility:&nbsp;<b id="agility_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
-									<p id="agility-toggle">	The agility value reflexes the flexibility of the development process.</p>
-									<p>
-										<i>Absolute score / Max. score:&nbsp;</i><b id="agility_absolute"></b>&nbsp;<b>/ 65</b>
-									</p>
-
-									<hr>
-									
-									<h4><b>User Involvement:&nbsp;<b id="user_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showUser()"></a></h4>
-									<p id="user-toggle">The user involvement value reflexes the level of user involvement during the development process.</p>
-									<p>
-										<i>Absolute score / Max. score:&nbsp;</i> <b id="user_absolute"></b> &nbsp;<b>/ 30</b>
-									</p>
-									
-									<hr>
-
-										<h4 ><b>Enabling Structure:&nbsp;<b id="en_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
-										<p id="enabling-toggle">The enabling structure value considers the composition of the team, its standards and tasks.</p>
-										<p><i>Absolute score / Max. score:&nbsp;</i> <b id="en_absolute"></b><b> / 100</b></p>
-									
-									<hr>
-									
-										<h4><b>Organization:&nbsp;<b id="org_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showOrg()"></a></h4>
-										<p id="org-toggle">The organzation value reflexes the level of the top management support (TMS) during the development process.</p>
-										<p><i>Absolute score / Max. score:&nbsp;</i> <b id="org_absolute"></b> <b> / 20</b></p>
-									
-								
-								</div>
-						</div>
 						<div class="col-xs-12 col-sm-8 col-md-6">
-							<br/><br/>
+							<p>The product <b><?php echo($product_name);?></b> achieved the following values in the team survey.</p>
 							<canvas id="barChart" width="450" height="300"></canvas>
 						</div>
+						<div class="col-xs-12 col-sm-4 col-md-6">
+								<div class="row">
+								<p><b>67%</b> of the score is weighted as 4 main constructs (internal factors): </p>
+								<ul>
+									<li>
+										<h4><b>Agility:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
+										<p id="agility-toggle">The agility value reflexes the flexibility of development process.</p>
+										<p><i>Absolute score / Max. score  (normalized):&nbsp;</i><b id="agility_absolute" style="color:#2C8BB7;"></b><b>/ 65</b></p>
+									</li>
+									<li>
+										<h4><b>User Involvement:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showUser()"></a></h4>
+										<p id="user-toggle">The user involvement value reflexes the level of user involvement during the development process.</p>
+										<p><i>Absolute score / Max. score (normalized)&nbsp;</i> <b id="user_absolute" style="color:#2C8BB7;"></b> <b> / 30</b></p>
+									</li>
+									<li>
+										<h4 ><b>Enabling Structure:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
+										<p id="enabling-toggle">The enabling structure value considers the composition of the team, its standards and tasks.</p>
+										<p><i>(Absolute score / Max. score) (normalized):&nbsp;</i> <b id="en_absolute" style="color:#2C8BB7;"></b><b> / 100</b></p>
+									</li>
+									<li>
+										<h4><b>Organization:  </b><a class="glyphicon glyphicon-collapse-down" onclick="showOrg()"></a></h4>
+										<p id="org-toggle">The organzation value reflexes the level of the top management support (TMS) during the development process.</p>
+										<p><i>Absolute score / Max. score (normalized):&nbsp;</i> <b id="org_absolute" style="color:#2C8BB7;"></b> <b> / 20</b></p>
+									</li>
+								</ul>
+								</div>
+						</div>
 					</div>
-					<div class ="row">
-							<br/>
-							<h4>Final team survey score: <b class="final_internal" style="font-size:24px; color:#2C8BB7;"></b> / 100.</h4>
-							<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_internal"></b> points in the team development survey. This value is used for the final score in the end.</p>
-					</div>
-
-					<hr>
-					<br/>
-					<div class="row">
+						<div class ="row">
+									<h3>Final team survey score: <b class="final_internal" style="font-size:24px; color:#2C8BB7;"></b> / 100.</h3>
+									<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_internal"></b> points in the team development survey.</p>
 						
-						<h3>Evaluation: User Survey</h3>
-						<p>External criterias are investigated along four factors: SUS, the Usefullness, the Intention to Use and the User Satisfaction.</p>
-	
-
 					</div>
-					<!--
+					</div>
+					<!--<div class="row">
+						<div class="col-xs-12">
+							<h3>Results: user survey SUS</h3>
+							<p>The product <b><?php echo($product_name);?></b> achieved the following values in the customer survey.</p>
+							<div class="jumbotron"> TODO!!!!!!!! SUS: 78</div>
+							<p> 33% of the score is considered as the <b>SUS</b> (external factors), max score:100.</p>
+						</div>
+					</div>
 					<hr>
 					<div class="row">
 						<h3>Final score and certificate</h3>
