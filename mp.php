@@ -166,7 +166,7 @@ if (isset($_GET["dname"])){
 									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","User Survey: Started");</script>
 										<script>$(".progres'.$counter.':eq(2)").attr("title","Team Survey: Not Started");</script>
 										<script>$(".progres'.$counter.':eq(3)").attr("title","Team/User Survey: Not Complete");</script>
-										<script>$(".progres'.$counter.':eq(4)").attr("title","Complete Report: Not Generated");</script>');
+										<script>$(".progres'.$counter.':eq(4)").attr("title","Full Report: Not Generated");</script>');
 								}
 								//Team Survey First
 									else if($ut_counter==2){ 
@@ -175,7 +175,7 @@ if (isset($_GET["dname"])){
 									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","Team Survey: Started");</script>
 										<script>$(".progres'.$counter.':eq(2)").attr("title","User Survey: Not Started");</script>
 										<script>$(".progres'.$counter.':eq(3)").attr("title","Team/User Survey: Not Complete");</script>
-										<script>$(".progres'.$counter.':eq(4)").attr("title","Complete Report: Not Generated");</script>');
+										<script>$(".progres'.$counter.':eq(4)").attr("title","Full Report: Not Generated");</script>');
 								}
 
 								}
@@ -188,7 +188,7 @@ if (isset($_GET["dname"])){
 									<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>
 									<script>$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>
 									<script>$(".progres'.$counter.':eq(3)").attr("title","User/Team Survey: Not Complete");</script>
-									<script>$(".progres'.$counter.':eq(4)").attr("title","Complete Report: Not Generated");</script>');
+									<script>$(".progres'.$counter.':eq(4)").attr("title","Full Report: Not Generated");</script>');
 
 								//User Survey First
 									if($ut_counter==1){
