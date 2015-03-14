@@ -74,25 +74,32 @@
 												<input type="number" class="form-control" id="tb6" name="groupsize" placeholder="No. of Team Members" required />
 											</div>
 										</div>
-										<div class="row" style="margin-bottom:5px;">
-											<label class="col-sm-5 col-xs-6 control-label nopadding">Developers</label>
-												<div class="col-sm-7 col-xs-6">
-													<input type="number" class="form-control" min="0" id="tb7" name="developers" placeholder="No. of Developers" required />
-												</div>
-										</div>
-										<div class="row" style="margin-bottom:5px;">
-											<label class="col-sm-5 col-xs-6 control-label nopadding">Designers</label>
-												<div class="col-sm-7 col-xs-6">
-													<input type="number" class="form-control" min="0" id="tb8" name="designers" placeholder="No. of Designers" required />
-												</div>
-										</div>
+
 										<div class="row" style="margin-bottom:5px;">
 											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Sites</label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="number" min="1" class=form-control id="tb9" name="teamno" placeholder="No. of Sites" required />
 											</div>
 										</div>
-									</div>
+										
+
+										<div class="row" style="margin-bottom:5px;">
+											<label class="col-sm-5 col-xs-6 control-label nopadding">Team Role</label>
+												<div class="col-sm-2 col-xs-2" style="padding-right:0; text-align:center; font-size:12px;">
+													<input type="number" class="form-control" min="0" id="tb7" name="developers" placeholder="0" required />
+													Developers <br />
+												</div>
+												<div class="col-sm-2 col-xs-2" style="padding-right:0; text-align:center; font-size:12px;">
+													<input type="number" class="form-control" min="0" id="tb8" name="designers" placeholder="0" required />
+													Designers <br />
+												</div>
+												<div class="col-sm-2 col-xs-2" style="padding-right:0; text-align:center; font-size:12px;">
+													<input type="number" class="form-control" min="0" id="tb10" name="others" placeholder="0" required />
+													Others <br />
+												</div>
+										</div>
+										
+										</div>
 									<div class="col-xs-12 col-sm-6">
 										<h2 class="panel-title"><b>Location Information</b></h2><br />
 										<div>
@@ -152,27 +159,44 @@
 		
 		$('#teamallocation').append('<tr><th>Location</th><th>No. of Employees</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" /></td><td style="padding:0;"><input type=text class="table-form nopadding" /></td></tr>');
 				
-		$('#tb9').change(function(){
+				var count;	
+				var stringsum="";
+
+			$('#tb9').change(function(){
 			$('#teamallocation').html("");
-			var count = $('#tb9').val();
-			$('#teamallocation').append('<tr><th>Location</th><th>No. of Employees</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" /></td><td style="padding:0;"><input type=text class="table-form nopadding" /></td></tr>');
-			while(count>1){
-			$('#teamallocation').append('<tr><td style="padding:0;"><input type=text class="table-form" /></td><td style="padding:0;"><input type=text class="table-form" /></td></tr>');
-			count-=1;
+			count = parseInt($('#tb9').val());
+			count1=count;
+			var i = 0;
+			$('#teamallocation').append('<tr><th class="addition">Location</th><th>No. of Employees</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" id="location'+i+'" /></td><td style="padding:0;"><input type=text class="table-form nopadding" id="locationno'+i+'" /></td></tr>');
+			while(count1>1){
+				i++;
+			$('#teamallocation').append('<tr><td style="padding:0;"><input type=text class="table-form" id="location'+i+'" /></td><td style="padding:0;"><input type=text class="table-form" id="locationno'+i+'" /></td></tr>');
+			count1-=1;
 			}
+			
 		});
 
+			
 
 			$("#submit").click(function() {
+				$("#errorstatus").html("");
 				var counter=0;
 				var valid=0;
-				for(var i=1; i<10; i++){
+				for(var i=1; i<11; i++){
 					var check = "#tb"+i; 
 					$(check).css("border", "");
 					if($(check).val()==""){
 						$(check).css("border", "solid 2px #AA4139");
 						counter++;
 					}
+				}
+
+
+				for(var i=0;i<count;i++){
+				if($("#location"+i).val()!=0)
+				stringsum=stringsum+$("#location"+i).val();
+				if($("#locationno"+i).val()!=0)
+				stringsum=stringsum+","+$("#locationno"+i).val()+";";
 				}
 
 				if(counter==0){
@@ -185,6 +209,8 @@
 				var developers1 = $("#tb7").val();
 				var designers1 = $("#tb8").val();
 				var teamno1 = $("#tb9").val();
+				var others1 = $("#tb10").val();
+				var location1 = stringsum;
 
 				queryStringNameValueArray = dp11.split("/");
 				if (queryStringNameValueArray[0]>31 || queryStringNameValueArray[1]>12 || queryStringNameValueArray[2]<2000 ||
@@ -203,7 +229,19 @@
 					$("#errorstatus").html("");
 					$("#errorstatus").html("**Invalid Date!");
 				}
-
+					var total = parseInt(others1)+parseInt(designers1)+parseInt(developers1);
+				if(total!=groupsize1)
+				{
+					$("#tb6,#tb7,#tb8,#tb10").css("border", "solid 2px #AA4139");
+					console.log(total);
+					console.log(groupsize1);
+					if(valid==1)
+					$("#errorstatus").append("<br />**Team Size should be equal to the sum of Team Roles ");
+					else{
+					$("#errorstatus").append("**Team Size should be equal to the sum of Team Roles ");
+					valid=1;
+				}
+				}
 
 				if(valid==0){
 					var sdatesplit = dp11.split("/");
@@ -223,6 +261,8 @@
 					developers: developers1,
 					designers: designers1,
 					teamno: teamno1,
+					others: others1,
+					location: location1,
 					}, function(data) {
 						if (parseInt(data)==1){
 							$("#errorstatus").html("");

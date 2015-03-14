@@ -29,6 +29,10 @@ else{
 	$edate = $_POST['dp2'];
 	$groupsize = $_POST['groupsize'];
 	$teamno = $_POST['teamno'];
+	$developers = $_POST['developers'];
+	$designers = $_POST['designers'];
+	$others = $_POST['others'];
+	$location = $_POST['location'];
 	$edate=date('Y-m-d', strtotime($edate));
 	$sdate=date('Y-m-d', strtotime($sdate));
 	if(strtotime($edate)<strtotime($sdate)){
@@ -49,7 +53,7 @@ else{
 		$msg=2;
 		echo($msg);}
 	else{
-	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `teamno`, `team_survey_end`,`user_survey_end`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$teamno', '$team_survey_end','$user_survey_end')";
+	$query = "INSERT INTO `products` (`username`, `p_name`, `p_class`, `budget`, `sdate`, `edate`, `gsize`, `developers`,`designers`,`others`, `teamno`,`surveyEnd`, `team_survey_end`,`user_survey_end`, `location`) VALUES ('$username', '$pname', '$pversion', '$budget', '$sdate', '$edate', '$groupsize', '$developers','$designers','$others', '$teamno', 0, '$team_survey_end','$user_survey_end', '$location')";
 	$result = mysql_query($query) or die(mysql_error());
 		if($result){ 	$success="Product Added!";
 						echo($success);

@@ -162,7 +162,7 @@ if (isset($_GET["dname"])){
 								//User Survey First
 									if($ut_counter==1){ 
 									echo('<script>$(".progres'.$counter.':eq(1)").css("background","#373737");
-									$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-unchecked'".'></span>");</script>');
+									$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>');
 									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","User Survey: Started");</script>
 										<script>$(".progres'.$counter.':eq(2)").attr("title","Team Survey: Not Started");</script>
 										<script>$(".progres'.$counter.':eq(3)").attr("title","Team/User Survey: Not Complete");</script>
@@ -171,7 +171,7 @@ if (isset($_GET["dname"])){
 								//Team Survey First
 									else if($ut_counter==2){ 
 									echo('<script>$(".progres'.$counter.':eq(1)").css("background","#373737");
-									$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-unchecked'".'></span>");</script>');
+									$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>');
 									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","Team Survey: Started");</script>
 										<script>$(".progres'.$counter.':eq(2)").attr("title","User Survey: Not Started");</script>
 										<script>$(".progres'.$counter.':eq(3)").attr("title","Team/User Survey: Not Complete");</script>
