@@ -141,8 +141,6 @@ if (isset($_GET["dname"])){
 							$queryuser = "SELECT * FROM `externaldata` WHERE `p_0001`= '$product' ";
 							$resultuser = mysql_query($queryuser) or die(mysql_error());
 							$countuser = mysql_num_rows($resultuser);
-							echo($countuser);
-
 
 							$teamsize = $row['gsize'];
 							$queryteam = "SELECT * FROM `data` WHERE `p_0001`= '$product' ";
@@ -150,7 +148,6 @@ if (isset($_GET["dname"])){
 							$countteam = mysql_num_rows($resultteam);
 							if ($countteam>=.75*$teamsize)
 								$countteam=1;
-							echo($countteam);
 
 							//TEAM & USER SURVEY NOT STARTED
 							if($uend==0 && $tend==0)
