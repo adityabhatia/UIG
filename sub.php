@@ -13,6 +13,7 @@
 				$result = 0;
 				$sname = $_GET["sname"];
 				$sversion = $_GET["sver"];
+				$report_status = $_GET["complete"];
 
 
 	//VARIABLES
@@ -111,8 +112,17 @@
 				var product_user_survey_end;
 				var product_team_survey_end;
 
+
+				//REPORT
+				var report_status;
+				var survey_participants;
+				var survey_users;
+
+
 				//OTHERS
 				var counter;
+
+
 
 
 				/**
@@ -162,6 +172,9 @@
 					product_team_survey_end = <?php echo json_encode($product_team_survey_end);?>;
 					product_user_survey_end = <?php echo json_encode($product_user_survey_end);?>;
 
+					report_status =  <?php echo json_encode($report_status);?>;
+
+
 
 					//SURVEY STATUS SHOW / HIDE
 					if(product_team_survey_end == 0){
@@ -192,6 +205,17 @@
 						var invitations = invitations_array[i];
 						$("#participant-table").append('<tr><td><input class="table-form" type="text" name="name[]" value="'+name+'" readonly></td><td><input class="table-form" type="text" name="mail[]" value="'+mail+'" readonly></td><td><input class="table-form" type="text" name="role[]" value="'+role+'" readonly ></td><td><input class="table-form" type="text" name="invitations[]" value="'+invitations+'" readonly ></td><td><a href="javascript:void(0);" class="sendINV"><i class="glyphicon glyphicon-envelope"></i></a></td></tr>');
 					};
+
+
+					//SHOW DATA ON REPORT OR NOT
+					if(report_status == 2 || report_status == 3){
+						$(".report_not").hide();
+						$(".report_avail").show();
+
+					} else{
+						$(".report_not").show();
+						$(".report_avail").hide();
+					}
 
 					//SEND SINGLE INVITATION
 					$("#participant-table").on('click','.sendINV',function(){
@@ -311,24 +335,28 @@
 							involvement = data['item2'];
 							enabling = data['item3'];
 							organization = data['item4'];
-							agility_absolute = data['item5'];
-							user_absolute = data['item6'];
-							en_absolute = data['item7'];
-							org_absolute = data['item8'];
+							sus = data['item5'];
+							usefullness = data['item6'];
+							satisfaction = data['item7'];
+							survey_participants = data['item8'];
+							survey_users = data['item9'];
 
 						}
 
 					});
 
-					$("#agility_absolute").html(Math.round(agility_absolute));
-					$("#user_absolute").html(Math.round(user_absolute));
-					$("#en_absolute").html(Math.round(en_absolute));
-					$("#org_absolute").html(Math.round(org_absolute));
+					$("#sus_weighted").html(Math.round(sus));
+					$("#usefullness_weighted").html(Math.round(usefullness));
+					$("#satisfaction_weighted").html(Math.round(satisfaction));
+
 					$(".final_internal").html(Math.round(agility)+Math.round(involvement)+Math.round(enabling)+Math.round(organization))
 					$("#agility_weighted").html(Math.round(agility));
 					$("#user_weighted").html(Math.round(involvement));
 					$("#en_weighted").html(Math.round(enabling));
 					$("#org_weighted").html(Math.round(organization));
+
+					$("#participants_done").html(survey_participants);
+					$("#users_done").html(survey_users);
 					
 
 
@@ -535,6 +563,7 @@
 							<h3>Team Survey Status</h3>
 							<p id="survey_not">The survey hasn't started yet!</p>
 							<p id="survey_started">The questionnaire will be made available for you until <b><?php echo($product_team_survey_end)?></b>!</p>
+							<p>Until now, <b id="participants_done"></b> invited team members have finished the survey.</p>
 						</p>
 						<br/>
 						<h4>Hint:</h4>
@@ -596,6 +625,7 @@
 							</form>
 							<br/>
 							<p>The questionnaire will be made available for you until <b><?php echo($product_user_survey_end)?></b>!</p>
+							<p>Until now, <b id="users_done"></b> invited customers have finished the survey.</p>
 						</div>
 						<br/>
 						<h4>Hint:</h4>
@@ -608,18 +638,20 @@
 				UIG SURVEY REPORT
 				-->
 				<span class="sel4">
-					<!--<div class="report_not" style="color:grey;">
+					<div class="report_not">
 						<h2 class="page-header" ><b>UIG survey report:</b> <?php echo($product_name);?> </h2>
-						<p>The team and user survey of the product <b> <?php echo($product_name);?></b> has not been completed.</br> Please come back later. The status bar in the product overview section will infrom you when a first analyses is available.</p>
-					</div>-->
+						<p><i class="glyphicon glyphicon-ban-circle" style="color:red;"></i> The team and user survey of the product <b> <?php echo($product_name);?></b> has not been completed. Please come back later. <br/><br/> The status bar in the "organize products" section will infrom you when a first analyses is available.</p>
+						<hr>
+					</div>
 
-						<div class ="row">
+					<div class="report_avail">
+					<div class ="row report">
 						<h2 class="page-header" ><b>UIG Survey Report:</b> <?php echo($product_name);?> <i class="glyphicon glyphicon-stats"></i></h2>
 						<p><i class="glyphicon glyphicon-check" style="color:green;"></i> The team and user survey of the product <b> <?php echo($product_name);?></b> have been completed.</p>
 						<p><b>At the moment we can only provide you data of the team development survey (internal factor), as long as the survey has been completed by some team members.</b></p>
-						</div>
-						<hr>
-						<div class ="row">
+					</div>
+					<hr>
+					<div class ="row">
 							<h3 >The Evaluation Process</h3>
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<br/>
@@ -636,7 +668,7 @@
 								<br/>
 								<canvas id="doughnutChart" width="250" height="120"></canvas>
 							</div>
-						</div>
+					</div>
 					<hr>
 					<div class="row">
 						<h3>Evaluation: Team Survey</h3>
@@ -645,74 +677,82 @@
 						
 
 						<div class="col-xs-12 col-sm-4 col-md-6">
+								<br/>
 								<div class="row">
 								
-									<h4><b>Agility:&nbsp;<b id="agility_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
-									<p id="agility-toggle">	The agility value reflexes the flexibility of the development process.</p>
-									<p>
-										<i>Absolute score / Max. score:&nbsp;</i><b id="agility_absolute"></b>&nbsp;<b>/ 65</b>
-									</p>
+									<h4><b>Agility:&nbsp;<b id="agility_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
+									<p id="agility-toggle">	The agility value considers e.g. the flexibility of the development process.</p>
+									<!--<p>	<i>Absolute score / Max. score:&nbsp;</i><b id="agility_absolute"></b>&nbsp;<b>/ 65</b>	</p>-->
 
 									<hr>
 									
-									<h4><b>User Involvement:&nbsp;<b id="user_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showUser()"></a></h4>
-									<p id="user-toggle">The user involvement value reflexes the level of user involvement during the development process.</p>
-									<p>
-										<i>Absolute score / Max. score:&nbsp;</i> <b id="user_absolute"></b> &nbsp;<b>/ 30</b>
-									</p>
+									<h4><b>User Involvement:&nbsp;<b id="user_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showUser()"></a></h4>
+									<p id="user-toggle">The user involvement value considers e.g. the level of user involvement and their representativeness during the development process.</p>
+									<!--<p>	<i>Absolute score / Max. score:&nbsp;</i> <b id="user_absolute"></b> &nbsp;<b>/ 46</b>	</p>-->
 									
 									<hr>
 
-										<h4 ><b>Enabling Structure:&nbsp;<b id="en_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
-										<p id="enabling-toggle">The enabling structure value considers the composition of the team, its standards and tasks.</p>
-										<p><i>Absolute score / Max. score:&nbsp;</i> <b id="en_absolute"></b><b> / 100</b></p>
+									<h4 ><b>Enabling Structure:&nbsp;<b id="en_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
+									<p id="enabling-toggle">The enabling structure value considers e.g. the composition of the team, its standards and tasks.</p>
+									<!--<p><i>Absolute score / Max. score:&nbsp;</i> <b id="en_absolute"></b><b> / 100</b></p>-->
 									
 									<hr>
 									
-										<h4><b>Organization:&nbsp;<b id="org_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(weighted 25%)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showOrg()"></a></h4>
-										<p id="org-toggle">The organzation value reflexes the level of the top management support (TMS) during the development process.</p>
-										<p><i>Absolute score / Max. score:&nbsp;</i> <b id="org_absolute"></b> <b> / 20</b></p>
+									<h4><b>Organization:&nbsp;<b id="org_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showOrg()"></a></h4>
+									<p id="org-toggle">The organzation value considers e.g. the level of the top management support (TMS) during the development process, as well as the product's age.</p>
+									<!--<p><i>Absolute score / Max. score:&nbsp;</i> <b id="org_absolute"></b> <b> / 20</b></p>-->
 									
 								
 								</div>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-6">
-							<br/><br/>
-							<canvas id="barChart" width="450" height="300"></canvas>
+							<br/>
+							<canvas id="barChart" width="450" height="250"></canvas>
 						</div>
 					</div>
 					<div class ="row">
 							<br/>
-							<h4>Final team survey score: <b class="final_internal" style="font-size:24px; color:#2C8BB7;"></b> / 100.</h4>
-							<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_internal"></b> points in the team development survey. This value is used for the final score in the end.</p>
+							<h4>Final team survey score: <b class="final_internal" style="font-size:22px; color:#2C8BB7;"></b> / 100.</h4>
+							<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_internal"></b> points in the team development survey.</p>
 					</div>
-
+					
 					<hr>
+					<!--	
 					<br/>
 					<div class="row">
 						
 						<h3>Evaluation: User Survey</h3>
-						<p>External criterias are investigated along four factors: SUS, the Usefullness, the Intention to Use and the User Satisfaction.</p>
+						<p>External criterias are investigated along three factors: SUS, the Usefullness and the User Satisfaction.</p>
 	
+						<div class="col-xs-12 col-sm-4 col-md-6">
+								<br/>
+								<div class="row">
+								
+									<h4><b>SUS:&nbsp;<b id="sus_weighted" style="color:#2C8BB7;"></b> / 50</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
+									<p id="agility-toggle">	The agility value considers e.g. the flexibility of the development process.</p>
+									
 
-					</div>
-					<!--
-					<hr>
-					<div class="row">
-						<h3>Final score and certificate</h3>
-						<div>
-							<div style="height:200px; width:400px; background-color:#E6E6E6; border: 1px solid #000">
-								<div style="height:150px; width:300px; background-color:#FFFFFF; border: 1px solid #000; box-shadow: 0px 5px 10px grey; margin: 25px auto; text-align:center;" >
-									<img id="uig-logo" src="img/uig-logo2.png" style="margin:20px auto"></img>
-									<p>Nutzerzentrierungsausweis</p>
-									<p>Software Inc.</p>
-								</div>	
-							</div>
-							<div style="height:100px; width:131px; background-color:#E6E6E6; border: 1px solid #000; display:inline-block"></div>
-							<div style="height:100px; width:131px; background-color:#E6E6E6; border: 1px solid #000; display:inline-block"></div>
-							<div style="height:100px; width:131px; background-color:#E6E6E6; border: 1px solid #000; display:inline-block"></div>
+									<hr>
+									
+									<h4><b>Usefullness:&nbsp;<b id="usefullness_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showUser()"></a></h4>
+									<p id="user-toggle">The user involvement value considers e.g. the level of user involvement and their representativeness during the development process.</p>
+									
+									
+									<hr>
+
+									<h4 ><b>Satisfaction:&nbsp;<b id="satisfaction_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
+									<p id="enabling-toggle">The enabling structure value considers e.g. the composition of the team, its standards and tasks.</p>
+									
+									
+									<hr>													
+								</div>
+						</div>
+						<div class="col-xs-12 col-sm-8 col-md-6">
+							<br/>
+							<canvas id="barChart" width="450" height="250"></canvas>
 						</div>
 					</div>-->
+					</div>
 				</span>
 		</div>
 	</body>
