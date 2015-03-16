@@ -126,7 +126,7 @@ if (isset($_GET["dname"])){
 							$tend = $row['team_survey_end'];
 							$date = date('Y-m-d', time());
 							$ut_counter = $row['surveyEnd'];
-							echo('<script>var complete'.$counter.'=0</script>');
+							echo('<script>var complete'.$counter.'=0;</script>');
 
 							//STATUS & COLOR INITIALIZATION
 							echo('<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-unchecked'".'></span>");</script>');
@@ -208,7 +208,7 @@ if (isset($_GET["dname"])){
 										
 										if ((strtotime($date)>strtotime($tend)) || ($countteam==1)){
 												echo('<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-check'".'></span>");</script>');
-												echo('<script>var complete'.$counter.'=2</script>');
+												echo('<script>var complete'.$counter.'=2;</script>');
 
 										//Team Survey started first, Complete & User survey not started	
 											if($ut_counter==2 && $uend==0){ 
@@ -224,7 +224,7 @@ if (isset($_GET["dname"])){
 										//User Survey started First, Complete & Team Survey Started, Complete	
 											else if((($ut_counter==1) && (strtotime($date)>strtotime($uend))) || (($ut_counter==1) && ($countuser>30))){ //Team Survey Completed
 												echo('<script>$(".progres'.$counter.':eq(4)").css("background","#373737").attr("title","Complete Report: Generated");</script>');
-												echo('<script>var complete'.$counter.'=3</script>');
+												echo('<script>var complete'.$counter.'=3;</script>');
 										}
 										}
 									}
@@ -234,7 +234,8 @@ if (isset($_GET["dname"])){
 
 										if ((strtotime($date)>strtotime($uend)) || ($countuser>30)){
 												echo('<script>$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-check'".'></span>");</script>');
-												echo('<script>var complete'.$counter.'=1</script>');
+												echo('<script>if (complete'.$counter.' != 3) var complete'.$counter.'=1;</script>');
+
 
 										//User Survey Started first, Complete & Team Survey not Started
 											if($ut_counter==1 && $tend==0){ 
@@ -250,7 +251,7 @@ if (isset($_GET["dname"])){
 										//Team Survey started First, Complete & User Survey Started, Complete
 											else if((($ut_counter==2) && (strtotime($date)>strtotime($tend))) || (($ut_counter==2) && ($countteam==1))){ //Team Survey Completed
 											echo('<script>$(".progres'.$counter.':eq(4)").css("background","#373737").attr("title","Complete Report: Generated");</script>');
-											echo('<script>var complete'.$counter.'=3</script>');
+											echo('<script>var complete'.$counter.'=3;</script>');
 										}
 										}
 									}

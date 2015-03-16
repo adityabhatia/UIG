@@ -747,7 +747,7 @@
 								<p>In the end of the evaluation a <b>final score</b> is presented.<br/>
 								The diagnose differentiate between a internal and external perspective.</p>
 									<ul>
-										<li>The <b>external</b> factor represents the score of the user survey: 1/3 of the final score (Not available yet!) </li>
+										<li>The <b>external</b> factor represents the score of the user survey: 1/3 of the final score</li>
 										<li>The <b>internal</b> factor represents the score of the team development survey: 2/3 of the final score</li>
 									</ul>
 							</div>
