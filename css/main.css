@@ -93,7 +93,7 @@ color:#373737;
  }
 
  h3{
- 	font-size: 22px;
+ 	font-size: 20px;
 
  }
 
@@ -178,6 +178,8 @@ hr{
 
 /* Large desktop */
 @media (min-width: 1200px) { ... }
+
+
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) { 
@@ -242,6 +244,13 @@ hr{
  	position: relative;
  	border-radius: 20px;
  	margin: 0px auto;
+ }
+
+
+ .report_element{
+ 	background-color: #eaeaea;
+ 	padding:20px;
+ 	margin: 5px;
  }
 
 

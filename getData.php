@@ -37,7 +37,7 @@
 
 
 	//PRODUCT
-	$product_id = 32;
+	$product_id = $_GET['product_id'];
 
 	
 	//SELECT FROM DB

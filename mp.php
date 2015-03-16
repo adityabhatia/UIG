@@ -9,6 +9,7 @@ if($_SESSION['username']==""){
 {	$msg ="";
 	$success="";
 	$uname = $_SESSION['username'];
+
 	
 if (isset($_GET["cname"])){
 			$cname = $_GET["cname"];
@@ -72,8 +73,9 @@ if (isset($_GET["dname"])){
 						<th style="text-align:center; " colspan="3">Survey Status</th>
 					</tr>
 					<tr>
-						<th style="text-align:center;">Name</th>
+						<th style="text-align:center;">Name</span></th>
 						<th style="text-align:center;">Version</th>
+						<th style="text-align:center; display:none;"></th>
 						<th style="text-align:center;">Actions</th>
 						<th style="text-align:center;">Team Survey</th>
 						<th style="text-align:center;">User Survey</th>
@@ -90,113 +92,165 @@ if (isset($_GET["dname"])){
 						echo('<script>var totalproducts='.$count.'</script>');
 						$counter = 0;
 						while($row = mysql_fetch_array($result)){
-							echo ('<tr><td style="width:15%; vertical-align:middle; padding:5px 10px 5px 10px; text-align:center;"><a style="vertical-align:middle;" href="" class=selec_name>' . $row['p_name'] . '</a></td>
+							echo ('<tr><td style="width:20%; vertical-align:middle; padding:5px 10px 5px 10px; text-align:center;"><a style="vertical-align:middle;" href="" class=selec_name>' . $row['p_name'] . '</a></td>
 
 							<td class=selec_version style="width:10%; vertical-align:middle; padding:5px 10px 5px 10px; text-align:center;">' . $row['p_class'] . '</td>
+
+							<td style="width:10%; text-align:center; display:none;">' . $row['product_id'] . '</td>
 
 							<td style="width:10%; text-align:center; vertical-align:middle; padding:5px 10px 5px 10px ;"><a style="vertical-align:middle;" href="" data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
 							<a style="vertical-align:middle;" href="" data-toggle="modal" id=pencil data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td>
 
-							<td class="teamstatus'.$counter.'" style="padding:0 5px 0 5px; width:15%; vertical-align:middle; text-align:center;">
+							<td class="teamstatus'.$counter.'" style="padding:0 5px 0 5px; width:10%; vertical-align:middle; text-align:center;">
 
 							</td>
 
-							<td class="userstatus'.$counter.'" style="padding:0 5px 0 5px; width:15%; vertical-align:middle; text-align:center;">
+							<td class="userstatus'.$counter.'" style="padding:0 5px 0 5px; width:10%; vertical-align:middle; text-align:center;">
 
 							</td>
 
-							<td style="padding:0 5px 0 5px; vertical-align:middle; text-align:center;">
+							<td style="padding:0 5px 0 5px; vertical-align:middle; width:20%; text-align:center;">
 
-							<img class="progres' .$counter.'" style="vertical-align:middle; margin-left:5px; margin-right:5px;" src="img/black.png" height=24 width=24 />
-							<img class="progres' .$counter.'" style="vertical-align:middle; margin-left:5px; margin-right:5px;" src="" height=24 width=24 />
-							<img class="progres' .$counter.'" style="vertical-align:middle; margin-left:5px; margin-right:5px;" src="" height=24 width=24 />
-							<img class="progres' .$counter.'" style="vertical-align:middle; margin-left:5px; margin-right:5px;" src="" height=24 width=24 />
-							<img class="progres' .$counter.'" style="vertical-align:middle; margin-left:5px; margin-right:5px;" src="" height=24 width=24 />');
+							<span class="nopadding col-md-6 col-sm-6 col-md-offset-3" style="display: table-cell; text-align:center; border: 1px solid #D5D3D4; border-radius:4px; height:24px; min-width:97px;">
+							<!--BOXES DEFINED-->
+							<div title="Product Registered" class="progres'.$counter.'" style=" height:80%; width:13px; vertical-align:bottom; display: inline-block; border-radius:2px; margin-left:-1px;"></div>
+							<div class="progres'.$counter.'" style=" height:80%; width:13px; vertical-align:bottom; display: inline-block; border-radius:2px; margin-left:-1px;"></div>
+							<div class="progres'.$counter.'" style=" height:80%; width:13px; vertical-align:bottom; display: inline-block; border-radius:2px; margin-left:-1px;"></div>
+							<div class="progres'.$counter.'" style=" height:80%; width:13px; vertical-align:bottom; display: inline-block; border-radius:2px; margin-left:-1px;"></div>
+							<div class="progres'.$counter.'" style=" height:80%; width:13px; vertical-align:bottom; display: inline-block; border-radius:2px; margin-left:-1px;"></div>
 
+							</span>');
+							
+							//REQUIRED COUNTERS
 							$uend = $row['user_survey_end'];
 							$tend = $row['team_survey_end'];
 							$date = date('Y-m-d', time());
 							$ut_counter = $row['surveyEnd'];
-							echo('<script>$(".teamstatus'.$counter.'").text("Not Started");</script>');
-							echo('<script>$(".userstatus'.$counter.'").text("Not Started");</script>');
-							echo('<script>$(".progres'.$counter.':eq(1)").attr("src","img/grey.png");</script>');
-							echo('<script>$(".progres'.$counter.':eq(2)").attr("src","img/grey.png");</script>');
-							echo('<script>$(".progres'.$counter.':eq(3)").attr("src","img/grey.png");</script>');
-							echo('<script>$(".progres'.$counter.':eq(4)").attr("src","img/grey.png");</script>');
-							echo('<script>$(".progres'.$counter.':eq(0)").attr("title","Product Launched");</script>');
+							echo('<script>var complete'.$counter.'=0</script>');
 
+							//STATUS & COLOR INITIALIZATION
+							echo('<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-unchecked'".'></span>");</script>');
+							echo('<script>$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-unchecked'".'></span>");</script>');
+							echo('<script>$(".progres'.$counter.':eq(1)").css("background","#BDBDBD");</script>');
+							echo('<script>$(".progres'.$counter.':eq(2)").css("background","#BDBDBD");</script>');
+							echo('<script>$(".progres'.$counter.':eq(3)").css("background","#BDBDBD");</script>');
+							echo('<script>$(".progres'.$counter.':eq(4)").css("background","#BDBDBD");</script>');
+							echo('<script>$(".progres'.$counter.':eq(0)").css("background","#373737");</script>');
+
+							$product = $row['product_id'];
+							$queryuser = "SELECT * FROM `externaldata` WHERE `p_0001`= '$product' ";
+							$resultuser = mysql_query($queryuser) or die(mysql_error());
+							$countuser = mysql_num_rows($resultuser);
+
+							$teamsize = $row['gsize'];
+							$queryteam = "SELECT * FROM `data` WHERE `p_0001`= '$product' ";
+							$resultteam = mysql_query($queryteam) or die(mysql_error());
+							$countteam = mysql_num_rows($resultteam);
+							if ($countteam>=.75*$teamsize)
+								$countteam=1;
+
+							//TEAM & USER SURVEY NOT STARTED
 							if($uend==0 && $tend==0)
 							{		for ($i=1; $i<5; $i++){
-									echo('<script>$(".progres'.$counter.':eq('.$i.')").attr("title","User/Team Survey Not Started");</script>');}
+									echo('<script>$(".progres'.$counter.':eq('.$i.')").attr("title","User/Team Survey: Not Started");</script>');}
 							}
 
+							//EITHER TEAM OR USER SURVEY STARTED
 							else if(($uend==0 && $tend!=0) || ($tend==0 && $uend!=0))
 								{	
-									if($ut_counter==1 && $uend!=0){ //User Survey First
-									echo('<script>$(".progres'.$counter.':eq(1)").attr("src","img/black.png");
-									$(".userstatus'.$counter.'").text("Started");</script>');
-									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","User Survey Started");</script>
-										<script>$(".progres'.$counter.':eq(2), .progres'.$counter.':eq(4)").attr("title","Team Survey Not Started");</script>
-										<script>$(".progres'.$counter.':eq(3)").attr("title","User Survey Not Complete");</script>');
+
+								//User Survey First
+									if($ut_counter==1){ 
+									echo('<script>$(".progres'.$counter.':eq(1)").css("background","#373737");
+									$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>');
+									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","User Survey: Started");</script>
+										<script>$(".progres'.$counter.':eq(2)").attr("title","Team Survey: Not Started");</script>
+										<script>$(".progres'.$counter.':eq(3)").attr("title","Team/User Survey: Not Complete");</script>
+										<script>$(".progres'.$counter.':eq(4)").attr("title","Full Report: Not Generated");</script>');
 								}
-									else if($ut_counter==2){ //Team Survey First
-									echo('<script>$(".progres'.$counter.':eq(1)").attr("src","img/black.png")
-									$(".teamstatus'.$counter.'").text("Started");</script>');
-									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","Team Survey Started");</script>
-										<script>$(".progres'.$counter.':eq(2), .progres'.$counter.':eq(4)").attr("title","User Survey Not Started");</script>
-										<script>$(".progres'.$counter.':eq(3)").attr("title","Team Survey Not Complete");</script>');
-								}
+								//Team Survey First
+									else if($ut_counter==2){ 
+									echo('<script>$(".progres'.$counter.':eq(1)").css("background","#373737");
+									$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>');
+									echo('<script>$(".progres'.$counter.':eq(1)").attr("title","Team Survey: Started");</script>
+										<script>$(".progres'.$counter.':eq(2)").attr("title","User Survey: Not Started");</script>
+										<script>$(".progres'.$counter.':eq(3)").attr("title","Team/User Survey: Not Complete");</script>
+										<script>$(".progres'.$counter.':eq(4)").attr("title","Full Report: Not Generated");</script>');
 								}
 
+								}
+
+							//BOTH TEAM OR USER SURVEYS STARTED	
 							else if($uend!=0 && $tend!=0)
 							{
-									echo('<script>$(".progres'.$counter.':eq(1)").attr("src","img/black.png");</script>
-									<script>$(".progres'.$counter.':eq(2)").attr("src","img/black.png");</script>
-									<script>$(".teamstatus'.$counter.'").text("Started");</script>
-									<script>$(".userstatus'.$counter.'").text("Started");</script>');
+									echo('<script>$(".progres'.$counter.':eq(1)").css("background","#373737");</script>
+									<script>$(".progres'.$counter.':eq(2)").css("background","#373737");</script>
+									<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>
+									<script>$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-expand'".'></span>");</script>
+									<script>$(".progres'.$counter.':eq(3)").attr("title","User/Team Survey: Not Complete");</script>
+									<script>$(".progres'.$counter.':eq(4)").attr("title","Full Report: Not Generated");</script>');
 
+								//User Survey First
 									if($ut_counter==1){
-										echo('<script>$(".progres'.$counter.':eq(1)").attr("title","User Survey Started");</script>');
-										echo('<script>$(".progres'.$counter.':eq(2)").attr("title","Team Survey Started");</script>
-											<script>$(".progres'.$counter.':eq(3)").attr("title","User Survey Not Complete");</script>
-											<script>$(".progres'.$counter.':eq(4)").attr("title","Team Survey Not Complete");</script>');
+										echo('<script>$(".progres'.$counter.':eq(1)").attr("title","User Survey: Started");</script>');
+										echo('<script>$(".progres'.$counter.':eq(2)").attr("title","Team Survey: Started");</script>');
 									}
-									
+								
+								//Team Survey First
 									else if($ut_counter==2){
-										echo('<script>$(".progres'.$counter.':eq(2)").attr("title","User Survey Started");</script>');
-										echo('<script>$(".progres'.$counter.':eq(1)").attr("title","Team Survey Started");</script>
-											<script>$(".progres'.$counter.':eq(4)").attr("title","User Survey Not Complete");</script>
-											<script>$(".progres'.$counter.':eq(3)").attr("title","Team Survey Not Complete");</script>');
+										echo('<script>$(".progres'.$counter.':eq(2)").attr("title","User Survey: Started");</script>');
+										echo('<script>$(".progres'.$counter.':eq(1)").attr("title","Team Survey: Started");</script>');
 									}
 							}
 
+							//CHECK TEAM SURVEY END
 							if($tend!=0){
-										echo('<script>$(".teamstatus'.$counter.'").text("Started");</script>');
-										if (strtotime($date)>strtotime($tend)){
-											if($ut_counter==1){
-											echo('<script>$(".progres'.$counter.':eq(4)").attr("src","img/black.png");
-												$(".teamstatus'.$counter.'").text("Complete");</script>');
-											echo('<script>$(".progres'.$counter.':eq(4)").attr("title","Team Survey Complete");</script>');
+										
+										if ((strtotime($date)>strtotime($tend)) || ($countteam==1)){
+												echo('<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-check'".'></span>");</script>');
+												echo('<script>var complete'.$counter.'=2</script>');
+
+										//Team Survey started first, Complete & User survey not started	
+											if($ut_counter==2 && $uend==0){ 
+												echo('<script>$(".progres'.$counter.':eq(2)").css("background","#373737").attr("title","Team Survey Report: Generated");
+												$(".progres'.$counter.':eq(3)").attr("title","User Survey: Not Started");</script>');
 										}
-											else{
-											echo('<script>$(".progres'.$counter.':eq(3)").attr("src","img/black.png");
-												$(".teamstatus'.$counter.'").text("Complete");</script>');
-											echo('<script>$(".progres'.$counter.':eq(3)").attr("title","Team Survey Completed");</script>');
+
+										//Team Survey started first, Complete & User survey started	
+											else if(($ut_counter==2 && $uend!=0) || (($ut_counter==1) && (strtotime($date)<strtotime($uend)) && ($countuser<30))){ //Team Survey started first, Complete & User started second
+												echo('<script>$(".progres'.$counter.':eq(3)").css("background","#373737").attr("title","Team Survey Report: Generated");</script>');
+											}
+
+										//User Survey started First, Complete & Team Survey Started, Complete	
+											else if((($ut_counter==1) && (strtotime($date)>strtotime($uend))) || (($ut_counter==1) && ($countuser>30))){ //Team Survey Completed
+												echo('<script>$(".progres'.$counter.':eq(4)").css("background","#373737").attr("title","Complete Report: Generated");</script>');
+												echo('<script>var complete'.$counter.'=3</script>');
 										}
 										}
 									}
+
+							//CHECK USER SURVEY END
 							if($uend!=0){
-										echo('<script>$(".userstatus'.$counter.'").text("Started");</script>');
-										if (strtotime($date)>strtotime($uend)){
-											if($ut_counter==2){
-											echo('<script>$(".progres'.$counter.':eq(4)").attr("src","img/black.png");
-												$(".userstatus'.$counter.'").text("Complete");</script>');
-											echo('<script>$(".progres'.$counter.':eq(4)").attr("title","User Survey Completed");</script>');
+
+										if ((strtotime($date)>strtotime($uend)) || ($countuser>30)){
+												echo('<script>$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-check'".'></span>");</script>');
+												echo('<script>var complete'.$counter.'=1</script>');
+
+										//User Survey Started first, Complete & Team Survey not Started
+											if($ut_counter==1 && $tend==0){ 
+													echo('<script>$(".progres'.$counter.':eq(2)").css("background","#373737").attr("title","User Survey Report: Generated");
+														$(".progres'.$counter.':eq(3)").attr("title","Team Survey: Not Started");</script>');
 										}
-											else{
-											echo('<script>$(".progres'.$counter.':eq(3)").attr("src","img/black.png");
-												$(".userstatus'.$counter.'").text("Complete");</script>');
-											echo('<script>$(".progres'.$counter.':eq(3)").attr("title","User Survey Complete");</script>');
+
+										//User Survey started first, Complete & Team survey started
+											else if(($ut_counter==1 && $tend!=0) || (($ut_counter==2) && (strtotime($date)<strtotime($tend)) && ($countteam==0))){ //User Survey started first, Complete & Team started second
+												echo('<script>$(".progres'.$counter.':eq(3)").css("background","#373737").attr("title","User Survey Report: Generated");</script>');
+											}
+
+										//Team Survey started First, Complete & User Survey Started, Complete
+											else if((($ut_counter==2) && (strtotime($date)>strtotime($tend))) || (($ut_counter==2) && ($countteam==1))){ //Team Survey Completed
+											echo('<script>$(".progres'.$counter.':eq(4)").css("background","#373737").attr("title","Complete Report: Generated");</script>');
+											echo('<script>var complete'.$counter.'=3</script>');
 										}
 										}
 									}
@@ -260,15 +314,44 @@ if (isset($_GET["dname"])){
 
 	<script type="text/javascript">
 $(document).ready(function() {
+
+$('.glyphicon-check').css("font-size","1.1em");
+$('.glyphicon-unchecked').css("font-size","1.1em");
+$('.glyphicon-expand').css("font-size","1.1em");
+
 for(var i=0; i<totalproducts;i++)
 {
 	for(var j=0; j<5;j++){
 	$('.progres'+i+':eq('+j+')').tooltip({
-    'show': true,
+    	'show': true,
         'placement': 'bottom',
+        'container':'body'
 });
 }
 }
+
+$('.glyphicon-check').tooltip({
+    	'show': true,
+        'placement': 'bottom',
+        'container':'body',
+        'title':'Completed'
+});
+
+$('.glyphicon-expand').tooltip({
+    	'show': true,
+        'placement': 'bottom',
+        'container':'body',
+        'title':'Started'
+});
+
+$('.glyphicon-unchecked').tooltip({
+    	'show': true,
+        'placement': 'bottom',
+        'container':'body',
+        'title':'Not Started'
+});
+
+
 
 	var className, substr;
 	$('.glyphicon').click(function(){
@@ -335,9 +418,23 @@ for(var i=0; i<totalproducts;i++)
 		
 	});
 	$('.selec_name').click(function(){
-	var selec_name = $(this).html();
+	var select_name = $(this).html();
 	var selec_version = $(this).closest('td').next().html();
-	var $url= "sub.php?sname="+selec_name+"&sver="+selec_version+"&sel=1";
+	var product_id = $(this).closest('td').next().next().html();
+    var rowIndex = $(this).parent().parent().parent().children().index($(this).closest('td').parent());
+    rowIndex = rowIndex - 1;
+    completecomb = "complete"+rowIndex;
+  	$('#temp').val(rowIndex);
+    var position= "mp.php?position="+rowIndex;
+    
+    /*if (typeof (history.pushState) != "undefined") {
+        var obj = { Title: "Welcome to UIG", Url: position};
+        history.pushState(obj, obj.Title, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+*/
+	var $url= "sub.php?sname="+select_name+"&sver="+selec_version+"&sel=1"+"&complete="+eval(completecomb);
 	$('.selec_name').attr("href", $url);
 	});
 
