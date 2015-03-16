@@ -45,7 +45,7 @@
 	$result= mysql_query($query) or die(mysql_error());
 	$count = mysql_num_rows($result);
 
-	$queryExt = "SELECT * FROM `externalData` WHERE `p_0001`=$product_id";
+	$queryExt = "SELECT * FROM `externaldata` WHERE `p_0001`=$product_id";
 	$resultExt= mysql_query($queryExt) or die(mysql_error());
 	$countExt = mysql_num_rows($resultExt);
 
