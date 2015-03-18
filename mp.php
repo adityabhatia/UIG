@@ -10,30 +10,16 @@ if($_SESSION['username']==""){
 	$success="";
 	$uname = $_SESSION['username'];
 
-
-
 	
 if (isset($_GET["cname"])){
-
 			$cname = $_GET["cname"];
 			$cver = $_GET["cver"];
 			$np_name = $_GET['nn'];
 			$np_class = $_GET['nv']; 
-
-				$query1 = "SELECT product_id FROM products where username = '$uname' and p_name='$cname' and p_class='$cver'";
-				$result1 = mysql_query($query1) or die(mysql_error());
-				$count1 = mysql_num_rows($result1);
-				while($row = mysql_fetch_array($result1)){
-					if($row['product_id']==65 || $row['product_id']==66)
-						echo('<script>alert("Sorry, DemoProduct cannot be modified!");</script>');
-				
-					else{
 						$query =  "UPDATE products SET p_name='$np_name', p_class='$np_class' WHERE username = '$uname' and p_name='$cname' and p_class='$cver'";
 						$result = mysql_query($query) or die(mysql_error());
 							if($result==1)
 							$success = "**Updated!";
-					}
-					}
 						}	
 if (isset($_GET["dname"])){
 			$result = 0;
@@ -43,22 +29,13 @@ if (isset($_GET["dname"])){
 			$result = mysql_query($query) or die(mysql_error());
 			$count = mysql_num_rows($result);
 			if($count==1){
-				$query1 = "SELECT product_id FROM products where username = '$uname' and p_name='$dname' and p_class='$dver'";
-				$result1 = mysql_query($query1) or die(mysql_error());
-				$count1 = mysql_num_rows($result1);
-				while($row = mysql_fetch_array($result1)){
-					if($row['product_id']==65 || $row['product_id']==66)
-						echo('<script>alert("Sorry, DemoProduct cannot be deleted!");</script>');
-					else{
 			$query = "DELETE FROM products WHERE username = '$uname' and p_name='$dname' and p_class='$dver'";
 			$result = mysql_query($query) or die(mysql_error());
 				if($result==1)
 					$success = "**Deleted!";
 					echo($msg);
 					}		
-				}
 						}	
-					}
  ?>
 
 <html>
@@ -149,7 +126,7 @@ if (isset($_GET["dname"])){
 							$tend = $row['team_survey_end'];
 							$date = date('Y-m-d', time());
 							$ut_counter = $row['surveyEnd'];
-							echo('<script>var complete'.$counter.'=0;</script>');
+							echo('<script>var complete'.$counter.'=0</script>');
 
 							//STATUS & COLOR INITIALIZATION
 							echo('<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-unchecked'".'></span>");</script>');
@@ -231,7 +208,7 @@ if (isset($_GET["dname"])){
 										
 										if ((strtotime($date)>strtotime($tend)) || ($countteam==1)){
 												echo('<script>$(".teamstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-check'".'></span>");</script>');
-												echo('<script>var complete'.$counter.'=2;</script>');
+												echo('<script>var complete'.$counter.'=2</script>');
 
 										//Team Survey started first, Complete & User survey not started	
 											if($ut_counter==2 && $uend==0){ 
@@ -247,7 +224,7 @@ if (isset($_GET["dname"])){
 										//User Survey started First, Complete & Team Survey Started, Complete	
 											else if((($ut_counter==1) && (strtotime($date)>strtotime($uend))) || (($ut_counter==1) && ($countuser>30))){ //Team Survey Completed
 												echo('<script>$(".progres'.$counter.':eq(4)").css("background","#373737").attr("title","Complete Report: Generated");</script>');
-												echo('<script>var complete'.$counter.'=3;</script>');
+												echo('<script>var complete'.$counter.'=3</script>');
 										}
 										}
 									}
@@ -257,8 +234,7 @@ if (isset($_GET["dname"])){
 
 										if ((strtotime($date)>strtotime($uend)) || ($countuser>30)){
 												echo('<script>$(".userstatus'.$counter.'").html("<span class='."'glyphicon glyphicon-check'".'></span>");</script>');
-												echo('<script>if (complete'.$counter.' != 3) var complete'.$counter.'=1;</script>');
-
+												echo('<script>var complete'.$counter.'=1</script>');
 
 										//User Survey Started first, Complete & Team Survey not Started
 											if($ut_counter==1 && $tend==0){ 
@@ -274,7 +250,7 @@ if (isset($_GET["dname"])){
 										//Team Survey started First, Complete & User Survey Started, Complete
 											else if((($ut_counter==2) && (strtotime($date)>strtotime($tend))) || (($ut_counter==2) && ($countteam==1))){ //Team Survey Completed
 											echo('<script>$(".progres'.$counter.':eq(4)").css("background","#373737").attr("title","Complete Report: Generated");</script>');
-											echo('<script>var complete'.$counter.'=3;</script>');
+											echo('<script>var complete'.$counter.'=3</script>');
 										}
 										}
 									}

@@ -122,7 +122,6 @@ if($result){
 				$(".iframe").attr('src','home.php');
 				$('.iframe').load(function(){
 						var sel, s_name, s_ver = null;
-						var complete;
 						var winURL = document.getElementById("iframe").contentWindow.location.href;
 						var queryStringArray = winURL.split("?");
 						if(queryStringArray[1]){
@@ -131,8 +130,6 @@ if($result){
 						{           
 							queryStringNameValueArray = queryStringParamArray[i].split("=");
 							
-							if ( "complete" == queryStringNameValueArray[0] )
-								complete = queryStringNameValueArray[1];
 							if ( "sname" == queryStringNameValueArray[0] )
 								s_name = queryStringNameValueArray[1];
 							if ( "sver" == queryStringNameValueArray[0] )
@@ -150,8 +147,8 @@ if($result){
 								$(".list-group a:nth-child(1)").addClass( " active" );}
 
 							if ("complete" == queryStringNameValueArray[0] ){
-								complete = queryStringNameValueArray[1];
-							}
+									complete = queryStringNameValueArray[1];
+								}
 							}
 						}
 						$urlnew = "sub.php?sname="+s_name+"&sver="+s_ver+"&sel=";	
