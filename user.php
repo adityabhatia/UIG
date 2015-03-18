@@ -5,28 +5,49 @@ $msg="";
 if($_SESSION['username']==""){
 ?>
 <script>window.location.replace("login.php");</script>
-<?php } $username = $_SESSION['username'];
+<?php } 
+else{$username = $_SESSION['username'];
 if(isset($_POST["submit"])){
+
 $name = $_POST['name'];
 $company = $_POST['company'];
 $desig = $_POST['desig'];
 $experience = $_POST['experience'];
 $user = $_POST['username'];
 $email = $_POST['email'];
+
+			$query2 = "SELECT * FROM `user` WHERE username='$user'";
+			$result2 = mysql_query($query2) or die(mysql_error());
+			$count2 = mysql_num_rows($result2);
+				if(($count2>=1 && $user==$username) || ($count2<1) )
+				{
 			$query1 =  "UPDATE `user` SET `name`='$name',`company`='$company',
 			`desig`='$desig',`experience`='$experience',`username`='$user',
 			`email`='$email' WHERE username='$username'";
-			$_SESSION['name'] = $name;
-			$_SESSION['username'] = $username;
+			$_SESSION['username'] = $user;
+			$username = $user;
 			$result1 = mysql_query($query1) or die(mysql_error());
-				if($result1)
-					$msg = ": Success!";
-	}				
+			if($result1){
+					echo('<script>alert("The User information has been changed successfully. The page will be reloaded.");
+					top.window.location.href="main.php";</script>');
+					}
+				
+				}
+				else
+				{
+					echo('<script>alert("Username already exists!");
+						window.location.replace("user.php");</script>');
+					
+				}
+			
+}
+else{	
+
 $query = "SELECT * FROM `user` WHERE username='$username'";
 $result = mysql_query($query) or die(mysql_error());
 $count = mysql_num_rows($result);
 if ($count == 1){
-$_SESSION['username'] = $username;
+
 while($row = mysql_fetch_array($result)){
 ?>
 
@@ -39,7 +60,7 @@ while($row = mysql_fetch_array($result)){
 		</script>
 		<!--Inclusions-->
 			<meta charset="utf-8">
-			<title>Welcome <?php echo($_SESSION['name']);?> </title>
+			<title>Welcome <?php echo($_SESSION['username']);?> </title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta name="description" content="INES Questionnaire">
 			<meta name="author" content="adityabhatia">
@@ -68,8 +89,9 @@ while($row = mysql_fetch_array($result)){
 															Change Password here!
 										</button>
 										</div>
+										<HR WIDTH="100%" SIZE="3" style="margin-bottom:-10px; border-width:2px;" >
 								</div>
-								<HR WIDTH="100%" SIZE="3" style="margin-bottom:-10px; border-width:2px;" > 
+								
 								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
 								<div class="col-sm-12">	
 									<h4><b>Account Information</b></h4>
@@ -112,7 +134,7 @@ while($row = mysql_fetch_array($result)){
 									</div>
 								
 									<div class="col-sm-12" style="text-align:center;">
-													<button type="submit" class="btn btn-default" name=submit>
+													<button type=button name=submit class="btn btn-default formbutton">
 														Save Changes
 									 				</button> <br/>
 									</div>
@@ -136,7 +158,7 @@ while($row = mysql_fetch_array($result)){
 											<input type="password" class="form-control input-sm" id="inputName" name="pass" placeholder="New Password" value="" required />
 										</div>
 									</div>
-						        <button type="submit" class="btn btn-primary center-block" name="submit1" id="edit" >Change Password</button>
+						        <button type="button" class="btn btn-primary center-block formbutton"  name="submit1" id="edit" >Change Password</button>
 						        </form>
 						      </div>
 						    </div><!-- /.modal-content -->
@@ -150,6 +172,24 @@ while($row = mysql_fetch_array($result)){
 										$result1 = mysql_query($query1) or die("error: " . mysql_error()) ;
 						        	}
 						        ?>
+
+	<script type="text/javascript">
+$(document).ready(function() {
+	$('.formbutton').on("click",function(){
+  	var username = '<?php echo($username); ?>';
+  	var result;
+  	result= username.search(new RegExp("demo", "i"));
+  	console.log(result);
+  	if(result==0)
+  	{
+  		alert("Sorry, not possible to change demo account information!");
+  		$('#password').modal('hide');
+  	}
+  	else
+  		$(this).attr("type","submit");
+});	
+});
+</script>
 	</body>
 </html>
-<?php }}?>
+<?php }}}}?>

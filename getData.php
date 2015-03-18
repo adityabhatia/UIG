@@ -21,14 +21,23 @@
 	$value_org = 0;
 
 	//EXTERNAL
-	$array_sus = array("v_63","v_64","v_64","v_66","v_67","v_68","v_69","v_70","v_71","v_71");
-	$array_usefullness = array("v_84","v_85","v_86","v_87","v_88","v_89",);
-	$array_satisfaction = array();
-	$array_intention = array();
+	$array_sus = array("v_63","v_64","v_65","v_66","v_67","v_68","v_69","v_70","v_71","v_72");
+	$array_usefullness = array("v_84","v_85","v_86","v_87","v_88","v_89");
+	$array_satisfaction = array("v_76","v_90","v_78","v_79","v_80","v_95");
+
+	$sus_absolute = 0;
+	$usefullness_absolute = 0;
+	$intention_absolute = 0;
+	$satisfaction_absolute = 0;
+
+	$value_sus = 0;
+	$value_usefullness = 0;
+	$value_intention = 0;
+	$value_satisfaction = 0;
 
 
 	//PRODUCT
-	$product_id = 43;
+	$product_id = $_GET['product_id'];
 
 	
 	//SELECT FROM DB
@@ -36,7 +45,11 @@
 	$result= mysql_query($query) or die(mysql_error());
 	$count = mysql_num_rows($result);
 
+	$queryExt = "SELECT * FROM `externaldata` WHERE `p_0001`=$product_id";
+	$resultExt= mysql_query($queryExt) or die(mysql_error());
+	$countExt = mysql_num_rows($resultExt);
 
+	//GET INTERNAL UNIPARK DATA
 	while($row = mysql_fetch_array($result)){
 		foreach ($array_agility as $value) {
 			if($row[$value]>0){
@@ -85,6 +98,55 @@
 
 	
 	}
+	//GET EXTERNAL UNIPARK DATA
+	while($row2 = mysql_fetch_array($resultExt)){
+		foreach ($array_sus as $value) {
+			if($row2[$value]>0){
+				$sus_absolute += $row2[$value];
+			}
+			else{
+				$sus_absolute += 2.5;
+
+			}
+
+		}
+	
+		foreach ($array_usefullness as $value) {
+			
+			if($row2[$value]>0){
+				$usefullness_absolute += $row2[$value];
+			}
+			else{
+				$usefullness_absolute += 2.5;
+
+			}	
+
+		}
+
+		foreach ($array_intention as $value) {
+			
+			if($row2[$value]>0){
+				$intention_absolute += $row2[$value];
+			}
+			else{
+				$intention_absolute += 2.5;
+
+			}	
+
+		}
+
+		foreach ($array_satisfaction as $value) {
+			if($row2[$value]>0){
+				$satisfaction_absolute += $row2[$value];
+			}
+			else{
+				$satisfaction_absolute += 2.5;
+
+			}	
+		}
+
+
+	}
 
 	//EXTERNAL VALUES
 	$value_agility = $agility_absolute/$count;
@@ -101,10 +163,18 @@
 	//INTERNAL VALUES
 
 
+	$value_sus = $sus_absolute/$countExt;
+	$value_usefullness = $usefullness_absolute/$countExt;
+	$value_satisfaction = $satisfaction_absolute/$countExt;
 
+	$sus = ($value_sus/100)*(50);
+	$usefullness = ($value_usefullness/30)*25;
+	$satisfaction = ($value_satisfaction/30)*25;
+
+	
 
 	//RESPONSE BODY JSON
-	$arr = array ('item1'=>$agility,'item2'=>$ui,'item3'=>$team, 'item4'=>$org, 'item5'=>$value_agility, 'item6'=>$value_ui, 'item7'=>$value_team, 'item8'=>$value_org);
+	$arr = array ('item1'=>$agility,'item2'=>$ui,'item3'=>$team, 'item4'=>$org, 'item5'=>$sus, 'item6'=>$usefullness, 'item7'=>$satisfaction, 'item8'=> $count, 'item9'=>$countExt);
 	echo json_encode($arr);
 
 ?>
