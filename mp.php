@@ -10,16 +10,30 @@ if($_SESSION['username']==""){
 	$success="";
 	$uname = $_SESSION['username'];
 
+
+
 	
 if (isset($_GET["cname"])){
+
 			$cname = $_GET["cname"];
 			$cver = $_GET["cver"];
 			$np_name = $_GET['nn'];
 			$np_class = $_GET['nv']; 
+
+				$query1 = "SELECT product_id FROM products where username = '$uname' and p_name='$cname' and p_class='$cver'";
+				$result1 = mysql_query($query1) or die(mysql_error());
+				$count1 = mysql_num_rows($result1);
+				while($row = mysql_fetch_array($result1)){
+					if($row['product_id']==65 || $row['product_id']==66)
+						echo('<script>alert("Sorry, DemoProduct cannot be modified!");</script>');
+				
+					else{
 						$query =  "UPDATE products SET p_name='$np_name', p_class='$np_class' WHERE username = '$uname' and p_name='$cname' and p_class='$cver'";
 						$result = mysql_query($query) or die(mysql_error());
 							if($result==1)
 							$success = "**Updated!";
+					}
+					}
 						}	
 if (isset($_GET["dname"])){
 			$result = 0;
@@ -29,13 +43,22 @@ if (isset($_GET["dname"])){
 			$result = mysql_query($query) or die(mysql_error());
 			$count = mysql_num_rows($result);
 			if($count==1){
+				$query1 = "SELECT product_id FROM products where username = '$uname' and p_name='$dname' and p_class='$dver'";
+				$result1 = mysql_query($query1) or die(mysql_error());
+				$count1 = mysql_num_rows($result1);
+				while($row = mysql_fetch_array($result1)){
+					if($row['product_id']==65 || $row['product_id']==66)
+						echo('<script>alert("Sorry, DemoProduct cannot be deleted!");</script>');
+					else{
 			$query = "DELETE FROM products WHERE username = '$uname' and p_name='$dname' and p_class='$dver'";
 			$result = mysql_query($query) or die(mysql_error());
 				if($result==1)
 					$success = "**Deleted!";
 					echo($msg);
 					}		
+				}
 						}	
+					}
  ?>
 
 <html>
