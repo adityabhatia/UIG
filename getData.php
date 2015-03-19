@@ -113,24 +113,11 @@
 		}
 	
 		foreach ($array_usefullness as $value) {
-						echo($row2[$value]);
 			if($row2[$value]>0){
 				$usefullness_absolute += $row2[$value];
 			}
 			else{
 				$usefullness_absolute += 2.5;
-
-			}	
-
-		}
-
-		foreach ($array_intention as $value) {
-			
-			if($row2[$value]>0){
-				$intention_absolute += $row2[$value];
-			}
-			else{
-				$intention_absolute += 2.5;
 
 			}	
 
