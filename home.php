@@ -47,8 +47,8 @@ if($_SESSION['username']==""){
 								<img style="float:left" src="img/uig-test.png"/>							
 								<p>	<br/><br/>
 									<b>First step:</b> Register a product for the UIG survey.<br/><br/>
-									<b>Second step:</b> Invite development team members to your survey.<br/><br/>
-									<b>Third step:</b> Provide the user survey link to your software customers.
+									<b>Second step:</b> Invite development team members to your survey and share the user survey link with your software customers and clients.<br/><br/>
+									<b>Third step:</b> Analyze the responses and take actions.
 								</p>
 								<br/><br/><br/><br/>
 						<p>In the end we will present you a precise evaluation and analysis of the usability level of your product.</p>

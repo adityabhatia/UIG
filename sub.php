@@ -215,6 +215,7 @@
 						$("#report_status_user_completed").hide();
 						$("#report_status_team_not").show();
 						$("#report_status_user_not").show();
+						$(".final_report").hide();
 
 					}else if(report_status == 1){
 						$(".report_user_avail").show();
@@ -223,6 +224,7 @@
 						$("#report_status_user_completed").show();
 						$("#report_status_team_not").show();
 						$("#report_status_user_not").hide();
+						$(".final_report").hide();
 					}else if(report_status == 2){
 						$(".report_user_avail").hide();
 						$(".report_team_avail").show();
@@ -230,6 +232,7 @@
 						$("#report_status_user_completed").hide();
 						$("#report_status_team_not").hide();
 						$("#report_status_user_not").show();
+						$(".final_report").hide();
 					}else if(report_status == 3){
 						$(".report_user_avail").show();
 						$(".report_team_avail").show();
@@ -237,6 +240,7 @@
 						$("#report_status_user_completed").show();
 						$("#report_status_team_not").hide();
 						$("#report_status_user_not").hide();
+						$(".final_report").show();
 					}
 
 					//SEND SINGLE INVITATION
@@ -380,9 +384,14 @@
 					$("#user_weighted").html(Math.round(involvement));
 					$("#en_weighted").html(Math.round(enabling));
 					$("#org_weighted").html(Math.round(organization));
+
+					$(".final").html(Math.round(((Math.round(agility)+Math.round(involvement)+Math.round(enabling)+Math.round(organization))*2+(Math.round(sus)+Math.round(usefullness)+Math.round(satisfaction)))/3));
+
 					
 					$("#participants_done").html(survey_participants);
 					$("#users_done").html(survey_users);
+
+
 
 
 					
@@ -390,7 +399,7 @@
 
 					//DATA ARRAY FOR BAR CHART
 					data = {
-					    	labels: ["Agility", "User Involvement", "Enabling Structure", "Organization"],
+					    	labels: ["Enabling Str.", "Agility", "User Inv.", "Organization"],
 						    	datasets: [
 						        {
 						            label: "My First dataset",
@@ -398,7 +407,7 @@
 						            strokeColor: "rgba(44,139,183,0.1)",
 						            highlightFill: "rgba(44,139,183,0.75)",
 						            highlightStroke: "rgba(44,139,183,0.75)",
-						            data: [Math.round(agility), Math.round(involvement), Math.round(enabling), Math.round(organization)]
+						            data: [ Math.round(enabling), Math.round(agility), Math.round(involvement), Math.round(organization)]
 						        }
 						       
 						    ]
@@ -433,7 +442,7 @@
 						    barStrokeWidth : 0,
 
 						    //Number - Spacing between each of the X value sets
-						    barValueSpacing : 40,
+						    barValueSpacing : 30,
 
 						    //Number - Spacing between data sets within X values
 						    barDatasetSpacing : 1,
@@ -466,7 +475,7 @@
 
 					//DATA ARRAY FOR BAR CHART User Survey
 					data2 = {
-					    	labels: ["SUS", "Usefullness", "User satisfaction"," "],
+					    	labels: ["SUS", "Usefulness", "User satisfaction"," "],
 						    	datasets: [
 						        {
 						            label: "My First dataset",
@@ -684,10 +693,6 @@
 							
 						</form>					
 					</div>
-					<div class="col-xs-12 col-sm-12" style="text-align:left;" ><br>
-						<p>An overview of the results of all product-related surveys is shown in the review section.</p>
-						
-					</div>
 				</span>
 
 
@@ -728,23 +733,21 @@
 					
 
 					<div class ="row report">
-						<h2 class="page-header" ><b>UIG Survey Report:</b> <?php echo($product_name);?> <i class="glyphicon glyphicon-stats"></i></h2>
+						<h2 class="page-header" ><b>UIG Dashboard:</b> <?php echo($product_name);?> <i class="glyphicon glyphicon-stats"></i></h2>
 						<p id="report_status_team_completed"><i class="glyphicon glyphicon-check" style="color:green;" ></i> The team survey of the product <b> <?php echo($product_name);?></b> has been completed.</p>
 						<p id="report_status_user_completed"><i class="glyphicon glyphicon-check" style="color:green;"></i> The user survey of the product <b> <?php echo($product_name);?></b> has been completed.</p>
 						<p id="report_status_team_not"><i class="glyphicon glyphicon-unchecked" style="color:red;"></i> The team survey of the product <b> <?php echo($product_name);?></b> has  not been completed. The team survey report is not available.</p>
 						<p id="report_status_user_not"><i class="glyphicon glyphicon-unchecked" style="color:red;"></i> The user survey of the product <b> <?php echo($product_name);?></b> has not been completed. The user survey report is not available.</p>
 						<br/>
-						<b>Unfortunately a final score is not available at the moment.</b>
 					</div>
 
 					<hr>
 
 					<div class ="row">
-
 							<h3 >The Evaluation Process</h3>
 							<div class="col-xs-12 col-sm-6 col-md-6 ">
 								<br/>
-								<p>In the end of the evaluation a <b>final score</b> is presented.<br/>
+								<p>In the end of the evaluation the <b>final UIG score</b> is presented.<br/>
 								The diagnose differentiate between a internal and external perspective.</p>
 									<ul>
 										<li>The <b>external</b> factor represents the score of the user survey: 1/3 of the final score</li>
@@ -752,15 +755,29 @@
 									</ul>
 							</div>
 
-														<div class="col-xs-12 col-sm-6 col-md-6">
-								<br/>
+							<div class="col-xs-12 col-sm-6 col-md-6">
 								<canvas id="doughnutChart"></canvas>
-							</div>
-							
-							
+							</div>	
 					</div>
 
 					<hr>
+					<br/>
+
+
+					<div class="final_report">
+						<div class="row">
+							<h3>Final UIG Score</h3>
+							<div class="col-xs-12">
+								<div class="report_element">
+									<h3>UIG score: <b class="final" style="font-size:22px; color:#2C8BB7;"></b> / 100.</h3>
+									<p>The product <b><?php echo($product_name);?></b> achieved <b class="final"></b> points in the UIG diagnosis.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<hr>
+					<br/>
 
 					<div class="report_team_avail">
 						<div class="row ">
@@ -770,7 +787,11 @@
 
 									<p>The team is investigated along four factors: Agility, User Involvement, Enabling Structure and Organization.</p>
 									<br/>
-									
+										
+										<h4 ><b>Enabling Structure:&nbsp;<b id="en_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
+										<p id="enabling-toggle">The value enabling structure considers e.g. the composition of the team, its standards and tasks.</p>
+										<!--<p><i>Absolute score / Max. score:&nbsp;</i> <b id="en_absolute"></b><b> / 100</b></p>-->
+										<hr>
 									
 										<h4><b>Agility:&nbsp;<b id="agility_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
 										<p id="agility-toggle">	The value agility considers e.g. the flexibility of the development process.</p>
@@ -782,12 +803,7 @@
 										<p id="user-toggle">The value user involvement considers e.g. the level of user involvement and their representativeness during the development process.</p>
 										<!--<p>	<i>Absolute score / Max. score:&nbsp;</i> <b id="user_absolute"></b> &nbsp;<b>/ 46</b>	</p>-->
 										
-										<hr>
 
-										<h4 ><b>Enabling Structure:&nbsp;<b id="en_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
-										<p id="enabling-toggle">The value considers enabling structure e.g. the composition of the team, its standards and tasks.</p>
-										<!--<p><i>Absolute score / Max. score:&nbsp;</i> <b id="en_absolute"></b><b> / 100</b></p>-->
-										
 										<hr>
 										
 										<h4><b>Organization:&nbsp;<b id="org_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showOrg()"></a></h4>
@@ -818,25 +834,21 @@
 					<div class="report_user_avail">
 					<div class="row">
 						
-								<h3>Evaluation: User Survey</h3>
+						<h3>Evaluation: User Survey</h3>
 						<div class="col-xs-12 col-sm-12 col-md-6">
 							<div class=" report_element">
 
-								<p>External criterias are investigated along three factors: SUS, the Usefullness and the User Satisfaction.</p>
+								<p>External criterias are investigated along three factors: SUS, the Usefulness and the User Satisfaction.</p>
 								<br/>
 								
 									<h4><b>SUS:&nbsp;<b id="sus_weighted" style="color:#2C8BB7;"></b> / 50</b>&nbsp;<i style="font-size:14px;">(normalized)</i></h4>
 									
 									
-
+									<hr>		
+									<h4><b>Usefulness:&nbsp;<b id="usefullness_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i></h4>
+									
+																
 									<hr>
-									
-									<h4><b>Usefullness:&nbsp;<b id="usefullness_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i></h4>
-									
-									
-									
-									<hr>
-
 									<h4 ><b>Satisfaction:&nbsp;<b id="satisfaction_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i></h4>
 
 									<hr>													
@@ -855,8 +867,10 @@
 								<p>The product <b><?php echo($product_name);?></b> achieved <b class="final_external"></b> points in the user survey.</p>
 							</div>
 							</div>
-						</div>
-				</div>
+					</div>
+					</div>
+
+					
 
 				</span>
 		</div>
