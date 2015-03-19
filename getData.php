@@ -21,9 +21,9 @@
 	$value_org = 0;
 
 	//EXTERNAL
-	$array_sus = array("v_63","v_64","v_65","v_66","v_67","v_68","v_69","v_70","v_71","v_72");
-	$array_usefullness = array("v_84","v_85","v_86","v_87","v_88","v_89");
-	$array_satisfaction = array("v_76","v_90","v_78","v_79","v_80","v_95");
+	$array_sus = array("v_9","v_10","v_11","v_12","v_13","v_14","v_15","v_16","v_17","v_18");
+	$array_usefullness = array("v_101","v_102","v_103","v_104","v_105","v_106");
+	$array_satisfaction = array("v_46","v_90","v_56","v_61","v_66","v_95");
 
 	$sus_absolute = 0;
 	$usefullness_absolute = 0;
@@ -52,6 +52,7 @@
 	//GET INTERNAL UNIPARK DATA
 	while($row = mysql_fetch_array($result)){
 		foreach ($array_agility as $value) {
+
 			if($row[$value]>0){
 				$agility_absolute += $row[$value];
 			}
@@ -101,18 +102,18 @@
 	//GET EXTERNAL UNIPARK DATA
 	while($row2 = mysql_fetch_array($resultExt)){
 		foreach ($array_sus as $value) {
+
 			if($row2[$value]>0){
 				$sus_absolute += $row2[$value];
 			}
 			else{
 				$sus_absolute += 2.5;
-
 			}
 
 		}
 	
 		foreach ($array_usefullness as $value) {
-			
+						echo($row2[$value]);
 			if($row2[$value]>0){
 				$usefullness_absolute += $row2[$value];
 			}
