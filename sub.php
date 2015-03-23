@@ -587,7 +587,7 @@
 
 	</head>
 	<body>
-		<div class="container-fluid" style="max-width:1500px;">
+		<div class="container">
 
 
 				<!--
@@ -732,7 +732,7 @@
 				<span class="sel4">
 					
 
-					<div class =" report">
+					<div class ="row report">
 						<h2 class="page-header" ><b>UIG Dashboard:</b> <?php echo($product_name);?> <i class="glyphicon glyphicon-stats"></i></h2>
 						<p id="report_status_team_completed"><i class="glyphicon glyphicon-check" style="color:green;" ></i> The team survey of the product <b> <?php echo($product_name);?></b> has been completed.</p>
 						<p id="report_status_user_completed"><i class="glyphicon glyphicon-check" style="color:green;"></i> The user survey of the product <b> <?php echo($product_name);?></b> has been completed.</p>
@@ -743,7 +743,7 @@
 
 					<hr>
 
-					<div>
+					<div class ="row">
 							<h3 >The Evaluation Process</h3>
 							<div class="col-xs-12 col-sm-6 col-md-6 ">
 								<br/>
@@ -764,7 +764,7 @@
 
 
 					<div class="final_report">
-						<div>
+						<div class="row">
 							<h3>Final UIG Score</h3>
 							<div class="col-xs-12">
 								<div class="report_element">
@@ -779,7 +779,7 @@
 					<br/>
 
 					<div class="report_team_avail">
-						<div>
+						<div class="row ">
 							<h3>Evaluation: Team Survey</h3>
 							<div class="col-xs-12 col-sm-12 col-md-6">
 								<div class=" report_element">
@@ -818,7 +818,7 @@
 							</div>
 						</div>
 
-						<div>
+						<div class ="row">
 							<div class="col-xs-12">
 								<div class=" report_element">
 								<h3>Final team survey score: <b class="final_internal" style="font-size:22px; color:#2C8BB7;"></b> / 100.</h3>
@@ -831,7 +831,7 @@
 						
 					<br/>
 					<div class="report_user_avail">
-					<div>
+					<div class="row">
 						
 						<h3>Evaluation: User Survey</h3>
 						<div class="col-xs-12 col-sm-12 col-md-6">
@@ -859,7 +859,7 @@
 							</div>
 						</div>
 					</div>
-					<div>
+					<div class ="row">
 							<div class="col-xs-12">
 								<div class=" report_element">
 								<h3>Final user survey score: <b class="final_external" style="font-size:22px; color:#2C8BB7;"></b> / 100.</h3>
