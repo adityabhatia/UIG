@@ -33,7 +33,8 @@
 								<div id="errorstatus" style="color:#AA4139;"></div>
 								<br />
 								<form class="form-horizontal" method="post" action="">
-									<div class="col-xs-12 col-sm-6 ">
+									
+										<div class="col-xs-12 col-sm-6 " style="border-right:2px solid #eee;">
 										<h2 class="panel-title"><b>General Product Information</b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
 											<label for="inputName" class="col-sm-5 col-xs-6 control-label nopadding">Product Name</label>
@@ -49,11 +50,16 @@
 										</div>
 										
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Budget <span style="font-weight:normal;">(in 1000 € /year)</span></label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Budget <span style="font-weight:normal;">(initial costs in €)</span></label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="tb3" name="budget" placeholder="Budget" required />
 											</div>
 										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-6 " style="border-right:2px solid #eee;">
+										<h2 class="panel-title" style=""><b>Product Development Duration</b></h2><br />
+
 										<div class="row" style="margin-bottom:5px;">
 											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Start Date <span style="font-weight:normal;">(dd/mm/yyyy)</span></label>
 											<div class="col-sm-7 col-xs-6">
@@ -66,7 +72,16 @@
 												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="tb5" id="edate" name="edate" placeholder="End Date" required />
 											</div>
 										</div>
-										<HR WIDTH="100%" SIZE="3" style=" border-width:2px;" > 
+										</div>
+									
+									
+
+
+										<div class="col-sm-12 col-xs-12">
+										<HR  WIDTH="100%" SIZE="3" style=" border-width:2px;" > 
+										</div>
+
+										<div class="col-xs-12 col-sm-6 " style="border-right:2px solid #eee;">
 										<h2 class="panel-title"><b>Development Information</b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
 											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Team Size</label>
@@ -98,9 +113,10 @@
 													Others <br />
 												</div>
 										</div>
-										
+
 										</div>
-									<div class="col-xs-12 col-sm-6">
+									<div class="col-xs-12 col-sm-6" style="border-right:2px solid #eee;">
+
 										<h2 class="panel-title"><b>Location Information</b></h2><br />
 										<div>
 											<table class="table-bordered table-striped table-condensed" id="teamallocation" align=center>
@@ -108,7 +124,7 @@
 											</table>
 										</div>
 									</div>
-									<div class="col-sm-12 col-xs-12">
+									<div class="col-sm-12 col-xs-12"><br />
 										<div class="form-group" align=center>
 												<input id="submit" type="button" class="btn btn-default" style="margin-bottom:-10px;" value="Add Product" />
 										</div>

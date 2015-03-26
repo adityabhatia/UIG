@@ -59,17 +59,26 @@ if($result){
 						Dear <b>Admin</b>,<br /><br />
 						You have received a new feedback. 
 						<br /><br />
-						Username: ' . $username . 
-						'<br />Performance: ' . $performance . 
-						'<br />Usability: ' . $usability . 
-						'<br />Category: ' . $ncategory . 
-						'<br />Comments: ' . $comments . 
+						<b>Username</b>: ' . $username . 
+						'<br /><b>Performance</b>: ' . $performance . 
+						'<br /><b>Usability</b>: ' . $usability . 
+						'<br /><b>Category</b>: ' . $ncategory . 
+						'<br /><b>Comments</b>: ' . $comments . 
 						'<br /><br />Thanks,<br />
-						UIG Team.';
+						UIG Team. <br /><br /><span style="color:grey";
+
+						UIG e.V.<br />
+						University of Mannheim | Business School<br />
+						Institute for Enterprise Systems (InES)<br />
+						L 15, 1-6 | 4th floor | 68131 Mannheim | Germany <br />
+						Phone +49 621 181-3550 | Fax +49 621 181-3627<br />
+						Email: uig@uni-mannheim.de </span>';
 
 						$mail->AltBody    = "New UIG Feedback!" ; // optional, comment out and test
 
 						$mail->AddAddress("bhatia.aditya11@gmail.com", "admin");
+						$mail->AddAddress("werder@es.uni-mannheim.de", "admin");
+						$mail->AddAddress("thilo@thiloweigold.de", "admin");
 
 						if(!$mail->Send()) {
 						  $msg = "Mailer Error: " . $mail->ErrorInfo;
@@ -245,7 +254,7 @@ if($result){
 
 		<div class="container-fluid">	
 			<div class="row">
-					<div class="col-sm-3 col-md-2 sidebar" id="sidebar" role="navigation">
+					<div class="col-sm-3 col-md-2 sidebar" id="sidebar" role="navigation" >
 						<div class="list-group">
 							<a href="mp.php" target="myiframe" class="list-group-item deactive external" id="listh"><i class="glyphicon glyphicon-cog"></i>&nbsp&nbspOrganize Products</a>
 							<span class = "sublist"><a href="" target="myiframe" class="list-group-item deactive" id="listh" style="padding-left:1em; border-left:none; border-right:none;"><i class="glyphicon glyphicon-minus"></i>&nbsp&nbsp Product Overview</a>
@@ -265,7 +274,7 @@ if($result){
 							
 							</div>
 					</div>
-					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 						<div class="embe">
 							<iframe src="home.php" name="myiframe" width=100% 
 							frameborder="0" scrolling=no class="iframe" id="iframe"> </iframe>
