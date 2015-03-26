@@ -71,14 +71,14 @@
 										<div class="row" style="margin-bottom:5px;">
 											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Team Size</label>
 											<div class="col-sm-7 col-xs-6">
-												<input type="number" class="form-control" id="tb6" name="groupsize" placeholder="No. of Team Members" required />
+												<input type="text" class="form-control" id="tb6" name="groupsize" placeholder="No. of Team Members" required />
 											</div>
 										</div>
 
 										<div class="row" style="margin-bottom:5px;">
 											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Sites</label>
 											<div class="col-sm-7 col-xs-6">
-												<input type="number" min="1" class=form-control id="tb9" name="teamno" placeholder="No. of Sites" required />
+												<input type="text" min="1" class=form-control id="tb9" name="teamno" placeholder="No. of Sites" required />
 											</div>
 										</div>
 										
@@ -86,15 +86,15 @@
 										<div class="row" style="margin-bottom:5px;">
 											<label class="col-sm-5 col-xs-6 control-label nopadding">Team Role</label>
 												<div class="col-sm-2 col-xs-2" style="padding-right:0; text-align:center; font-size:12px;">
-													<input type="number" class="form-control" min="0" id="tb7" name="developers" placeholder="0" required />
+													<input type="text" class="form-control" min="0" id="tb7" name="developers" placeholder="0" required />
 													Developers <br />
 												</div>
 												<div class="col-sm-2 col-xs-2" style="padding-right:0; text-align:center; font-size:12px;">
-													<input type="number" class="form-control" min="0" id="tb8" name="designers" placeholder="0" required />
+													<input type="text" class="form-control" min="0" id="tb8" name="designers" placeholder="0" required />
 													Designers <br />
 												</div>
 												<div class="col-sm-2 col-xs-2" style="padding-right:0; text-align:center; font-size:12px;">
-													<input type="number" class="form-control" min="0" id="tb10" name="others" placeholder="0" required />
+													<input type="text" class="form-control" min="0" id="tb10" name="others" placeholder="0" required />
 													Others <br />
 												</div>
 										</div>
@@ -229,19 +229,106 @@
 					$("#errorstatus").html("");
 					$("#errorstatus").html("**Invalid Date!");
 				}
-					var total = parseInt(others1)+parseInt(designers1)+parseInt(developers1);
-				if(total!=groupsize1)
+					
+
+				if(isNaN(budget1)==1 || budget1<0)
+					{$("#tb3").css("border", "solid 2px #AA4139");
+					if(valid==1){
+					$("#errorstatus").append("<br />**Only Numerical values allowed for Budget!");
+					valid=3;
+				}
+
+					else{
+						$("#errorstatus").html("**Only Numerical values allowed for Budget!");
+						valid=3;
+					}
+				}
+
+				if ((isNaN(groupsize1)==1 || groupsize1<0)  && valid!=3)
+						{$("#tb6").css("border", "solid 2px #AA4139");
+					if(valid==1){
+					$("#errorstatus").append("<br />**Only Numerical values allowed for Team Size!");
+					valid=3;
+				}
+
+					else{
+						$("#errorstatus").html("**Only Numerical values allowed for Team Size!");
+						valid=3;
+					}
+				}
+
+					if ((isNaN(teamno1)==1 || teamno1<0) && valid!=3)
+						{$("#tb9").css("border", "solid 2px #AA4139");
+					if(valid==1){
+					$("#errorstatus").append("<br />**Only Numerical values allowed for Sites!");
+					valid=3;
+				}
+
+					else{
+						$("#errorstatus").html("**Only Numerical values allowed for Sites!");
+						valid=3;
+					}
+				}
+
+				if ((isNaN(developers1)==1 || developers1<0)  && valid!=3)
+						{ $("#tb7").css("border", "solid 2px #AA4139");
+
+					if(valid==1){
+					$("#errorstatus").append("<br />**Only Numerical values allowed for Developers!");
+					valid=3;
+				}
+					else{
+						$("#errorstatus").html("**Only Numerical values allowed for Developers!");
+						valid=3;
+					}
+				}
+
+
+				if ((isNaN(designers1)==1 || designers1<0) && valid!=3)
+						{$("#tb8").css("border", "solid 2px #AA4139");
+					if(valid==1){
+					$("#errorstatus").append("<br />**Only Numerical values allowed for Designers!");
+					valid=3;
+				}
+
+					else{
+						$("#errorstatus").html("**Only Numerical values allowed for Designers!");
+						valid=3;
+					}
+				}
+
+				if ((isNaN(others1)==1 || others1<0) && valid!=3)
+						{$("#tb10").css("border", "solid 2px #AA4139");
+					if(valid==1){
+					$("#errorstatus").append("<br />**Only Numerical values allowed for Others!");
+					valid=3;
+				}
+
+					else{
+						$("#errorstatus").html("**Only Numerical values allowed for Others!");
+						valid=3;
+					}
+				}
+
+		
+
+				var total = parseInt(others1)+parseInt(designers1)+parseInt(developers1);
+				if(total!=groupsize1 && valid!=3)
 				{
 					$("#tb6,#tb7,#tb8,#tb10").css("border", "solid 2px #AA4139");
 					console.log(total);
 					console.log(groupsize1);
-					if(valid==1)
-					$("#errorstatus").append("<br />**Team Size should be equal to the sum of Team Roles ");
+					if(valid==1){
+					$("#errorstatus").append("<br />**Team Size should be equal to the sum of Team Roles. ");
+					valid=2;
+				}
 					else{
-					$("#errorstatus").append("**Team Size should be equal to the sum of Team Roles ");
+					$("#errorstatus").append("**Team Size should be equal to the sum of Team Roles. ");
 					valid=1;
 				}
 				}
+
+				
 
 				if(valid==0){
 					var sdatesplit = dp11.split("/");
@@ -277,7 +364,7 @@
 							$("#tb2").css("border", "solid 2px #AA4139");
 						}
 						else{
-							alert(data);
+							//alert(data);
 							window.location.href = "mp.php?reset=1";
 							}
 					});
