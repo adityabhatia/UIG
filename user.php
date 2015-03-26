@@ -16,9 +16,10 @@ $experience = $_POST['experience'];
 $user = $_POST['username'];
 $email = $_POST['email'];
 
-			$query2 = "SELECT * FROM `user` WHERE username='$user'";
+			$query2 = "SELECT * FROM `user` WHERE username='$username'";
 			$result2 = mysql_query($query2) or die(mysql_error());
 			$count2 = mysql_num_rows($result2);
+			$user = strtolower($user);
 				if(($count2>=1 && $user==$username) || ($count2<1) )
 				{
 			$query1 =  "UPDATE `user` SET `name`='$name',`company`='$company',
