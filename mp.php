@@ -385,6 +385,9 @@ $('.glyphicon-unchecked').tooltip({
 		substr = className.split('__');
 			$("#inputName").attr("placeholder", substr[1]);
 			$("#version").attr("placeholder", substr[2]);
+			$("#inputName").val(substr[1]);
+			$("#version").val(substr[2]);
+
 	});
 	$('#removal').click(function(){
 		var $url= "mp.php?dname="+substr[1]+"&dver="+substr[2];
