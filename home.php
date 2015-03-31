@@ -4,7 +4,7 @@ require('connect.php');
 $msg="";
 if($_SESSION['username']==""){
 ?>
-<script>top.window.location.href="main.php";</script>
+<script>top.window.location.href="login.php";</script>
 <?php } 
 ?>
 
