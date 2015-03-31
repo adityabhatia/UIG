@@ -79,7 +79,15 @@
 				<a href="' . $survey_url .'" style="background-color:#373737;border:1px solid grey;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:14px;line-height:30px;text-align:center;text-decoration:none;width:100px;-webkit-text-size-adjust:none;mso-hide:all;">Click here! &rarr;</a>
 				
 				<br/><br/>Best Regards,<br/>
-				UIG Team';
+				UIG Team
+				<br /><br /><span style="color:grey";
+
+						UIG e.V.<br />
+						University of Mannheim | Business School<br />
+						Institute for Enterprise Systems (InES)<br />
+						L 15, 1-6 | 4th floor | 68131 Mannheim | Germany <br />
+						Phone +49 621 181-3550 | Fax +49 621 181-3627<br />
+						Email: uig@uni-mannheim.de </span>';
 
 				$mail->AltBody    = "Survey Invitation" ; // optional, comment out and test
 

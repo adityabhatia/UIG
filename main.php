@@ -77,8 +77,8 @@ if($result){
 						$mail->AltBody    = "New UIG Feedback!" ; // optional, comment out and test
 
 						$mail->AddAddress("bhatia.aditya11@gmail.com", "admin");
-						//$mail->AddAddress("werder@es.uni-mannheim.de", "admin");
-						//$mail->AddAddress("thilo@thiloweigold.de", "admin");
+						$mail->AddAddress("werder@es.uni-mannheim.de", "admin");
+						$mail->AddAddress("thilo@thiloweigold.de", "admin");
 
 						if(!$mail->Send()) {
 						  $msg = "Mailer Error: " . $mail->ErrorInfo;
