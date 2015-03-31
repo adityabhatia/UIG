@@ -1,7 +1,13 @@
 
 <!DOCTYPE html>
-
-
+<?php 
+session_start();
+require('connect.php');
+if($_SESSION['username']==""){
+?>
+<script>top.window.location.href="main.php";</script>
+<?php }  else 
+{ ?>
 <html lang="en">
 	<head>
 		<!--Inclusions-->
@@ -405,3 +411,4 @@
 		</script>
 		</body>
 </html>
+<?php } ?>

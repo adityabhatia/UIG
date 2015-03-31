@@ -1,0 +1,38 @@
+
+
+#slider{
+	
+	width:158px;
+	top:20px;
+	position:absolute;
+}
+   
+#header{ 
+	display:none;
+	background:#BDBDBD;
+	width:360px;
+	position:absolute; 
+	right:0px; 
+	border:1px solid #d8d8d8;
+	margin-left:40px;
+	padding:20px 40px;
+	border-radius:3px;
+	box-shadow: 0 0 8px gray;
+}
+
+
+#sidebarnew{
+	position:absolute;
+	top:180px;
+	left:113px;
+	box-shadow: 0 0 8px gray;
+}
+
+#sidebar1{
+	position:absolute;
+	top:180px;
+	left:113px;
+	box-shadow: 0 0 8px gray;
+}
+
+

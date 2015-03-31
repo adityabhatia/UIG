@@ -77,8 +77,8 @@ if($result){
 						$mail->AltBody    = "New UIG Feedback!" ; // optional, comment out and test
 
 						$mail->AddAddress("bhatia.aditya11@gmail.com", "admin");
-						$mail->AddAddress("werder@es.uni-mannheim.de", "admin");
-						$mail->AddAddress("thilo@thiloweigold.de", "admin");
+						//$mail->AddAddress("werder@es.uni-mannheim.de", "admin");
+						//$mail->AddAddress("thilo@thiloweigold.de", "admin");
 
 						if(!$mail->Send()) {
 						  $msg = "Mailer Error: " . $mail->ErrorInfo;
@@ -93,8 +93,11 @@ if($result){
 <html lang="en">
 	<head>
 		<!--Inclusions-->
+		
+		<script src="js/slider.js"></script>
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		
 
 		<script type="text/javascript">
 				$( document ).ready(function() {
@@ -190,6 +193,7 @@ if($result){
 			<link rel="stylesheet" type="text/css" href="css/dashboard.css">
 
 			<link type="text/css" rel="stylesheet" href="css/main.css">
+			<link rel="stylesheet" href="css/slider.css" />
 
 			 <!--[if lt IE 9]>
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -236,7 +240,7 @@ if($result){
 					<li><a id="add" href="contact.php" target="myiframe">Contact</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right" >
-					<div class="dropdown" >
+					<div class="dropdown">
 						<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" style="display:block; width:160px;">
 						<i class="glyphicon glyphicon-user"></i>   <?php echo($_SESSION['username']); ?>
 							<span class="caret"></span></a>
@@ -264,7 +268,7 @@ if($result){
 							</span>
 							<a href="np.php" target="myiframe" class="list-group-item deactive external" id="listnp"><i class="glyphicon glyphicon-plus"></i>&nbsp&nbspRegister Product</a>
 							
-							<br /><a href="" data-toggle="modal" data-target="#feedback" type="button" class="btn btn-default center-block" align=right style="display:block; white-space: normal;">Give your Feedback here!</a>
+							
 							<br /><img class=beta src="img/beta.jpg" height=120 width=120></img>
 							
 							<br /> 	<div class="panel"> 
@@ -276,30 +280,33 @@ if($result){
 					</div>
 					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 						<div class="embe">
+
 							<iframe src="home.php" name="myiframe" width=100% 
 							frameborder="0" scrolling=no class="iframe" id="iframe"> </iframe>
 						</div>
-					</div>
-			</div>
+						
 
-	</div>
 
-	
 
-	<div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-      		<div class="panel panel-default" style="margin:0 auto; max-width:500px; width=200px">
-							<div class="panel-heading">
-								<h2 class="panel-title">Your Feedback<!--<?php echo($msg);?>--></h2>
+
+						<div id="slider" style="right:1px;">
+							<div id="sidebarnew" onclick="open_panel()">
+								<img src="images/contact.png"/>
 							</div>
-							<div class="panel-body">
-							Your feedback is important to us. Please let us know how can we improve this tool further.<br/><br/>
-							<form name="contactform" method="post" action="" class="form-horizontal" role="form" style="">
-								<h2 class="panel-title"><b>Please rate your experience using this tool</b></h2>
-									<div style="text-align:left; font-size:12px;">(1-Poor, 5-Outstanding)</div>
-									<div class="form-group">
+
+							<div id="header" style="padding:0;">
+				
+      							<div class="panel panel-default" style="margin:0 auto; max-width:500px; padding:0;">
+									<div class="panel-heading">
+									<h2 class="panel-title">Your Feedback<!--<?php echo($msg);?>--></h2>
+								</div>
+
+								<div class="panel-body">
+									Your feedback is important to us. Please let us know how can we improve this tool further.<br/><br/>
+									<form name="contactform" method="post" action="" class="form-horizontal" role="form" style="">
+										<h2 class="panel-title"><b>Please rate your experience using this tool</b></h2>
+										<div style="text-align:left; font-size:12px;">(1-Poor, 5-Outstanding)</div>
+										<div class="form-group">
 										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Performance</label>
 										<div class="col-sm-9 col-xs-9">
 											<label class="radio-inline">
@@ -372,16 +379,21 @@ if($result){
 											<button type="submit" class="btn btn-default" name=submit >
 												Send Message
 											</button>
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-default" onclick="close_panel()">Close</button>
 									</div>
 								</form>
 							</div>
 							<div align=center>Thanks for taking out the time to give us your feedback.</div>
 			</div>
+				
 		</div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+	</div>
+					</div>
+			</div>
+
+	</div>
+
+	
 	<style type="text/css">
 	.beta {
 					    display: block;

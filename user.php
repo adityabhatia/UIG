@@ -4,7 +4,7 @@ require('connect.php');
 $msg="";
 if($_SESSION['username']==""){
 ?>
-<script>window.location.replace("login.php");</script>
+<script>top.window.location.href="main.php";</script>
 <?php } 
 else{$username = $_SESSION['username'];
 if(isset($_POST["submit"])){
