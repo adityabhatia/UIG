@@ -77,6 +77,7 @@ while($row = mysql_fetch_array($result)){
 
 	</head>
 	<body>
+		<?php include_once("analyticstracking.php") ?>
 		<div class="container">
 						<div class="panel panel-default" style="margin:0 auto; width:100%; max-width:500px">
 							<div class="panel-heading">

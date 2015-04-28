@@ -31,6 +31,7 @@ if($_SESSION['username']==""){
 
 	</head>
 	<body>
+		<?php include_once("analyticstracking.php") ?>
 		<div class="container-fluid" width=200px>
 			<div class="col-md-12">
 			<h2 class="page-header">About Us</h2>

@@ -84,6 +84,7 @@ if (isset($_GET["dname"])){
 </head>
 
 <body id="tabular" >
+	<?php include_once("analyticstracking.php") ?>
 	<div class="container">
 		<h2 class="page-header"><b> Organize Products</b></h2>
 		Please select a product to get more detailed information.<br />

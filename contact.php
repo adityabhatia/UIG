@@ -47,6 +47,7 @@ if($result){
 
 	</head>
 	<body>
+		<?php include_once("analyticstracking.php") ?>
 	<div class="col-xs-12 col-sm-12"
 		<div class="container" width=200px>
 			<div class="panel panel-default" style="margin:0 auto; max-width:500px;">

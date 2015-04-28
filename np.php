@@ -28,6 +28,7 @@ if($_SESSION['username']==""){
 
 	</head>
 	<body>
+		<?php include_once("analyticstracking.php") ?>
 		<div class="container" style=" margin: 0 auto;">
 		<div class = "col-sm-12 col-xs-12" >
 						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">

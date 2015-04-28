@@ -63,6 +63,7 @@ else{
 	</head>
 	
 	<body style="background-color:#f5f5f5">
+		<?php include_once("analyticstracking.php") ?>
 		<div class="row">
 		<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
 			<!-- Brand and toggle get grouped for better mobile display -->

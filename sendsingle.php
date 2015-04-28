@@ -70,7 +70,7 @@
 			    margin-left: auto;
 			    margin-right: auto" /></div><br />Dear <b>'. $name .'</b>,<br/><br/>
 
-				As you&#39;re an active team member within the development of the product ' . $product_name . ', ' . $user . ' has selected you to participate in a short 20-25 minutes questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
+				As you&#39;re an active team member within the development of the product ' . $product_name . '. ' . $user . ' has selected you to participate in a short 20-25 minutes questionnaire, that is conducted by Usability in Germany (UIG) to gather opinions on various aspects of software usability.
 
 				You will be asked to answer a few questions throughout the survey. Your answers will be completely anonymous and analysed in combination with other members&#39; responses.
 

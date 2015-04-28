@@ -33,6 +33,7 @@ if($_SESSION['username']==""){
 
 	</head>
 	<body>
+		<?php include_once("analyticstracking.php") ?>
 		<div class="well well-sm">
 						<h1>Welcome to the UIG survey tool, <?php echo($_SESSION['username']);?></h1>
 							
