@@ -85,6 +85,7 @@ color:#373737;
 
  h1{
  	font-size: 24px;
+ 	font-weight: bold;
  }
 
  h2{
@@ -96,6 +97,14 @@ color:#373737;
  	font-size: 20px;
 
  }
+
+ .row{
+ 	padding-left: 0px;
+ 	padding-right: 0px;
+ 	margin-left: 0px;
+ 	margin-right: 0px;
+ }
+
 
  .iframe{
  	height: 2500px;
@@ -175,9 +184,16 @@ hr{
 	margin-top: 15px;
 }
 
+.innerContainer{
+	margin-left: 30px;
+	margin-right:30px;
+}
 
 /* Large desktop */
-@media (min-width: 1200px) { ... }
+@media (min-width: 1400px) { 
+
+
+}
 
 
  
@@ -198,8 +214,10 @@ hr{
 		padding-right: 0px;
 	}
 
-	 
-
+	.innerContainer{
+		margin-left: 15px;
+		margin-right:15px;
+	}
  }
  
 /* Landscape phones and down */
@@ -256,6 +274,82 @@ hr{
  .page-header{
  	margin-top: 30px;
  }
+
+
+
+
+/******
+* FORMS
+*******/
+
+
+.form-container {
+   border: 1px solid #ffffff;
+   background: #ffffff;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
+   background: -webkit-linear-gradient(top, #ffffff, #ffffff);
+   background: -moz-linear-gradient(top, #ffffff, #ffffff);
+   background: -ms-linear-gradient(top, #ffffff, #ffffff);
+   background: -o-linear-gradient(top, #ffffff, #ffffff);
+   background-image: -ms-linear-gradient(top, #ffffff 0%, #ffffff 100%);
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+   -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+   box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+   font-family: 'Helvetica Neue',Helvetica,sans-serif;
+   text-decoration: none;
+   vertical-align: middle;
+   min-width:300px;
+   padding:20px;
+   width:300px;
+   }
+.form-field {
+   border: 1px solid #eaedf1;
+   background: #eaedf1;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   color: #9ea7b3;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+   padding:8px;
+   margin-bottom:20px;
+   width:280px;
+   }
+.form-field:focus {
+   background: #323a45;
+   color: #ffffff;
+   }
+.form-container h2 {
+   text-shadow: #ffffff 0 1px 0;
+   font-size:18px;
+   margin: 0 0 10px 0;
+   font-weight:bold;
+   text-align:center;
+    }
+.form-title {
+   margin-bottom:10px;
+   text-shadow: #ffffff 0 1px 0;
+   }
+
+.form-horizontal .control-label{
+	text-align: left;
+}
+
+
+
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.container-fluid{
+	padding-right:0px;
+}
 
 
 

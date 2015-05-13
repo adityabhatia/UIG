@@ -173,7 +173,7 @@
 					product_user_survey_end = <?php echo json_encode($product_user_survey_end);?>;
 
 					
-					report_status = <?php echo json_encode($report_status);?>;
+					report_status = 3;//<?php echo json_encode($report_status);?>;
 
 
 					//SURVEY STATUS SHOW / HIDE
@@ -475,7 +475,7 @@
 
 					//DATA ARRAY FOR BAR CHART User Survey
 					data2 = {
-					    	labels: ["SUS", "Usefulness", "User satisfaction"," "],
+					    	labels: ["SUS", "Usefulness"," "],
 						    	datasets: [
 						        {
 						            label: "My First dataset",
@@ -483,7 +483,7 @@
 						            strokeColor: "rgba(44,139,183,0.1)",
 						            highlightFill: "rgba(44,139,183,0.75)",
 						            highlightStroke: "rgba(44,139,183,0.75)",
-						            data: [Math.round(sus), Math.round(usefullness), Math.round(satisfaction)]
+						            data: [Math.round(sus), Math.round(usefullness)]
 						        }
 						       
 						    ]
@@ -529,6 +529,8 @@
 					$("#user-toggle").slideUp();
 					$("#enabling-toggle").slideUp();
 					$("#org-toggle").slideUp();
+					$("#sus-toggle").slideUp();
+					$("#usefulness-toggle").slideUp();
 				
 					//EXTERNAL DATA
 					/**
@@ -564,6 +566,17 @@
 					$("#enabling-toggle").slideUp();
 					$("#org-toggle").slideToggle();
 				}
+
+
+				function showSus(){
+					$("#sus-toggle").slideToggle();
+					$("#usefulness-toggle").slideUp();
+				}
+
+				function showUsefulness(){
+					$("#usefulness-toggle").slideToggle();
+					$("#sus-toggle").slideUp();					
+				}
 				
 				//ADD A NEW ROW TO THE PARTICPIANT TABLE
 				function addRow(){
@@ -588,8 +601,7 @@
 	</head>
 	<body>
 		<?php include_once("analyticstracking.php") ?>
-		<div class="container">
-
+		<div class="container-fluid innerContainer">
 
 				<!--
 				UIG PRODUCT OVERVIEW
@@ -789,25 +801,25 @@
 									<br/>
 										
 										<h4 ><b>Enabling Structure:&nbsp;<b id="en_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showEn()"></a></h4>
-										<p id="enabling-toggle">The value enabling structure considers e.g. the composition of the team, its standards and tasks.</p>
+										<p id="enabling-toggle"> The enabling structure is computed by averaging member responses on dimensions that assess the degree to which the team is well composed, the team’s task is motivationally well designed, and team norms of conduct are clear and well accepted.</p>
 										<!--<p><i>Absolute score / Max. score:&nbsp;</i> <b id="en_absolute"></b><b> / 100</b></p>-->
 										<hr>
 									
 										<h4><b>Agility:&nbsp;<b id="agility_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showAgility()"></a></h4>
-										<p id="agility-toggle">	The value agility considers e.g. the flexibility of the development process.</p>
+										<p id="agility-toggle">	Team agility is defined as the continual readiness of a software development team to rapidly or inherently create change, pro-actively or reactively embrace change, and learn from change while contributing to perceived customer value (economy, quality, and simplicity), through its collective components and relationships with its environment.</p>
 										<!--<p>	<i>Absolute score / Max. score:&nbsp;</i><b id="agility_absolute"></b>&nbsp;<b>/ 65</b>	</p>-->
 
 										<hr>
 										
 										<h4><b>User Involvement:&nbsp;<b id="user_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showUser()"></a></h4>
-										<p id="user-toggle">The value user involvement considers e.g. the level of user involvement and their representativeness during the development process.</p>
+										<p id="user-toggle">User involvement is defined as a subjective psychological state reflecting the importance and personal relevance of a system to the user.</p>
 										<!--<p>	<i>Absolute score / Max. score:&nbsp;</i> <b id="user_absolute"></b> &nbsp;<b>/ 46</b>	</p>-->
 										
 
 										<hr>
 										
 										<h4><b>Organization:&nbsp;<b id="org_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showOrg()"></a></h4>
-										<p id="org-toggle">The value organzation considers e.g. the level of the top management support (TMS) during the development process, as well as the product's age.</p>
+										<p id="org-toggle">The organizational variable is defined as a source of influence that is external to the team, yet emanate from the larger organizational system within which it is nested.</p>
 										<!--<p><i>Absolute score / Max. score:&nbsp;</i> <b id="org_absolute"></b> <b> / 20</b></p>-->	
 								</div>
 							</div>
@@ -838,19 +850,14 @@
 						<div class="col-xs-12 col-sm-12 col-md-6">
 							<div class=" report_element">
 
-								<p>External criterias are investigated along three factors: SUS, the Usefulness and the User Satisfaction.</p>
-								<br/>
-								
-									<h4><b>SUS:&nbsp;<b id="sus_weighted" style="color:#2C8BB7;"></b> / 50</b>&nbsp;<i style="font-size:14px;">(normalized)</i></h4>
-									
-									
-									<hr>		
-									<h4><b>Usefulness:&nbsp;<b id="usefullness_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i></h4>
-									
-																
+								<p>External criterias are investigated along two factors: SUS and Usefulness.</p>
+								<br/>								
+									<h4><b>SUS:&nbsp;<b id="sus_weighted" style="color:#2C8BB7;"></b> / 50</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showSus()"></a></h4>
+									<p id="sus-toggle">The SUS value yields a single number representing a composite measure of the overall usability of the system being studied.</p>									
 									<hr>
-									<h4 ><b>Satisfaction:&nbsp;<b id="satisfaction_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i></h4>
 
+									<h4><b>Usefulness:&nbsp;<b id="usefullness_weighted" style="color:#2C8BB7;"></b> / 25</b>&nbsp;<i style="font-size:14px;">(normalized)</i>&nbsp;&nbsp;<a class="glyphicon glyphicon-collapse-down" onclick="showUsefulness()"></a></h4>
+									<p id="usefulness-toggle"> This value represents the degree to which a usefulness person believes that using a particular system would  enhance his or her job performance.</p>
 									<hr>													
 								</div>
 						</div>

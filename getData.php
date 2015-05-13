@@ -161,15 +161,18 @@
 
 
 	//INTERNAL VALUES
-
-	$sus_absolute = (($sus_absolute1/$countExt)-5)+(25-($sus_absolute2/$countExt));
+	if($sus_absolute1==0 && $sus_absolute2==0){
+		$sus_absolute=0;
+	}else{
+		$sus_absolute = (($sus_absolute1/$countExt)-5)+(25-($sus_absolute2/$countExt));
+	}
 	$value_sus = $sus_absolute*2.5;
 	$value_usefullness = $usefullness_absolute/$countExt;
 	$value_satisfaction = $satisfaction_absolute/$countExt;
 
 	$sus = ($value_sus/100)*50;
-	$usefullness = ($value_usefullness/30)*25;
-	$satisfaction = ($value_satisfaction/30)*25;
+	$usefullness = ($value_usefullness/30)*50;
+
 
 	
 

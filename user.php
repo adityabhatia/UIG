@@ -78,73 +78,70 @@ while($row = mysql_fetch_array($result)){
 	</head>
 	<body>
 		<?php include_once("analyticstracking.php") ?>
-		<div class="container">
-						<div class="panel panel-default" style="margin:0 auto; width:100%; max-width:500px">
-							<div class="panel-heading">
-								<h2 class="panel-title" align=center>Account Settings<?php echo($msg);?></h2>
-							</div>
-							<div class="panel-body">
-								<div class="col-sm-12 " style="margin-top:-10px; margin-bottom:5px;">
-										
-										<div style="text-align:center;">
-										<button class="btn btn-default center-block" data-toggle="modal" data-target="#password" style="display:block; white-space: normal; ">
-															Change Password here!
-										</button>
-										</div>
-										<HR WIDTH="100%" SIZE="3" style="margin-bottom:-10px; border-width:2px;" >
-								</div>
-								
-								<form name="contactform" method="post" action="" class="form-horizontal" role="form">
-								<div class="col-sm-12">	
-									<h4><b>Account Information</b></h4>
-									<div class="form-group">
-										<label for="inputName" class="col-sm-5 col-xs-4 control-label nopadding" >Name</label>
-										<div class="col-sm-7 col-xs-8">
-											<input type="text" class="form-control" id="inputName" name="name" placeholder="Name" value="<?php echo($row['name']);?>" required />
-										</div>
-									</div>
-									<div class="form-group" style="margin-top:">
-										<label for="username" class="col-sm-5 col-xs-4 control-label nopadding" style="margin-top:-10px;">Username</label>
-										<div class="col-sm-7 col-xs-8">
-											<input type="text" class="form-control" id="username" style="margin-top:-10px;" name="username" placeholder="Username" value="<?php echo($row['username']);?>" style="margin-top:5px;" required />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="email" class="col-sm-5 col-xs-4 control-label nopadding" style="margin-top:-10px;">E-Mail</label>
-										<div class="col-sm-7 col-xs-8">
-											<input type="email" class="form-control" style="margin-top:-10px;" id="email" name="email" placeholder="E-Mail" value="<?php echo($row['email']);?>" required />
-										</div>
-									</div>
-									<h4><b>General Information</b></h4>
-									<div class="form-group">
-										<label for="company" class="col-sm-5 col-xs-4 control-label nopadding" >Company</label>
-										<div class="col-sm-7 col-xs-8">
-											<input type="text" class="form-control" id="cname" name="company" placeholder="Company Name" value="<?php echo($row['company']);?>" required />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="desig" class="col-sm-5 col-xs-4 control-label nopadding" style="margin-top:-10px;">Job Title</label>
-										<div class="col-sm-7 col-xs-8">
-											<input type="text" class="form-control" id="desig" name="desig" style="margin-top:-10px;" placeholder="Designation" value="<?php echo($row['desig']);?>" required />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputEmail1" class="col-sm-5 col-xs-4 control-label nopadding" style="margin-top:-10px;">Experience (Yrs.)</label>
-										<div class="col-sm-7 col-xs-8">
-											<input type="text" class="form-control" id="experience" style="margin-top:-10px;" name="experience" placeholder="Experience" value="<?php echo($row['experience']);?>" required />
-										</div>
-									</div>
-								
-									<div class="col-sm-12" style="text-align:center;">
-													<button type=button name=submit class="btn btn-default formbutton">
-														Save Changes
-									 				</button> <br/>
-									</div>
-								</div>
-								</form>
-							</div>
+		<div class="container-fluid innerContainer">
+			<h2 class="page-header"><b> Account Settings</b></h2>
+
+			<div class="col-xs-12 col-sm-7">
+				<form name="contactform" method="post" action="" class="form-horizontal" role="form">
+					<h4 style="color:#2C8BB7;"><b>Account Information</b></h4>
+					<div class="form-group">
+						<label for="inputName" class="col-sm-5 col-xs-4 control-label" >Name</label>
+						<div class="col-sm-7 col-xs-8">
+							<input type="text" class="form-control" id="inputName" name="name" placeholder="Name" value="<?php echo($row['name']);?>" required />
 						</div>
 					</div>
+					<div class="form-group" style="margin-top:">
+						<label for="username" class="col-sm-5 col-xs-4 control-label" style="margin-top:-10px;">Username</label>
+						<div class="col-sm-7 col-xs-8">
+							<input type="text" class="form-control" id="username" style="margin-top:-10px;" name="username" placeholder="Username" value="<?php echo($row['username']);?>" style="margin-top:5px;" required />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-5 col-xs-4 control-label" style="margin-top:-10px;">E-Mail</label>
+						<div class="col-sm-7 col-xs-8">
+							<input type="email" class="form-control" style="margin-top:-10px;" id="email" name="email" placeholder="E-Mail" value="<?php echo($row['email']);?>" required />
+						</div>
+					</div>
+					
+					<h4 style="color:#2C8BB7;"><b>General Information</b></h4>
+					<div class="form-group">
+						<label for="company" class="col-sm-5 col-xs-4 control-label" >Company</label>
+						<div class="col-sm-7 col-xs-8">
+							<input type="text" class="form-control" id="cname" name="company" placeholder="Company Name" value="<?php echo($row['company']);?>" required />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="desig" class="col-sm-5 col-xs-4 control-label form-title" style="margin-top:-10px;">Job Title</label>
+						<div class="col-sm-7 col-xs-8">
+							<input type="text" class="form-control" id="desig" name="desig" style="margin-top:-10px;" placeholder="Designation" value="<?php echo($row['desig']);?>" required />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail1" class="col-sm-5 col-xs-4 control-label" style="margin-top:-10px;">Experience (Yrs.)</label>
+						<div class="col-sm-7 col-xs-8">
+							<input type="text" class="form-control" id="experience" style="margin-top:-10px;" name="experience" placeholder="Experience" value="<?php echo($row['experience']);?>" required />
+						</div>
+					</div>
+					<hr>
+					<button type=button name=submit class="btn btn-default formbutton">
+						Save Changes
+	 				</button>
+				</form>
+				<hr>
+				<br/>
+				<h4 style="color:#2C8BB7;"><b>Password Settings</b></h4>
+				<hr>
+				<button class="btn btn-default" data-toggle="modal" data-target="#password" style="display:block; white-space: normal; ">Change Password here!</button>
+				<hr>
+			</div>
+
+
+
+
+
+
+
+		</div>
 					<div class="modal fade" id="password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
@@ -155,7 +152,7 @@ while($row = mysql_fetch_array($result)){
 						      <div class="modal-body">
 								<form name="contactform" method="post" class="form-horizontal">
 									<div class="form-group">
-										<label for="inputName" class="col-sm-3 control-label nopadding">Password</label>
+										<label for="inputName" class="col-sm-3 control-label">Password</label>
 										<div class="col-sm-9">
 											<input type="password" class="form-control input-sm" id="inputName" name="pass" placeholder="New Password" value="" required />
 										</div>

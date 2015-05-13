@@ -81,11 +81,17 @@ if (isset($_GET["dname"])){
 	<!--<script type="text/javascript" language="javascript" src="js/dataTables.bootstrap.js"></script>-->
 	<script type="text/javascript" language="javascript" src="js/shCore.js"></script>
 	<script type="text/javascript" language="javascript" src="js/demo.js"></script>
+
+	<script>
+		$(document).ready(function(){
+    		$('[data-toggle="tooltip"]').tooltip(); 
+	});
+	</script>
 </head>
 
 <body id="tabular" >
 	<?php include_once("analyticstracking.php") ?>
-	<div class="container">
+	<div class="container-fluid innerContainer">
 		<h2 class="page-header"><b> Organize Products</b></h2>
 		Please select a product to get more detailed information.<br />
 		<div style="color:#AA4139;"><?php echo($msg);?></span><span style="color:#408E2F"><?php echo($success);?></div><br />
@@ -116,14 +122,14 @@ if (isset($_GET["dname"])){
 						echo('<script>var totalproducts='.$count.'</script>');
 						$counter = 0;
 						while($row = mysql_fetch_array($result)){
-							echo ('<tr><td style="width:20%; vertical-align:middle; padding:5px 10px 5px 10px; text-align:center;"><a style="vertical-align:middle;" href="" class=selec_name>' . $row['p_name'] . '</a></td>
+							echo ('<tr><td style="width:20%; vertical-align:middle; padding:5px 10px 5px 10px; text-align:center;"><a style="vertical-align:middle;" data-toggle="tooltip" data-placement="bottom" title="Open '. $row['p_name'].'" href="" class=selec_name>' . $row['p_name'] . '</a></td>
 
 							<td class=selec_version style="width:10%; vertical-align:middle; padding:5px 10px 5px 10px; text-align:center;">' . $row['p_class'] . '</td>
 
 							<td style="width:10%; text-align:center; display:none;">' . $row['product_id'] . '</td>
 
-							<td style="width:10%; text-align:center; vertical-align:middle; padding:5px 10px 5px 10px ;"><a style="vertical-align:middle;" href="" data-toggle="modal" data-target="#myModal" class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a>&nbsp&nbsp
-							<a style="vertical-align:middle;" href="" data-toggle="modal" id=pencil data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></td>
+							<td style="width:10%; text-align:center; vertical-align:middle; padding:5px 10px 5px 10px ;"><i style="vertical-align:middle;" href="" data-toggle="tooltip" data-placement="bottom" title="Delete '. $row['p_name'].'"><a href="" data-toggle="modal" data-target="#myModal"  class="glyphicon glyphicon-trash __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></i>&nbsp&nbsp
+							<i style="vertical-align:middle;" href="" data-toggle="tooltip" data-placement="bottom" title="Edit '. $row['p_name'].'"> <a href="" data-toggle="modal" id=pencil data-target="#myModalc" class="glyphicon glyphicon-pencil __' . $row['p_name'] . '__' . $row['p_class'] . '"></a></i></td>
 
 							<td class="teamstatus'.$counter.'" style="padding:0 5px 0 5px; width:10%; vertical-align:middle; text-align:center;">
 

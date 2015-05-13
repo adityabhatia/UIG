@@ -29,35 +29,33 @@ if($_SESSION['username']==""){
 	</head>
 	<body>
 		<?php include_once("analyticstracking.php") ?>
-		<div class="container" style=" margin: 0 auto;">
+		<div class="container-fluid innerContainer">
+		<h2 class="page-header"><b> Register a new Product</b></h2>
+		<p>Please fill out the form below to register a new product for the UIG survey.</p>
 		<div class = "col-sm-12 col-xs-12" >
-						<div class="panel panel-default " style="margin:0 auto;width:100%; min-width:150px;">
-							<div class="panel-heading">
-								<h2 class="panel-title" align=center>Register a new product</h2>
-							</div>
-							<div class="panel-body">
-								Please fill out the form below to register a new product for the UIG survey.<br />
+
+
 								<div id="errorstatus" style="color:#AA4139;"></div>
 								<br />
 								<form class="form-horizontal" method="post" action="">
 									
 										<div class="col-xs-12 col-sm-6 " style="border-right:2px solid #eee;">
-										<h2 class="panel-title"><b>General Product Information</b></h2><br />
+										<h2 class="panel-title" style="color:#2C8BB7;"><b>General Product Information</b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
-											<label for="inputName" class="col-sm-5 col-xs-6 control-label nopadding">Product Name</label>
+											<label for="inputName" class="col-sm-5 col-xs-6 control-label">Product Name</label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="tb1" name="inputName" placeholder="Name" required />
 											</div>
 										</div>
 										<div class="row" style="margin-bottom:5px;">
-											<label for="inputEmail1" class="col-sm-5 col-xs-6 control-label nopadding">Version</label>
+											<label for="inputEmail1" class="col-sm-5 col-xs-6 control-label">Version</label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="tb2" name="version" placeholder="Version" required />
 											</div>
 										</div>
 										
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Budget <span style="font-weight:normal;">(initial costs in €)</span></label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label" >Budget <span style="font-weight:normal;">(initial costs in €)</span></label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="tb3" name="budget" placeholder="Budget" required />
 											</div>
@@ -65,16 +63,16 @@ if($_SESSION['username']==""){
 									</div>
 
 									<div class="col-xs-12 col-sm-6 " style="border-right:2px solid #eee;">
-										<h2 class="panel-title" style=""><b>Product Development Duration</b></h2><br />
+										<h2 class="panel-title" style="color:#2C8BB7;"><b>Product Development Duration</b></h2><br />
 
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Start Date <span style="font-weight:normal;">(dd/mm/yyyy)</span></label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label" >Start Date <span style="font-weight:normal;">(dd/mm/yyyy)</span></label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="tb4" name="sdate" placeholder="Start Date" required />
 											</div>
 										</div>
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >End Date <span style="font-weight:normal;">(dd/mm/yyyy)</span></label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label " >End Date <span style="font-weight:normal;">(dd/mm/yyyy)</span></label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" value="" data-date-format="dd/mm/yyyy" id="tb5" id="edate" name="edate" placeholder="End Date" required />
 											</div>
@@ -89,16 +87,16 @@ if($_SESSION['username']==""){
 										</div>
 
 										<div class="col-xs-12 col-sm-6 " style="border-right:2px solid #eee;">
-										<h2 class="panel-title"><b>Development Information</b></h2><br />
+										<h2 class="panel-title" style="color:#2C8BB7;"><b>Development Information</b></h2><br />
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding">Team Size</label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label ">Team Size</label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" class="form-control" id="tb6" name="groupsize" placeholder="No. of Team Members" required />
 											</div>
 										</div>
 
 										<div class="row" style="margin-bottom:5px;">
-											<label for="budget" class="col-sm-5 col-xs-6 control-label nopadding" >Sites</label>
+											<label for="budget" class="col-sm-5 col-xs-6 control-label " >Sites</label>
 											<div class="col-sm-7 col-xs-6">
 												<input type="text" min="1" class=form-control id="tb9" name="teamno" placeholder="No. of Sites" required />
 											</div>
@@ -106,7 +104,7 @@ if($_SESSION['username']==""){
 										
 
 										<div class="row" style="margin-bottom:5px;">
-											<label class="col-sm-5 col-xs-6 control-label nopadding">Team Role</label>
+											<label class="col-sm-5 col-xs-6 control-label ">Team Role</label>
 												<div class="col-sm-2 col-xs-2" style="padding-right:0; text-align:center; font-size:12px;">
 													<input type="text" class="form-control" min="0" id="tb7" name="developers" placeholder="0" required />
 													Developers <br />
@@ -124,18 +122,20 @@ if($_SESSION['username']==""){
 										</div>
 									<div class="col-xs-12 col-sm-6" style="border-right:2px solid #eee;">
 
-										<h2 class="panel-title"><b>Location Information</b></h2><br />
+										<h2 class="panel-title" style="color:#2C8BB7;"><b>Location Information</b></h2><br />
 										<div>
 											<table class="table-bordered table-striped table-condensed" id="teamallocation" align=center>
 												
 											</table>
 										</div>
 									</div>
+									
 									<div class="col-sm-12 col-xs-12"><br />
-										<div class="form-group" align=center>
-												<input id="submit" type="button" class="btn btn-default" style="margin-bottom:-10px;" value="Add Product" />
-										</div>
+										<hr>
+												<input id="submit" type="button" class="btn btn-default" value="Add Product" />
+<hr>
 									</div>
+									
 								</form>
 
 							</div>
@@ -180,7 +180,7 @@ if($_SESSION['username']==""){
 			  checkout.hide();
 			}).data('datepicker');
 		
-		$('#teamallocation').append('<tr><th>Location</th><th>No. of Employees</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" /></td><td style="padding:0;"><input type=text class="table-form nopadding" /></td></tr>');
+		$('#teamallocation').append('<tr><th>Location</th><th>No. of Employees</th></tr><tr><td style="padding:0;"><input type=text class="table-form " /></td><td style="padding:0;"><input type=text class="table-form " /></td></tr>');
 				
 				var count;	
 				var stringsum="";
@@ -190,7 +190,7 @@ if($_SESSION['username']==""){
 			count = parseInt($('#tb9').val());
 			count1=count;
 			var i = 0;
-			$('#teamallocation').append('<tr><th class="addition">Location</th><th>No. of Employees</th></tr><tr><td style="padding:0;"><input type=text class="table-form nopadding" id="location'+i+'" /></td><td style="padding:0;"><input type=text class="table-form nopadding" id="locationno'+i+'" /></td></tr>');
+			$('#teamallocation').append('<tr><th class="addition">Location</th><th>No. of Employees</th></tr><tr><td style="padding:0;"><input type=text class="table-form " id="location'+i+'" /></td><td style="padding:0;"><input type=text class="table-form nopadding" id="locationno'+i+'" /></td></tr>');
 			while(count1>1){
 				i++;
 			$('#teamallocation').append('<tr><td style="padding:0;"><input type=text class="table-form" id="location'+i+'" /></td><td style="padding:0;"><input type=text class="table-form" id="locationno'+i+'" /></td></tr>');

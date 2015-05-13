@@ -37,7 +37,6 @@ if($result){
 			<link href="css/bootstrap.min.css" rel="stylesheet">
 			<link href="css/bootstrap-responsive.css" rel="stylesheet">
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-			<link rel="stylesheet" type="text/css" href="css/dashboard.css">
 			<link type="text/css" rel="stylesheet" href="css/main.css">
 			
 			
@@ -48,37 +47,38 @@ if($result){
 	</head>
 	<body>
 		<?php include_once("analyticstracking.php") ?>
-	<div class="col-xs-12 col-sm-12"
-		<div class="container" width=200px>
-			<div class="panel panel-default" style="margin:0 auto; max-width:500px;">
-							<div class="panel-heading">
-								<h2 class="panel-title">Contact Form<?php echo($msg);?></h2>
+		<div class="container-fluid innerContainer">
+			<h2 class="page-header"><b> Contact Us</b></h2>
+				<p>Feel free to send us your questions and comments regarding the diagnose tool.<p>
+					<br>
+					<h4 style="color:#2C8BB7;"><b>Contact Form</b></h4>
+					<form class="form-horizontal" name="contactform" method="post" action=""  role="form">
+							<div class="form-group">
+								
+								<div class="col-sm-7 col-xs-10">
+								<input class="form-control" type="text" id="reason" name="reason" placeholder="Subject" value="" required />
+								</div>
 							</div>
-							<div class="panel-body">
-							<p style="text-align: justify;">Feel free to send us your questions and comments regarding this tool. </p>
-							<form name="contactform" method="post" action="" class="form-horizontal" role="form">
-									<div class="form-group">
-										<label for="inputName" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Subject</label>
-										<div class="col-sm-9 col-xs-9">
-											<input type="text" class="form-control" id="reason" name="reason" placeholder="Subject" value="" required />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="username" class="col-sm-3 col-xs-3 control-label nopadding" align=right>Message</label>
-										<div class="col-sm-9 col-xs-9">
-											<textarea type="text" class="form-control" id="message" name="message" placeholder="Message" value="" style="resize:none;"required /></textarea>
-										</div>
-									</div>
-									<div class="form-group" align=center>
-										
-											<button type="submit" class="btn btn-default" name=submit style="margin-bottom:-10px;">
-												Send Message
-											</button>
-									
-									</div>
-								</form>
+
+							<div class="form-group">
+								
+								<div class="col-sm-7 col-xs-10">
+									<textarea class="form-control" cols="50" rows="6" type="text" id="message" name="message" placeholder="Message" value="" style="resize:none;"required /></textarea>
+
+							<hr>
+							<button type="submit" class="btn btn-default" name=submit>
+								Send Message
+							</button>	
+							<hr>					
+								</div>
 							</div>
+					</form>
+				
+				<div class="col-xs-12 col-sm-5">
+
+				</div>
+
+
 			</div>
-		</div>
 	</body>
 </html>
